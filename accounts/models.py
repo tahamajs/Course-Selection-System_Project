@@ -20,9 +20,10 @@ class User(General):
 class Professor(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE, related_name='professor_user')
     college = models.OneToOneField(to='', on_delete=models.CASCADE, related_name='professor_college')
-    field_of_study = models.ForeignKey(to='', on_delete=models.CASCADE, related_name='professor_field_of_study')
-    expertise = models.ForeignKey(to='', on_delete=models.CASCADE, related_name='professor_expertise')
-    degree = models.ForeignKey(to='', on_delete=models.CASCADE, related_name='professor_degree')
+    field_of_study = models.OneToOneField(to='', on_delete=models.CASCADE, related_name='professor_field_of_study')
+    expertise = models.OneToOneField(to='', on_delete=models.CASCADE, related_name='professor_expertise')
+    degree = models.OneToOneField(to='', on_delete=models.CASCADE, related_name='professor_degree')
+    past_teaching_courses = models.ManyToManyField(to='', on_delete=models.CASCADE, related_name='professor_courses')
 
 
 class ITAdmin(models.Model):
@@ -31,6 +32,9 @@ class ITAdmin(models.Model):
 
 class EducationalDeputy(models.Model):
     user = models.OneToOneField(User, on_delete=models)
+    college = models.OneToOneField(to='', on_delete=models.CASCADE, related_name='educational_deputy_college')
+    field_of_study = models.OneToOneField(to='', on_delete=models.CASCADE,
+                                          related_name='educational_deputy_field_of_study')
 
 
 class Student(models.Model):
@@ -38,11 +42,11 @@ class Student(models.Model):
     entry_year = jmodels.jDateField()
     entry_term = models.IntegerField(max_length=1, choices=((1, 'نیمه اول'), (2, 'نیمه دوم')))
     gpa = models.DecimalField(max_digits=5, decimal_places=3)  # معدل => grade point average
-    college = models.ForeignKey(to='', on_delete=models.CASCADE, related_name='student_college')
-    field_of_study = models.ForeignKey(to='', on_delete=models.CASCADE, related_name='student_field_of_study')
+    college = models.OneToOneField(to='', on_delete=models.CASCADE, related_name='student_college')
+    field_of_study = models.OneToOneField(to='', on_delete=models.CASCADE, related_name='student_field_of_study')
     courses_passed = models.ManyToManyField(to='', on_delete=models.CASCADE, related_name='student_courses_passed')
     courses_passing = models.ManyToManyField(to='', on_delete=models.CASCADE, related_name='student_courses_passing')
-    supervisor = models.ForeignKey(to=Professor, on_delete=models.CASCADE, related_name='student_supervisor')
+    supervisor = models.OneToOneField(to=Professor, on_delete=models.CASCADE, related_name='student_supervisor')
     military_service_status = models.CharField(
         choices=(('SBJ', 'مشمول'), ('MEE', 'معافیت تحصیلی'), ('MES', 'پایان خدمت')))
     years_of_education = models.IntegerField()
