@@ -14,6 +14,10 @@ class Course(models.Model):
          ('foundation', 'پایه'),
          ('elective', 'اختیاری'),
      ])
+
+
+
+
      def __str__(self):
          return self.name
 
@@ -24,7 +28,8 @@ class TermCourse(models.Model):
     exam_venue = models.CharField(max_length=50)
     profossor = models.ForeignKey(to='accounts.Professor', on_delete=models.CASCADE , related_name='term_course')
     capacity = models.IntegerField()
-    time = models.CharField(max_length=50)
+    time = models.TimeField()
+    day = models.IntegerField(choices=[(1, 'شنبه'), (2, 'یکشنبه'), (3, 'دوشنبه'), (4, 'سه شنبه'), (5, 'چهارشنبه'), (6, 'پنجشنبه'), (7, 'جمعه')])
 
     def __str__(self):
         return self.course.name + ' - ' + self.term.name
