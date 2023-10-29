@@ -8,5 +8,5 @@ WORKDIR /CourseSelectionSystem
 
 EXPOSE 8000
 
-ENTRYPOINT ["python", "mysite/manage.py"]
+ENTRYPOINT ["python", "CourseSelectionSystem/manage.py"]
 CMD ["runserver", "0.0.0.0:8000"]
