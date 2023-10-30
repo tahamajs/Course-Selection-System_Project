@@ -4,6 +4,11 @@ from django_jalali.db import models as jmodels
 from shared.models import *
 
 
+class General(AbstractUser):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
 class User(General):
     user_no = models.IntegerField()
     avatar = models.ImageField(upload_to=lambda instance, filename: f'user_{instance.user.id}/{filename}')

@@ -2,58 +2,16 @@ from django.contrib import admin
 from .models import *
 from shared.admin import *
 
+admin.site.register(User, admin.ModelAdmin)
 
-class UserAdmin(GeneralAdmin):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+admin.site.register(Expertise, admin.ModelAdmin)
 
+admin.site.register(Degree, admin.ModelAdmin)
 
-admin.site.register(User, UserAdmin)
+admin.site.register(Professor, admin.ModelAdmin)
 
+admin.site.register(ITAdmin, admin.ModelAdmin)
 
-class ExpertiseAdmin(GeneralAdmin):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+admin.site.register(EducationalDeputy, admin.ModelAdmin)
 
-
-admin.site.register(Expertise, ExpertiseAdmin)
-
-
-class DegreeAdmin(GeneralAdmin):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-
-admin.site.register(Degree, DegreeAdmin)
-
-
-class ProfessorAdmin(GeneralAdmin):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-
-admin.site.register(Professor, ProfessorAdmin)
-
-
-class ITAdminAdmin(GeneralAdmin):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-
-admin.site.register(ITAdmin, ITAdminAdmin)
-
-
-class EducationalDeputyAdmin(GeneralAdmin):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-
-admin.site.register(EducationalDeputy, EducationalDeputyAdmin)
-
-
-class StudentAdmin(GeneralAdmin):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-
-admin.site.register(Student, StudentAdmin)
+admin.site.register(Student, admin.ModelAdmin)

@@ -2,9 +2,9 @@ from django.contrib import admin
 from .models import *
 from shared.admin import *
 
-admin.site.register(RegistrationReq, GeneralAdmin)
-admin.site.register(UpdateTakenCourseReq, GeneralAdmin)
-admin.site.register(CourseDropReq, GeneralAdmin)
-admin.site.register(TermDropReq, GeneralAdmin)
-admin.site.register(EnrollmentVerificationReq, GeneralAdmin)
-admin.site.register(ReviewCourseReq, GeneralAdmin)
+admin.site.register(RegistrationReq, admin.ModelAdmin)
+admin.site.register(UpdateTakenCourseReq, admin.ModelAdmin)
+admin.site.register(CourseDropReq, admin.ModelAdmin)
+admin.site.register(TermDropReq, admin.ModelAdmin)
+admin.site.register(EnrollmentVerificationReq, admin.ModelAdmin)
+admin.site.register(ReviewCourseReq, admin.ModelAdmin)
