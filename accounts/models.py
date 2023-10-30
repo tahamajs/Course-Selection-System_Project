@@ -8,6 +8,9 @@ class General(AbstractUser):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.username
+
 
 def upload_dir(instance, filename):
     return f'user_{instance.user.id}/{filename}'

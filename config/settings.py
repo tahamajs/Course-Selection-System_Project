@@ -136,4 +136,4 @@ PASSWORD_HASHERS = (
     "django.contrib.auth.hashers.ScryptPasswordHasher",
 )
 
-AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = 'accounts.General'
