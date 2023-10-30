@@ -4,7 +4,7 @@ from django_jalali.db import models as jmodels
 from shared.models import *
 
 
-class General(AbstractUser):
+class BaseUser(AbstractUser):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -16,7 +16,7 @@ def upload_dir(instance, filename):
     return f'user_{instance.user.id}/{filename}'
 
 
-class User(General):
+class User(BaseUser):
     user_no = models.IntegerField()
     avatar = models.ImageField(upload_to=upload_dir)
     phone_number = models.CharField(max_length=12)
@@ -59,7 +59,7 @@ class EducationalDeputy(models.Model):
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     entry_year = jmodels.jDateField()
-    entry_term = models.IntegerField(max_length=1, choices=((1, 'نیمه اول'), (2, 'نیمه دوم')))
+    entry_term = models.IntegerField(choices=((1, 'نیمه اول'), (2, 'نیمه دوم')))
     gpa = models.DecimalField(max_digits=5, decimal_places=3)  # معدل => grade point average
     faculty = models.OneToOneField(to='college.Faculty', on_delete=models.CASCADE, related_name='student_faculty')
     field_of_study = models.OneToOneField(to='college.FieldOfStudy', on_delete=models.CASCADE,
