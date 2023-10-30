@@ -25,7 +25,7 @@ class TermCourse(models.Model):
     term = models.ForeignKey(to='college.Term', on_delete=models.CASCADE, related_name='term_course')
     exam_date_time = jmodels.jDateTimeField()
     exam_venue = models.CharField(max_length=50)
-    profossor = models.ForeignKey(to='accounts.Professor', on_delete=models.CASCADE, related_name='term_course')
+    professor = models.ForeignKey(to='accounts.Professor', on_delete=models.CASCADE, related_name='term_course')
     capacity = models.IntegerField()
     time = models.TimeField()
     day = models.IntegerField(
