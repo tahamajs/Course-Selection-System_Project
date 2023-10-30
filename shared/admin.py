@@ -3,4 +3,4 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 
 class GeneralAdmin(BaseUserAdmin):
-    search_fields = list_filter = list_display = ('__all__',)
+    search_fields = list_display = ('__all__',)
