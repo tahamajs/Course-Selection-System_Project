@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'college',
     'requests',
     'shared',
+    'course'
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,5 @@ PASSWORD_HASHERS = (
     "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
     "django.contrib.auth.hashers.ScryptPasswordHasher",
 )
+
+AUTH_USER_MODEL = 'accounts.User'

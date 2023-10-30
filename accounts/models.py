@@ -9,11 +9,15 @@ class General(AbstractUser):
     updated_at = models.DateTimeField(auto_now=True)
 
 
+def upload_dir(instance, filename):
+    return f'user_{instance.user.id}/{filename}'
+
+
 class User(General):
     user_no = models.IntegerField()
-    avatar = models.ImageField(upload_to=lambda instance, filename: f'user_{instance.user.id}/{filename}')
-    phone_number = models.CharField()
-    national_code = models.CharField()
+    avatar = models.ImageField(upload_to=upload_dir)
+    phone_number = models.CharField(max_length=12)
+    national_code = models.CharField(max_length=12)
     gender = models.CharField(max_length=1, choices=(('M', 'مرد'), ('F', 'زن')))
     birth_date = jmodels.jDateField()
 
@@ -33,8 +37,8 @@ class Professor(models.Model):
                                           related_name='professor_field_of_study')
     expertise = models.OneToOneField(to=Expertise, on_delete=models.CASCADE, related_name='professor_expertise')
     degree = models.OneToOneField(to=Degree, on_delete=models.CASCADE, related_name='professor_degree')
-    past_teaching_courses = models.ManyToManyField(to='college.Course',
-                                                   related_name='professor_courses')
+    past_teaching_courses = models.ManyToManyField(to='course.Course',
+                                                   related_name='professor_past_courses')
 
 
 class ITAdmin(models.Model):
@@ -57,11 +61,12 @@ class Student(models.Model):
     faculty = models.OneToOneField(to='college.Faculty', on_delete=models.CASCADE, related_name='student_faculty')
     field_of_study = models.OneToOneField(to='college.FieldOfStudy', on_delete=models.CASCADE,
                                           related_name='student_field_of_study')
-    courses_passed = models.ManyToManyField(to='college.Course',
+    courses_passed = models.ManyToManyField(to='course.Course',
                                             related_name='student_courses_passed')
-    courses_taken = models.ManyToManyField(to='college.Course',
-                                           related_name='student_courses_passing')
+    courses_taken = models.ManyToManyField(to='course.Course',
+                                           related_name='student_courses_taken')
     supervisor = models.OneToOneField(to=Professor, on_delete=models.CASCADE, related_name='student_supervisor')
-    military_service_status = models.CharField(
-        choices=(('SBJ', 'مشمول'), ('MEE', 'معافیت تحصیلی'), ('MES', 'پایان خدمت')))
+    military_service_status = models.CharField(max_length=3,
+                                               choices=(
+                                                   ('SBJ', 'مشمول'), ('MEE', 'معافیت تحصیلی'), ('MES', 'پایان خدمت')))
     academic_years = models.IntegerField()

@@ -23,6 +23,3 @@ class StudentCourseAdmin(admin.ModelAdmin):
     search_fields = ('course__name', 'term__name')
 
 
-admin.site.register(Course, CourseAdmin)
-admin.site.register(TermCourse, TermCourseAdmin)
-admin.site.register(StudentCourse, StudentCourseAdmin)

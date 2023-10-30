@@ -12,8 +12,8 @@ class RegistrationReq(models.Model):
 
 class UpdateTakenCourseReq(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='update_taken_course_student')
-    add_courses = models.ManyToManyField(Course, null=True, blank=True)
-    del_courses = models.ManyToManyField(Course, null=True, blank=True)
+    add_courses = models.ManyToManyField(Course, null=True, blank=True, related_name='update_taken_course_add')
+    del_courses = models.ManyToManyField(Course, null=True, blank=True, related_name='update_taken_course_del')
     approval_status = models.BooleanField(default=False)
 
 
@@ -42,4 +42,4 @@ class EnrollmentVerificationReq(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='enrollment_verification_req_student')
     enrollment_verification_file = models.FileField()
     term = models.ForeignKey(Term, on_delete=models.CASCADE, related_name='enrollment_verification_req_term')
-    issuance_certificate_place = models.CharField()
+    issuance_certificate_place = models.CharField(max_length=200)
