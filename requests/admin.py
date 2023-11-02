@@ -1,10 +1,11 @@
 from django.contrib import admin
-from .models import *
-from shared.admin import *
+from django.contrib.auth.models import Group
+from requests.models import Registration, RegistrationUpdate, CourseDrop, TermDrop, ReviewGrade, \
+    EnrollmentVerification
 
-admin.site.register(RegistrationReq, admin.ModelAdmin)
-admin.site.register(UpdateTakenCourseReq, admin.ModelAdmin)
-admin.site.register(CourseDropReq, admin.ModelAdmin)
-admin.site.register(TermDropReq, admin.ModelAdmin)
-admin.site.register(EnrollmentVerificationReq, admin.ModelAdmin)
-admin.site.register(ReviewCourseReq, admin.ModelAdmin)
+admin.register(Registration)
+admin.register(RegistrationUpdate)
+admin.register(CourseDrop)
+admin.register(TermDrop)
+admin.register(ReviewGrade)
+admin.register(EnrollmentVerification)
