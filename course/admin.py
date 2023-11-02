@@ -23,5 +23,3 @@ class StudentCourseAdmin(admin.ModelAdmin):
     list_display = ('course', 'term', 'course_state', 'grade')
     list_filter = ('course', 'term', 'course_state')
     search_fields = ('course__name', 'term__name')
-
-

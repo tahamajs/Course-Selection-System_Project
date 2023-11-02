@@ -1,4 +1,7 @@
-Django~=4.2.6
 django-admin-interface
 pillow
-django-jalali
+asgiref==3.7.2
+Django==4.2.6
+django-jalali==6.0.1
+jdatetime==4.1.1
+sqlparse==0.4.4
