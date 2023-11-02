@@ -1,2 +1,4 @@
 Django~=4.2.6
 django-admin-interface
+pillow
+django-jalali
