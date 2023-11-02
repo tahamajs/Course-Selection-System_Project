@@ -1,7 +1,8 @@
 import pathlib
 
 for path in pathlib.Path('.').glob('**/*.py'):
-    if ('venv' not in path.parts) and path.name.endswith('_initial.py'):
+    if ('venv' not in path.parts) and ('migrations' in path.parts) and ('__init__.py' not in path.parts):
+        print(path.parts)
         print(path.relative_to('.'))
         try:
             path.unlink()

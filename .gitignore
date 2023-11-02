@@ -1,6 +1,6 @@
 /venv/
 /.idea/
-**/migrations/
+**/migrations/*_initial.py
 
 *.log
 *.pot
