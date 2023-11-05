@@ -79,7 +79,7 @@ class CourseDropTestCase(TestCase):
         self.course.pre_requisite.add(pre_req1, pre_req2)
         self.course.co_requisite.add(co_req1, co_req2)
 
-            # Create a CourseDrop instance
+
         self.course_drop = CourseDrop.objects.create(
             student=self.student,
             course=self.course,
