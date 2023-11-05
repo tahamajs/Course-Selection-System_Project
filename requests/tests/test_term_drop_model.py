@@ -1,12 +1,12 @@
 from django.test import TestCase
 from accounts.models import Student, User, Professor, Expertise, Degree, FacultyUser
+from college.models import FieldOfStudy, Faculty, Term
+from requests.models.term_drop import TermDrop
 from course.models.course import Course
-from requests.models import CourseDrop
-from college.models import FieldOfStudy, Faculty
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 
-class CourseDropModelTest(TestCase):
+class TermDropModelTest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(
             username='testuser',
@@ -40,57 +40,17 @@ class CourseDropModelTest(TestCase):
         self.student.courses_passed.add(*self.passed_courses)
         self.student.courses_taken.add(*self.taken_courses)
         
+        # needs to be completed
+        self.term = Term.objects.create(
 
-        self.course = Course.objects.create(
-            name = 'physics2',
-            faculty = self.faculty,
-            credits = 3,
-            course_type = 'elective',
         )
 
-        pre_req1 = Course.objects.create(
-        name='Pre-requisite Course 1',
-        faculty=self.faculty,
-        credits=3,
-        course_type='core'
+        self.term_drop = TermDrop.objects.create(
+            student = self.student,
+            term = self.term,
+            student_descr = "student's description",
+            educational_deputy_description = "Educational deputy's description",
         )
-        pre_req2 = Course.objects.create(
-            name='Pre-requisite Course 2',
-            faculty=self.faculty,
-            credits=3,
-            course_type='core'
-        )
+            
 
-        co_req1 = Course.objects.create(
-            name='Co-requisite Course 1',
-            faculty=self.faculty,
-            credits=3,
-            course_type='core'
-        )
-        co_req2 = Course.objects.create(
-            name='Co-requisite Course 2',
-            faculty=self.faculty,
-            credits=3,
-            course_type='core'
-        )
-
-        self.course.pre_requisite.add(pre_req1, pre_req2)
-        self.course.co_requisite.add(co_req1, co_req2)
-
-
-        self.course_drop = CourseDrop.objects.create(
-            student=self.student,
-            course=self.course,
-            student_description="Student's description",
-            educational_deputy_description="Educational deputy's description",
-        )
-
-    def test_course_drop_attributes(self):
-        self.assertEqual(self.course_drop.student, self.student)
-        self.assertEqual(self.course_drop.course, self.course)
-        self.assertEqual(self.course_drop.student_description, "Student's description")
-        self.assertEqual(self.course_drop.educational_deputy_description, "Educational deputy's description")
-
-    def test_related_names(self):
-        self.assertEqual(self.course_drop.student.course_drop_req_student.all().count(), 1)
-        self.assertEqual(self.course_drop.course.course_drop_req_course.all().count(), 1)
+        
