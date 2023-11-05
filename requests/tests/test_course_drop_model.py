@@ -6,8 +6,6 @@ from college.models import FieldOfStudy, Faculty
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 
-
-
 class CourseDropTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(
