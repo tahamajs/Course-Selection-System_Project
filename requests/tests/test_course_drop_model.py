@@ -23,7 +23,7 @@ class CourseDropTestCase(TestCase):
                                                     credits=3, course_type='specialized'), ]
 
         avatar = SimpleUploadedFile(name='test_image.jpg',
-                                    content=open(r"D:\Gallery\My\king-head-vector-logo-icon_43623-454.jpg",
+                                    content=open(r"C:\Users\Asus\Pictures\Screenshots\Screenshot (163).png",
                                                  'rb').read(),
                                     content_type='image/jpeg')
         self.faculty_user = FacultyUser.objects.create(base_user=self.user, user_no=5214, avatar=avatar,
@@ -42,7 +42,7 @@ class CourseDropTestCase(TestCase):
         self.student.courses_passed.add(*self.passed_courses)
         self.student.courses_taken.add(*self.taken_courses)
         
-        
+
         self.course = Course.objects.create(
             name = 'physics2',
             faculty = self.faculty,
