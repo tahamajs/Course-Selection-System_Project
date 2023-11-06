@@ -3,8 +3,8 @@ from django.db import models
 
 class Term(models.Model):
     name = models.CharField(max_length=256)
-    students = models.ManyToManyField(to='accounts.Student', related_name='term_student')
-    professors = models.ManyToManyField(to='accounts.Professor', related_name='term_professor')
+    students = models.ManyToManyField(to='accounts.Student', related_name='term_student', null=True, blank=True)
+    professors = models.ManyToManyField(to='accounts.Professor', related_name='term_professor', null=True, blank=True)
     selection_start_time = models.DateTimeField()
     selection_end_time = models.DateTimeField()
     classes_start_time = models.DateTimeField()
