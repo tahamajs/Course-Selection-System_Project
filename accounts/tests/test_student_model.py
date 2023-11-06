@@ -9,7 +9,7 @@ class CustomUserModelTest(TestCase):
 
     def setUp(self):
         # Create a test user
-        self.user = User.objects.create_user(
+        self.base_user = User.objects.create_user(
             username='testuser',
             password='testpassword'
         )
@@ -25,7 +25,7 @@ class CustomUserModelTest(TestCase):
                                     content=open(r"D:\Gallery\My\king-head-vector-logo-icon_43623-454.jpg",
                                                  'rb').read(),
                                     content_type='image/jpeg')
-        self.faculty_user = FacultyUser.objects.create(base_user=self.user, user_no=5214, avatar=avatar,
+        self.faculty_user = FacultyUser.objects.create(base_user=self.base_user, user_no=5214, avatar=avatar,
                                                        phone_number='+987654321', national_code='1547825478',
                                                        gender='M',
                                                        birth_date='1375-05-08')
@@ -41,29 +41,23 @@ class CustomUserModelTest(TestCase):
         self.student.courses_passed.add(*self.passed_courses)
         self.student.courses_taken.add(*self.taken_courses)
 
-    def test_create_user(self):
-        # Check if the user is created successfully
-        self.assertEqual(self.user.username, 'testuser')
+    def test_student_create(self):
+        self.student.save()
+        self.assertEqual(self.student.gpa, 18.0)
 
-    def test_create_faculty(self):
-        # Check if the user is created successfully
-        self.assertEqual(self.faculty.name, 'فنی حرفه ای 1 تبریز')
+    def test_student_retrieve(self):
+        student = Student.objects.get(pk=self.student.pk)
+        self.assertEqual(student.gpa, 18.0)
 
-    def test_create_fos(self):
-        self.assertEqual(self.fos.name, 'نرم افزار')
+    def test_student_update(self):
+        old_gpa = self.student.gpa
+        self.student.gpa = 15.0
+        self.student.save()
+        student = Student.objects.get(pk=self.student.pk)
+        self.assertNotEqual(student.gpa, old_gpa)
 
-    def test_create_course(self):
-        self.assertEqual(self.passed_courses[0].name, 'تاریخ')
-        self.assertEqual(self.taken_courses[0].name, 'سیستم عامل')
-
-    def test_create_expertise(self):
-        self.assertEqual(self.expertise.name, 'نرم افزار')
-
-    def test_create_degree(self):
-        self.assertEqual(self.degree.name, 'دکترا')
-
-    def test_create_passed_course(self):
-        self.assertEqual(self.professor.user.base_user.username, 'testuser')
-
-    def test_create_student(self):
-        self.assertEqual(self.student.user.base_user.username, 'testuser')
+    def test_student_delete(self):
+        pk = self.student.pk
+        self.student.delete()
+        result = Student.objects.filter(pk=pk).count()
+        self.assertEqual(result, 0)
