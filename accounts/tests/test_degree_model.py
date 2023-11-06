@@ -28,3 +28,4 @@ class CustomUserModelTest(TestCase):
         self.degree.delete()
         result = Degree.objects.filter(pk=pk).exists()
         self.assertEqual(result, False)
+#
