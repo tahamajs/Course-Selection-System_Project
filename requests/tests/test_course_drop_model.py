@@ -85,12 +85,69 @@ class CourseDropModelTest(TestCase):
             educational_deputy_description="Educational deputy's description",
         )
 
-    def test_course_drop_attributes(self):
-        self.assertEqual(self.course_drop.student, self.student)
-        self.assertEqual(self.course_drop.course, self.course)
-        self.assertEqual(self.course_drop.student_description, "Student's description")
-        self.assertEqual(self.course_drop.educational_deputy_description, "Educational deputy's description")
+    def test_create_course_drop(self):
+        course_drop_count_before = CourseDrop.objects.count()
+ 
+        course_drop = CourseDrop.objects.create(
+            student=self.student,
+            course=self.course,
+            student_description="Student's description",
+            educational_deputy_description="Educational deputy's description",
+        )
 
-    def test_related_names(self):
-        self.assertEqual(self.course_drop.student.course_drop_req_student.all().count(), 1)
-        self.assertEqual(self.course_drop.course.course_drop_req_course.all().count(), 1)
+        course_drop_count_after = CourseDrop.objects.count()
+        self.assertEqual(course_drop_count_after, course_drop_count_before + 1)
+
+    def test_delete_course_drop(self):
+        course_drop = CourseDrop.objects.create(
+            student=self.student,
+            course=self.course,
+            student_description="Student's description",
+            educational_deputy_description="Educational deputy's description",
+        )
+
+        course_drop_count_before = CourseDrop.objects.count()
+
+        course_drop.delete()
+
+        course_drop_count_after = CourseDrop.objects.count()
+        self.assertEqual(course_drop_count_after, course_drop_count_before - 1)
+
+    def test_retrieve_course_drop(self):
+
+        course_drop = CourseDrop.objects.create(
+            student=self.student,
+            course=self.course,
+            student_description="Student's description",
+            educational_deputy_description="Educational deputy's description",
+        )
+
+        retrieved_course_drop = CourseDrop.objects.get(pk=course_drop.pk)
+
+        self.assertEqual(retrieved_course_drop.student, self.student)
+        self.assertEqual(retrieved_course_drop.course, self.course)
+        self.assertEqual(retrieved_course_drop.student_description, "Student's description")
+        self.assertEqual(retrieved_course_drop.educational_deputy_description, "Educational deputy's description")
+
+    def test_update_course_drop(self):
+        # Create a CourseDrop
+        course_drop = CourseDrop.objects.create(
+            student=self.student,
+            course=self.course,
+            student_description="Student's description",
+            educational_deputy_description="Educational deputy's description",
+        )
+
+        # Update the CourseDrop
+        new_student_description = "Updated student's description"
+        new_educational_deputy_description = "Updated educational deputy's description"
+        course_drop.student_description = new_student_description
+        course_drop.educational_deputy_description = new_educational_deputy_description
+        course_drop.save()
+
+
+        updated_course_drop = CourseDrop.objects.get(pk=course_drop.pk)
+
+
+        self.assertEqual(updated_course_drop.student_description, new_student_description)
+        self.assertEqual(updated_course_drop.educational_deputy_description, new_educational_deputy_description)

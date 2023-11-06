@@ -4,6 +4,7 @@ from college.models import FieldOfStudy, Faculty, Term
 from requests.models.enrollment_verification import EnrollmentVerification
 from course.models.course import Course
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django_jalali import date
 
 
 class EnrollmentVerificationModelTest(TestCase):
@@ -40,10 +41,22 @@ class EnrollmentVerificationModelTest(TestCase):
         self.student.courses_passed.add(*self.passed_courses)
         self.student.courses_taken.add(*self.taken_courses)
          
-         # needs to be completed
+        # needs to be completed
         self.term = Term.objects.create(
-            
+            name="Spring Term",
+            selection_start_time=date(1402, 10, 20),
+            selection_end_time=date(1402, 11, 5),
+            classes_start_time=date(1402, 11, 10),
+            classes_end_time=date(1403, 3, 15),
+            update_start_time=date(1402, 11, 6),
+            update_end_time=date(1402, 11, 9),
+            emergency_cancellation_end_time=date(1402, 11, 25),
+            exams_start_time=date(1403, 3, 20),
+            term_end_time=date(1403, 5, 13)
         )
+        self.term.students.add(self.student)
+        self.term.professors.add(self.professor)
+
 
         self.enrollment_verification = EnrollmentVerification.objects.create(
             student = self.student,
