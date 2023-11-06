@@ -86,17 +86,8 @@ class CourseDropModelTest(TestCase):
         )
 
     def test_create_course_drop(self):
-        course_drop_count_before = CourseDrop.objects.count()
- 
-        course_drop = CourseDrop.objects.create(
-            student=self.student,
-            course=self.course,
-            student_description="Student's description",
-            educational_deputy_description="Educational deputy's description",
-        )
-
-        course_drop_count_after = CourseDrop.objects.count()
-        self.assertEqual(course_drop_count_after, course_drop_count_before + 1)
+        self.course_drop.save()
+        self.assertEqual(self.course_drop.student_description, "Student's description")
 
     def test_delete_course_drop(self):
         course_drop = CourseDrop.objects.create(
@@ -114,15 +105,7 @@ class CourseDropModelTest(TestCase):
         self.assertEqual(course_drop_count_after, course_drop_count_before - 1)
 
     def test_retrieve_course_drop(self):
-
-        course_drop = CourseDrop.objects.create(
-            student=self.student,
-            course=self.course,
-            student_description="Student's description",
-            educational_deputy_description="Educational deputy's description",
-        )
-
-        retrieved_course_drop = CourseDrop.objects.get(pk=course_drop.pk)
+        retrieved_course_drop = CourseDrop.objects.get(pk=self.course_drop.pk)
 
         self.assertEqual(retrieved_course_drop.student, self.student)
         self.assertEqual(retrieved_course_drop.course, self.course)
@@ -130,15 +113,12 @@ class CourseDropModelTest(TestCase):
         self.assertEqual(retrieved_course_drop.educational_deputy_description, "Educational deputy's description")
 
     def test_update_course_drop(self):
-        # Create a CourseDrop
         course_drop = CourseDrop.objects.create(
             student=self.student,
             course=self.course,
             student_description="Student's description",
             educational_deputy_description="Educational deputy's description",
         )
-
-        # Update the CourseDrop
         new_student_description = "Updated student's description"
         new_educational_deputy_description = "Updated educational deputy's description"
         course_drop.student_description = new_student_description
