@@ -10,10 +10,9 @@ class TermInline(admin.TabularInline):
 
 class TermAdmin(admin.ModelAdmin):
     model = Term
-    inlines = [TermInline, ]
+    inlines = (TermInline, )
 
 
 admin.site.register(Faculty, admin.ModelAdmin)
 admin.site.register(FieldOfStudy, admin.ModelAdmin)
 admin.site.register(Term, TermAdmin)
-#s

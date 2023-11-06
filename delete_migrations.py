@@ -1,4 +1,9 @@
 import pathlib
+import sys
+
+if input("ARE YOU SURE ? (Yes/no)") != 'Yes':
+    print('Good Decision.')
+    sys.exit()
 
 for path in pathlib.Path('.').glob('**/*.py'):
     if ('venv' not in path.parts) and ('migrations' in path.parts) and ('__init__.py' not in path.parts):
@@ -17,3 +22,5 @@ try:
     print('deleted.')
 except FileNotFoundError as e:
     print('not found!')
+
+print('EVERYTHING IS ON FIRE !')
