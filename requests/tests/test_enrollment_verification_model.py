@@ -4,7 +4,7 @@ from college.models import FieldOfStudy, Faculty, Term
 from requests.models.enrollment_verification import EnrollmentVerification
 from course.models.course import Course
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django_jalali import date
+from jdatetime import date
 
 
 class EnrollmentVerificationModelTest(TestCase):
@@ -65,3 +65,22 @@ class EnrollmentVerificationModelTest(TestCase):
             issuance_certification_place = 'Tehran'
 
         )
+
+
+    def test_create_enrollment_verification(self):
+        self.enrollment_verification.save()
+        self.assertEqual(self.enrollment_verification.issuance_certificate_place, 'Tehran')
+
+    def test_retrieve_enrollment_verification(self):
+        self.enrollment_verification.get(pk=self.enrollment_verification.pk)
+        self.assertEqual(self.enrollment_verification.issuance_certificate_place, 'Tehran')
+
+    def test_update_enrollment_verification(self):
+        self.enrollment_verification.issuance_certificate_place = 'Birjand'
+        self.enrollment_verification.save()
+        self.assertEqual(self.enrollment_verification.issuance_certificate_place, 'Birjand')
+
+    def test_delete_enrollment_verification(self):
+        enroll_verification = EnrollmentVerification.objects.get(issuance_certificate_place='Birjand')
+        enroll_verification.delete()
+        self.assertEqual(EnrollmentVerification.objects.filter(issuance_certificate_place='Birjand'), 0)
