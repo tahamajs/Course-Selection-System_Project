@@ -3,9 +3,10 @@ from django.contrib.auth.models import Group
 from requests.models import Registration, RegistrationUpdate, CourseDrop, TermDrop, ReviewGrade, \
     EnrollmentVerification
 
-admin.register(Registration)
-admin.register(RegistrationUpdate)
-admin.register(CourseDrop)
-admin.register(TermDrop)
-admin.register(ReviewGrade)
-admin.register(EnrollmentVerification)
+
+admin.site.register(Registration)
+admin.site.register(RegistrationUpdate)
+admin.site.register(CourseDrop)
+admin.site.register(TermDrop)
+admin.site.register(ReviewGrade)
+admin.site.register(EnrollmentVerification)
