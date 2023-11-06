@@ -41,7 +41,7 @@ class EnrollmentVerificationModelTest(TestCase):
         self.student.courses_passed.add(*self.passed_courses)
         self.student.courses_taken.add(*self.taken_courses)
          
-        # needs to be completed
+  
         self.term = Term.objects.create(
             name="Spring Term",
             selection_start_time=date(1402, 10, 20),
@@ -60,20 +60,19 @@ class EnrollmentVerificationModelTest(TestCase):
 
         self.enrollment_verification = EnrollmentVerification.objects.create(
             student = self.student,
-            enrollment_verification_file = "C:\Users\Asus\Desktop\verificationfile.pdf",
+            enrollment_verification_file = r"C:\Users\Asus\Desktop\verificationfile.pdf",
             term = self.term,
-            issuance_certification_place = 'Tehran'
-
+            issuance_certificate_place= 'Tehran'
         )
-
+    
 
     def test_create_enrollment_verification(self):
         self.enrollment_verification.save()
         self.assertEqual(self.enrollment_verification.issuance_certificate_place, 'Tehran')
 
     def test_retrieve_enrollment_verification(self):
-        self.enrollment_verification.get(pk=self.enrollment_verification.pk)
-        self.assertEqual(self.enrollment_verification.issuance_certificate_place, 'Tehran')
+        retrieved_verification = EnrollmentVerification.objects.get(pk=self.enrollment_verification.pk)
+        self.assertEqual(retrieved_verification.issuance_certificate_place, 'Tehran')
 
     def test_update_enrollment_verification(self):
         self.enrollment_verification.issuance_certificate_place = 'Birjand'
@@ -81,6 +80,7 @@ class EnrollmentVerificationModelTest(TestCase):
         self.assertEqual(self.enrollment_verification.issuance_certificate_place, 'Birjand')
 
     def test_delete_enrollment_verification(self):
-        enroll_verification = EnrollmentVerification.objects.get(issuance_certificate_place='Birjand')
+        enroll_verification = EnrollmentVerification.objects.get(issuance_certificate_place='Tehran')
         enroll_verification.delete()
-        self.assertEqual(EnrollmentVerification.objects.filter(issuance_certificate_place='Birjand'), 0)
+        self.assertEqual(EnrollmentVerification.objects.filter(issuance_certificate_place='Tehran').count(), 0)
+
