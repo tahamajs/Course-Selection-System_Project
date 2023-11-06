@@ -4,7 +4,7 @@ from college.models import FieldOfStudy, Faculty, Term
 from requests.models.term_drop import TermDrop
 from course.models.course import Course
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django_jalali import date
+from jdatetime import date
 
 class TermDropModelTest(TestCase):
     def setUp(self):
