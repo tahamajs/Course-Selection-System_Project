@@ -50,14 +50,14 @@ class CustomUserModelTest(TestCase):
         self.assertEqual(student.gpa, 18.0)
 
     def test_student_update(self):
-        old_gpa = self.student.gpa
+        old = self.student.gpa
         self.student.gpa = 15.0
         self.student.save()
         student = Student.objects.get(pk=self.student.pk)
-        self.assertNotEqual(student.gpa, old_gpa)
+        self.assertNotEqual(student.gpa, old)
 
     def test_student_delete(self):
         pk = self.student.pk
         self.student.delete()
-        result = Student.objects.filter(pk=pk).count()
-        self.assertEqual(result, 0)
+        result = Student.objects.filter(pk=pk).exists()
+        self.assertEqual(result, False)
