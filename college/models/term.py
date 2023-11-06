@@ -1,4 +1,5 @@
 from django.db import models
+from django_jalali.db import models as jmodels
 
 
 class Term(models.Model):
@@ -14,3 +15,4 @@ class Term(models.Model):
     emergency_cancellation_end_time = models.DateTimeField()
     exams_start_time = models.DateField()
     term_end_time = models.DateField()
+
