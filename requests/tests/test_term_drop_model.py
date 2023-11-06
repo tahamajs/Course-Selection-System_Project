@@ -63,6 +63,23 @@ class TermDropModelTest(TestCase):
             student_descr = "student's description",
             educational_deputy_description = "Educational deputy's description",
         )
+
+    def test_create_term_drop(self):
+        self.term_drop.save()
+        self.assertEqual(self.term_drop.student_descr, "student's description")
+
+    def test_retrieve_term_drop(self):
+        term_drop = TermDrop.objects.get(pk=self.term_drop.pk)
+        self.assertEqual(term_drop.student_descr, "student's description")
             
+    def test_update_term_drop(self):
+        self.term_drop.student_descr = "New description"
+        self.term_drop.save()
+        self.assertEqual(self.term_drop.student_descr, "New description")
+
+    def test_delete_term_drop(self):
+        term_drop = TermDrop.objects.get(student_descr="student's description")
+        term_drop.delete()
+        self.assertEqual(TermDrop.objects.filter(student_descr="student's description").count(), 0)
 
         
