@@ -61,7 +61,7 @@ class TermDropModelTest(TestCase):
             student = self.student,
             term = self.term,
             student_descr = "student's description",
-            educational_deputy_description = "Educational deputy's description",
+            educational_deputy_descr = "Educational deputy's description",
         )
 
     def test_create_term_drop(self):
