@@ -21,7 +21,7 @@ class CourseDropModelTest(TestCase):
                                                     credits=3, course_type='specialized'), ]
 
         avatar = SimpleUploadedFile(name='test_image.jpg',
-                                    content=open(r"C:\Users\Asus\Pictures\Screenshots\Screenshot (163).png",
+                                    content=open(r"shared/files/avatar.jpg",
                                                  'rb').read(),
                                     content_type='image/jpeg')
         self.faculty_user = FacultyUser.objects.create(base_user=self.user, user_no=5214, avatar=avatar,

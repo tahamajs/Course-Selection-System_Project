@@ -1,5 +1,6 @@
 from django.test import TestCase
-from jdatetime import date
+from django.utils import timezone
+
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 from accounts.models import Degree, Professor
@@ -28,20 +29,20 @@ class RegistrationModelTestCase(TestCase):
                                                     credits=3, course_type='specialized'), ]
 
         avatar = SimpleUploadedFile(name='default.jpg',
-                                    content=open(r"C:\Users\Samareh\Pictures\default.jpg",
+                                    content=open(r"shared/files/avatar.jpg",
                                                  'rb').read(),
                                     content_type='image/jpeg')
         self.faculty_user = FacultyUser.objects.create(base_user=self.user, user_no=1521, avatar=avatar,
                                                        phone_number='+987654321', national_code='1547825478',
                                                        gender='M',
-                                                       birth_date=date(1375, 5, 8))
+                                                       birth_date=timezone.datetime(1375, 5, 8))
         self.expertise = Expertise.objects.create(name='نرم افزار')
         self.degree = Degree.objects.create(name='دکترا')
         self.professor = Professor.objects.create(user=self.faculty_user, faculty=self.faculty,
                                                   field_of_study=self.fos,
                                                   expertise=self.expertise, degree=self.degree)
         self.professor.past_teaching_courses.add(*self.taken_courses)
-        self.student = Student.objects.create(user=self.faculty_user, entry_year=date(1375, 10, 10), entry_term=1,
+        self.student = Student.objects.create(user=self.faculty_user, entry_year=timezone.datetime(1375, 10, 10), entry_term=1,
                                               gpa=18.0,
                                               faculty=self.faculty, field_of_study=self.fos,
                                               supervisor=self.professor,

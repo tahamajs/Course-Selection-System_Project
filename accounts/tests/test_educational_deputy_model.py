@@ -17,7 +17,7 @@ class CustomUserModelTest(TestCase):
         self.fos = FieldOfStudy.objects.create(name='نرم افزار', group='کامپیوتر', faculty=self.faculty, units=75,
                                                degree='کارشناسی')
         avatar = SimpleUploadedFile(name='test_image.jpg',
-                                    content=open(r"D:\Gallery\My\king-head-vector-logo-icon_43623-454.jpg",
+                                    content=open(r"shared/files/avatar.jpg",
                                                  'rb').read(),
                                     content_type='image/jpeg')
         self.faculty_user = FacultyUser.objects.create(base_user=self.base_user, user_no=5214, avatar=avatar,
