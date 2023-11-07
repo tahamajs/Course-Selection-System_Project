@@ -46,7 +46,7 @@ class CourseModelTest(TestCase):
     def test_course_faculty(self):
         course = Course.objects.get(name='مبانی کامپیوتر')
         self.assertEqual(course.faculty.name, 'مهندسی کامپیوتر')
-
+#
 
 class StudentCourseTest(TestCase):
     def setUp(self):
