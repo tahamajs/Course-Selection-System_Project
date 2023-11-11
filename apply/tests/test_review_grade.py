@@ -8,7 +8,7 @@ from accounts.models.student import Student, FacultyUser
 from college.models.faculty import Faculty
 from college.models.fieldofstudy import FieldOfStudy
 from course.models.course import Course
-from requests.models.review_grade import ReviewGrade
+from apply.models.review_grade import ReviewGrade
 
 
 class RegistrationModelTestCase(TestCase):

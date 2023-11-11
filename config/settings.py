@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'accounts',
     'college',
     'course',
-    'requests',
+    'apply',
     'shared',
     'rest_framework',
 ]
@@ -142,7 +142,6 @@ PASSWORD_HASHERS = (
 
 AUTH_USER_MODEL = 'accounts.User'
 
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
@@ -157,3 +156,5 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 }
+
+PASSWORD_RESET_TIMEOUT = 5 * 60

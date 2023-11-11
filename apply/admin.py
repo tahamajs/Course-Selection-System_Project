@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group
-from requests.models import Registration, RegistrationUpdate, CourseDrop, TermDrop, ReviewGrade, \
+from apply.models import Registration, RegistrationUpdate, CourseDrop, TermDrop, ReviewGrade, \
     EnrollmentVerification
 
 
