@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'course',
     'requests',
     'shared',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -149,3 +150,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = "pychicss@gmail.com"
 EMAIL_SENDER = EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = "sawgojyooxtqvfnn"
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
