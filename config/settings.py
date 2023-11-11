@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'course',
     'requests',
     'shared',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -140,3 +141,9 @@ PASSWORD_HASHERS = (
 )
 
 AUTH_USER_MODEL = 'accounts.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}

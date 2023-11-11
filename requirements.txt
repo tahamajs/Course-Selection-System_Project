@@ -6,3 +6,5 @@ django-jalali==6.0.1
 jdatetime==4.1.1
 sqlparse==0.4.4
 pytz
+djangorestframework_simplejwt
+djangorestframework
