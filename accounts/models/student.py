@@ -1,11 +1,11 @@
 from django.db import models
 from django_jalali.db import models as jmodels
 from .professor import Professor
-from .faculty_user import FacultyUser
+from .user import User
 
 
 class Student(models.Model):
-    user = models.OneToOneField(FacultyUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     entry_year = jmodels.jDateField()
     entry_term = models.IntegerField(choices=((1, 'نیمه اول'), (2, 'نیمه دوم')))
     gpa = models.DecimalField(max_digits=5, decimal_places=3)  # معدل => grade point average
@@ -23,4 +23,4 @@ class Student(models.Model):
     academic_years = models.IntegerField()
 
     def __str__(self):
-        return self.user.base_user.username
+        return self.user.username
