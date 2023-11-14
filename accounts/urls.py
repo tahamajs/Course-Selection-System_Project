@@ -11,3 +11,5 @@ urlpatterns = [
     path('change-password-request/', ChangePasswordRequestView.as_view(), name='change_password_request'),
     path('change-password-action/<uidb64>/<token>/', ChangePasswordActionView.as_view(), name='change_password_action')
 ]
+
+
