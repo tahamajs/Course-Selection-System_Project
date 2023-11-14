@@ -1,0 +1,15 @@
+POST http://127.0.0.1:8000/accounts/change-password-request/
+Content-Type: application/json
+
+{
+  "email": "hbpubgm@gmail.com"
+}
+
+###
+
+POST http://127.0.0.1:8000/accounts/change-password-action/MQ/bxilqn-4154123bfa5eec23cc121e0a3b769e49/
+Content-Type: application/json
+
+{
+  "new_password": 5298
+}
