@@ -1,7 +1,7 @@
 from django.test import TestCase
 from accounts.models import Student, User, Professor, Expertise, Degree, FacultyUser
 from college.models import FieldOfStudy, Faculty, Term
-from requests.models.enrollment_verification import EnrollmentVerification
+from apply.models.enrollment_verification import EnrollmentVerification
 from course.models.course import Course
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.utils import timezone

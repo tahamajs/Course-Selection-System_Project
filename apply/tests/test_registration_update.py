@@ -9,7 +9,7 @@ from accounts.models.user import User
 from accounts.models.student import Student, FacultyUser
 from college.models.faculty import Faculty
 from college.models.fieldofstudy import FieldOfStudy
-from requests.models.registration_update import RegistrationUpdate
+from apply.models.registration_update import RegistrationUpdate
 from course.models.course import Course
 
 

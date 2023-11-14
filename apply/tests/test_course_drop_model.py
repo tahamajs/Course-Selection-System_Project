@@ -1,7 +1,7 @@
 from django.test import TestCase
 from accounts.models import Student, User, Professor, Expertise, Degree, FacultyUser
 from course.models.course import Course
-from requests.models import CourseDrop
+from apply.models import CourseDrop
 from college.models import FieldOfStudy, Faculty
 from django.core.files.uploadedfile import SimpleUploadedFile
 
