@@ -9,4 +9,4 @@ for app_name in django_settings.INSTALLED_APPS:
         if models_file_path.exists() or models_folder_path.exists():
             (migrations_folder := folder_path / 'migrations').mkdir(parents=True, exist_ok=True)
             (init_file := migrations_folder / '__init__.py').touch(exist_ok=True)
-            print(f'{init_file.absolute()} created.')
+            print(f'{init_file.relative_to(".")} created.')

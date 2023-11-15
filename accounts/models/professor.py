@@ -1,7 +1,7 @@
 from django.db import models
 from .user import User
-from .expertise import Expertise
-from .degree import Degree
+from accounts.models.helper import Expertise
+from accounts.models.helper import Degree
 
 
 class Professor(models.Model):
