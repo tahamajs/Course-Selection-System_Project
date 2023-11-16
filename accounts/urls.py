@@ -7,7 +7,6 @@ from .views.faculty import FacultyViewSet
 
 app_name = 'users'
 router = routers.DefaultRouter()
-router.register(r'faculty', FacultyViewSet)
 router.register(r'admin/educationaldeputies', EducationalDeputyViewSet, basename='educationaldeputy')
 
 
