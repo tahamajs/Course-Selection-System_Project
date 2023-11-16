@@ -13,10 +13,11 @@ class Student(models.Model):
     field_of_study = models.OneToOneField(to='college.FieldOfStudy', on_delete=models.CASCADE,
                                           related_name='student_field_of_study')
     courses_passed = models.ManyToManyField(to='course.Course',
-                                            related_name='student_courses_passed')
+                                            related_name='student_courses_passed', blank=True)
     courses_taken = models.ManyToManyField(to='course.Course',
-                                           related_name='student_courses_taken')
-    supervisor = models.OneToOneField(to=Professor, on_delete=models.CASCADE, related_name='student_supervisor')
+                                           related_name='student_courses_taken', blank=True)
+    supervisor = models.OneToOneField(to=Professor, on_delete=models.CASCADE, related_name='student_supervisor',
+                                      blank=True)
     military_service_status = models.CharField(max_length=3,
                                                choices=(
                                                    ('SBJ', 'مشمول'), ('MEE', 'معافیت تحصیلی'), ('MES', 'پایان خدمت')))

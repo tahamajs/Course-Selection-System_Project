@@ -1,8 +1,16 @@
-POST http://127.0.0.1:8000/courses/
+POST http://127.0.0.1:8000/accounts/login/token/
 Content-Type: application/json
 
 {
-  "Token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcwNzkyMTQyNywiaWF0IjoxNzAwMTQ1NDI3LCJqdGkiOiJiZDdkZjJmZWYzNTc0MGIwODE4ZjhkNzZmNDkzYTZhNCIsInVzZXJfaWQiOjF9.4nLP5jkdgqaNyeZ1ThOvW6_aXh3IEypZoN7kXWwKosk",
-  "name": "tarix",
-
+  "username": "admin",
+  "password": "admin"
 }
+
+> {%
+    client.global.set("auth_token", response.body.json["access"]);
+%}
+
+###
+
+GET http://127.0.0.1:8000/course/courses/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1MzMyMjkzLCJpYXQiOjE3MDAxNDgyOTMsImp0aSI6IjNjNTZjNmU2ZmQ5YjQ1OTFiM2ExOGNjOGVlNDgyZGU3IiwidXNlcl9pZCI6MX0.EkgfxlKNFvKhy3UiG7s53NIk7AqbdIwdwtOUODhLjjU
