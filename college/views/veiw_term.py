@@ -33,6 +33,7 @@ class TermDetailAPIView(generics.RetrieveAPIView):
 
 class StudentCoursesAPIView(generics.ListAPIView):
     serializer_class = CourseSerializer
+    permission_classes = (IsProfessorOrStudent,)
 
     def get_queryset(self):
 
