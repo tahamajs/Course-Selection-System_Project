@@ -6,10 +6,10 @@ from .models import ITAdmin , Student , Professor
 
 class IsItManager(permissions.BasePermission):
     def has_permission(self, request, view):
-
-        if request.user.is_authenticated and ITAdmin.objects.get(user=request.user).exists():
+        if request.user.is_authenticated and ITAdmin.objects.filter(user=request.user):
             return True
-        return False
+        else:
+            return False
 
 
 class IsProfessorOrStudent(permissions.BasePermission):

@@ -11,7 +11,7 @@ from accounts.permissions import IsProfessorOrStudent , IsItManager
 
 
 class TermViewSet(viewsets.ModelViewSet):
-    # permission_classes = [IsItManager,]
+    permission_classes = [IsItManager ,]
     queryset = Term.objects.all()
     serializer_class = TermSerializer
 
@@ -19,13 +19,13 @@ class TermViewSet(viewsets.ModelViewSet):
         serializer.save()
 
 class TermListAPIView(generics.ListAPIView):
-    # permission_classes = (IsProfessorOrStudent,)
+    permission_classes = (IsProfessorOrStudent,)
     queryset = Term.objects.all()
     serializer_class = TermSerializer
 
 
 class TermDetailAPIView(generics.RetrieveAPIView):
-    # permission_classes = (IsProfessorOrStudent,)
+    permission_classes = (IsProfessorOrStudent,)
     queryset = Term.objects.all()
     serializer_class = TermSerializer
     lookup_field = 'pk'
