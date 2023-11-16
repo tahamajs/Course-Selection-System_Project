@@ -1,0 +1,1 @@
+from .has_permission import has_faculty_permission

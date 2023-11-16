@@ -1,0 +1,8 @@
+POST http://127.0.0.1:8000/courses/
+Content-Type: application/json
+
+{
+  "Token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcwNzkyMTQyNywiaWF0IjoxNzAwMTQ1NDI3LCJqdGkiOiJiZDdkZjJmZWYzNTc0MGIwODE4ZjhkNzZmNDkzYTZhNCIsInVzZXJfaWQiOjF9.4nLP5jkdgqaNyeZ1ThOvW6_aXh3IEypZoN7kXWwKosk",
+  "name": "tarix",
+
+}
