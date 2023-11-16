@@ -27,3 +27,5 @@ class ChangePasswordRequestView(generics.GenericAPIView):
                                                                 kwargs={'uidb64': user_id_b64, 'token': token})
             utils.send_password_reset_email(reset_url, email)
         return Response({'successfully': 'check your email to reset your password'}, status=status.HTTP_200_OK)
+
+
