@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 from accounts.models import Degree, Professor
-from accounts.models.expertise import Expertise
+from accounts.models.helper.expertise import Expertise
 from accounts.models.user import User
 from accounts.models.student import Student, FacultyUser
 from college.models.faculty import Faculty
