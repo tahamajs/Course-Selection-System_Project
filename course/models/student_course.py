@@ -1,8 +1,8 @@
 from django.db import models
-from django_jalali.db import models as jmodels
+from shared.models import BaseModel
 
 
-class StudentCourse(models.Model):
+class StudentCourse(BaseModel):
     course = models.ForeignKey("Course", on_delete=models.CASCADE, related_name='student_course_course')
     course_state = models.CharField(max_length=50, choices=[('passed', 'قبول'), ('failed', 'مردود')])
     grade = models.IntegerField()

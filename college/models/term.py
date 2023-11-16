@@ -1,8 +1,9 @@
 from django.db import models
 from django_jalali.db import models as jmodels
+from shared.models import BaseModel
 
 
-class Term(models.Model):
+class Term(BaseModel):
     name = models.CharField(max_length=256)
     students = models.ManyToManyField(to='accounts.Student', related_name='term_student', blank=True)
     professors = models.ManyToManyField(to='accounts.Professor', related_name='term_professor', blank=True)

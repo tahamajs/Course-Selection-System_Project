@@ -2,9 +2,10 @@ from django.db import models
 from django_jalali.db import models as jmodels
 from .professor import Professor
 from .user import User
+from shared.models import BaseModel
 
 
-class Student(models.Model):
+class Student(BaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     entry_year = jmodels.jDateField()
     entry_term = models.IntegerField(choices=((1, 'نیمه اول'), (2, 'نیمه دوم')))

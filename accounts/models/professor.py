@@ -2,9 +2,10 @@ from django.db import models
 from .user import User
 from .expertise import Expertise
 from .degree import Degree
+from shared.models import BaseModel
 
 
-class Professor(models.Model):
+class Professor(BaseModel):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE, related_name='professor_user')
     faculty = models.OneToOneField(to='college.Faculty', on_delete=models.CASCADE, related_name='professor_faculty')
     field_of_study = models.OneToOneField(to='college.FieldOfStudy', on_delete=models.CASCADE,
