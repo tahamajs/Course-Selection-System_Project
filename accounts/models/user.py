@@ -15,6 +15,5 @@ class User(AbstractUser):
     gender = models.CharField(max_length=1, choices=(('M', 'مرد'), ('F', 'زن')), null=True, blank=True)
     birth_date = jmodels.jDateField(null=True, blank=True)
 
-
     def __str__(self):
         return self.username

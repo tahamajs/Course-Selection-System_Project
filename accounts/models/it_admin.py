@@ -4,7 +4,7 @@ from shared.models import BaseModel
 
 
 class ITAdmin(BaseModel):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.username

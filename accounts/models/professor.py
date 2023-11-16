@@ -6,12 +6,12 @@ from shared.models import BaseModel
 
 
 class Professor(BaseModel):
-    user = models.OneToOneField(to=User, on_delete=models.CASCADE, related_name='professor_user')
-    faculty = models.OneToOneField(to='college.Faculty', on_delete=models.CASCADE, related_name='professor_faculty')
-    field_of_study = models.OneToOneField(to='college.FieldOfStudy', on_delete=models.CASCADE,
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='professor_user')
+    faculty = models.ForeignKey(to='college.Faculty', on_delete=models.CASCADE, related_name='professor_faculty')
+    field_of_study = models.ForeignKey(to='college.FieldOfStudy', on_delete=models.CASCADE,
                                           related_name='professor_field_of_study')
-    expertise = models.OneToOneField(to=Expertise, on_delete=models.CASCADE, related_name='professor_expertise')
-    degree = models.OneToOneField(to=Degree, on_delete=models.CASCADE, related_name='professor_degree')
+    expertise = models.ForeignKey(to=Expertise, on_delete=models.CASCADE, related_name='professor_expertise')
+    degree = models.ForeignKey(to=Degree, on_delete=models.CASCADE, related_name='professor_degree')
     past_teaching_courses = models.ManyToManyField(to='course.Course',
                                                    related_name='professor_past_courses')
 

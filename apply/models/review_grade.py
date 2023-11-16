@@ -4,7 +4,7 @@ from course.models.course import Course
 
 
 class ReviewGrade(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='review_course_student')
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='review_course_course')
+    student = models.ForeignKey(to=Student, on_delete=models.CASCADE, related_name='review_course_student')
+    course = models.ForeignKey(to=Course, on_delete=models.CASCADE, related_name='review_course_course')
     review_text = models.TextField(null=True, blank=True)
     result_text = models.TextField(null=True, blank=True)

@@ -1,10 +1,11 @@
 from django.db import models
 from django_jalali.db import models as jmodels
 from shared.models import BaseModel
+from .course import Course
 
 
 class TermCourse(BaseModel):
-    course = models.ForeignKey("Course", on_delete=models.CASCADE, related_name='term_course_course')
+    course = models.ForeignKey(to=Course, on_delete=models.CASCADE, related_name='term_course_course')
     term = models.ForeignKey(to='college.Term', on_delete=models.CASCADE, related_name='term_course_term')
     exam_date_time = jmodels.jDateTimeField()
     exam_venue = models.CharField(max_length=50)

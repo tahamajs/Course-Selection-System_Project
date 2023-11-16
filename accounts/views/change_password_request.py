@@ -8,6 +8,9 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import smart_bytes
 from django.utils.http import urlsafe_base64_encode
 import shared.utils as utils
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class ChangePasswordRequestView(generics.GenericAPIView):
