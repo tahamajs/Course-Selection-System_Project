@@ -28,7 +28,7 @@ class ProfessorViewSet(viewsets.ModelViewSet):
                 serializer = self.get_serializer(professor)
                 return Response(serializer.data, status=status.HTTP_200_OK)
             else:
-                return Response({'message': 'you cant access student with different faculty'},
+                return Response({'message': 'you cant access professor with different faculty'},
                                 status=status.HTTP_400_BAD_REQUEST)
 
     def get_queryset(self):
