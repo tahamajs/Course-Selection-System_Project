@@ -1,0 +1,1 @@
+from .EducationalDeputyOrStudentOrProfessor import EducationalDeputyOrStudentOrProfessorPermission
