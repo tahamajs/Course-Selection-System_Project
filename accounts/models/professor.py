@@ -13,7 +13,7 @@ class Professor(BaseModel):
     expertise = models.ForeignKey(to=Expertise, on_delete=models.CASCADE, related_name='professor_expertise')
     degree = models.ForeignKey(to=Degree, on_delete=models.CASCADE, related_name='professor_degree')
     past_teaching_courses = models.ManyToManyField(to='course.Course',
-                                                   related_name='professor_past_courses')
+                                                   related_name='professor_past_courses', blank=True)
 
     def __str__(self):
         return self.user.username

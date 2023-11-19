@@ -6,7 +6,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from accounts.models import Degree, Professor
 from accounts.models.expertise import Expertise
 from accounts.models.user import User
-from accounts.models.student import Student, FacultyUser
+from accounts.models.student import Student, User
 from college.models.faculty import Faculty
 from college.models.fieldofstudy import FieldOfStudy
 from apply.models.registration import Registration
@@ -32,7 +32,7 @@ class RegistrationModelTestCase(TestCase):
                                     content=open(r"shared/files/avatar.jpg",
                                                  'rb').read(),
                                     content_type='image/jpeg')
-        self.faculty_user = FacultyUser.objects.create(base_user=self.user, user_no=1521, avatar=avatar,
+        self.faculty_user = User.objects.create(base_user=self.user, user_no=1521, avatar=avatar,
                                                        phone_number='+987654321', national_code='1547825478',
                                                        gender='M',
                                                        birth_date=timezone.datetime(1375, 5, 8))

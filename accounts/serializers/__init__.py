@@ -1,0 +1,1 @@
+from .serializer_professor import ProfessorSerializer
