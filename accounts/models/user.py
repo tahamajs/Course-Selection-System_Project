@@ -14,8 +14,7 @@ class User(AbstractUser):
     national_code = models.CharField(max_length=12, null=True, blank=True)
     gender = models.CharField(max_length=1, choices=(('M', 'مرد'), ('F', 'زن')), null=True, blank=True)
     birth_date = jmodels.jDateField(null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+
 
     def __str__(self):
         return self.username

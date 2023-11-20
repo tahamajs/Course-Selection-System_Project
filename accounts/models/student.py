@@ -15,9 +15,8 @@ class Student(models.Model):
     courses_passed = models.ManyToManyField(to='course.Course',
                                             related_name='student_courses_passed', blank=True)
     courses_taken = models.ManyToManyField(to='course.Course',
-                                           related_name='student_courses_taken', blank=True)
-    supervisor = models.OneToOneField(to=Professor, on_delete=models.CASCADE, related_name='student_supervisor',
-                                      blank=True)
+                                           related_name='student_courses_taken')
+    supervisor = models.ForeignKey(to=Professor, on_delete=models.CASCADE, related_name='student_supervisor')
     military_service_status = models.CharField(max_length=3,
                                                choices=(
                                                    ('SBJ', 'مشمول'), ('MEE', 'معافیت تحصیلی'), ('MES', 'پایان خدمت')))

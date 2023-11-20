@@ -4,7 +4,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_decode
 from accounts.models import User
-from accounts.serializers import ChangePasswordActionSerializer
+from accounts.serializers.change_password_action import ChangePasswordActionSerializer
 from rest_framework import exceptions
 
 
