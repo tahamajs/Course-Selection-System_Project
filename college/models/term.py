@@ -16,3 +16,6 @@ class Term(models.Model):
     exams_start_time = jmodels.jDateField()
     term_end_time = jmodels.jDateField()
 
+    def __str__(self):
+        return self.name
+
