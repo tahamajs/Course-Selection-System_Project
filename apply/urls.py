@@ -2,7 +2,7 @@
 from rest_framework.routers import DefaultRouter
 from . import views
 
-app_name = 'course'
+app_name = 'apply'
 router = DefaultRouter()
 router.register(r'registration-update', views.RegistrationUpdateViewSet)
 

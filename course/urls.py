@@ -4,8 +4,8 @@ from . import views
 
 app_name = 'course'
 router = DefaultRouter()
-router.register(r'courses', views.CourseViewSet, basename="course")
-router.register(r'term-courses', views.TermCourseViewSet, basename="term-course")
+router.register(r'courses', views.CourseViewSet)
+router.register(r'term-courses', views.TermCourseViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
