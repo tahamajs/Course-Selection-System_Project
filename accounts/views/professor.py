@@ -34,7 +34,7 @@ class ProfessorViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         if EducationalDeputy.objects.filter(user=self.request.user).exists():
             educational_faculty = EducationalDeputy.objects.get(user=self.request.user).faculty
-            return Professor.objects.filter(faculty=educational_faculty)
+            return Professor.objects.filter(faculty=educational_faculty).order_by('pk')
         return Professor.objects.filter(user=self.request.user)
 
     def update(self, request, *args, **kwargs):
