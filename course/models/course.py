@@ -1,8 +1,6 @@
 from django.db import models
-from django_jalali.db import models as jmodels
 
 
-# Create your models here.
 class Course(models.Model):
     name = models.CharField(max_length=50)
     faculty = models.ForeignKey(to='college.Faculty', on_delete=models.CASCADE, related_name='course_faculty')
