@@ -8,3 +8,7 @@ sqlparse==0.4.4
 pytz
 djangorestframework_simplejwt
 djangorestframework
+django-filter
+celery[redis]
+psycopg2-binary
+markdown
