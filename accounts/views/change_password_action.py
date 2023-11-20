@@ -1,3 +1,4 @@
+from drf_spectacular.openapi import AutoSchema
 from rest_framework import generics, status
 from rest_framework.response import Response
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
@@ -6,6 +7,7 @@ from django.utils.http import urlsafe_base64_decode
 from accounts.models import User
 from accounts.serializers.change_password_action import ChangePasswordActionSerializer
 from rest_framework import exceptions
+from drf_spectacular.views import extend_schema
 
 
 class ChangePasswordActionView(generics.GenericAPIView):
