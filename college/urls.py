@@ -8,6 +8,4 @@ router = DefaultRouter()
 router.register(r'faculty', FacultyViewSet)
 router.register(r'term', TermViewSet)
 
-urlpatterns = [
-    path('', include(router.urls)),
-]
+urlpatterns = router.urls
