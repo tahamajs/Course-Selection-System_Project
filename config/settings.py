@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'college',
     'course',
     'apply',
-    # 'shared',
 ]
 
 MIDDLEWARE = [
@@ -123,8 +122,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "mediafiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -145,14 +147,14 @@ PASSWORD_HASHERS = (
 
 AUTH_USER_MODEL = 'accounts.User'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = "pychicss@gmail.com"
+EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
+EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL")
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_SENDER = EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = "sawgojyooxtqvfnn"
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -178,5 +180,20 @@ SIMPLE_JWT = {
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
 
-# CELERY_BROKER_URL = "redis://localhost:6379/0"
-# CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
+CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND")
+
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+
+MINIO_ACCESS_KEY = os.getenv("MINIO_ROOT_USER")
+MINIO_SECRET_KEY = os.getenv("MINIO_ROOT_PASSWORD")
+MINIO_BUCKET_NAME = os.getenv("MINIO_BUCKET_NAME")
+MINIO_ENDPOINT = os.getenv("MINIO_ENDPOINT")
+
+AWS_ACCESS_KEY_ID = MINIO_ACCESS_KEY
+AWS_SECRET_ACCESS_KEY = MINIO_SECRET_KEY
+AWS_STORAGE_BUCKET_NAME = MINIO_BUCKET_NAME
+AWS_S3_ENDPOINT_URL = MINIO_ENDPOINT
+AWS_DEFAULT_ACL = None
+AWS_QUERYSTRING_AUTH = True
+AWS_S3_FILE_OVERWRITE = False

@@ -1,0 +1,88 @@
+version: '3.8'
+
+services:
+
+  nginx:
+    restart: always
+    build: ./nginx
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/mediafiles
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+
+  db:
+    image: postgres:15
+    restart: unless-stopped
+    volumes:
+      - postgres_data_prod:/var/lib/postgresql/data/
+    env_file:
+      - .env
+    expose:
+      - 5432
+
+  redis:
+    image: redis:7.0.5-alpine
+    restart: unless-stopped
+    expose:
+      - 6379
+
+  s3:
+    image: minio/minio
+    restart: unless-stopped
+    command: server --console-address :9090 --address :9000 /data
+    expose:
+      - 9000
+      - 9090
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: minio123
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    volumes:
+      - s3:/data
+
+  web:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: /app/entrypoint-web.sh
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/mediafiles
+    expose:
+      - 8000
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+
+  celery:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: /app/entrypoint-celery.sh
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/mediafiles
+    expose:
+      - 8000
+    env_file:
+      - .env
+    depends_on:
+      - web
+      - db
+      - redis
+
+volumes:
+  postgres_data_prod:
+  static_volume:
+  media_volume:

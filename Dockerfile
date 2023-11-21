@@ -17,11 +17,12 @@ COPY . .
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-RUN sed -i 's/\r$//g'  $APP_HOME/entrypoint.prod.sh
-RUN chmod +x  $APP_HOME/entrypoint.prod.sh
+RUN chmod +x  $APP_HOME/entrypoint-web.sh
+RUN chmod +x  $APP_HOME/entrypoint-celery.sh
 
 RUN chown -R app:app $APP_HOME
 
 USER app
 
-ENTRYPOINT ["/app/entrypoint.prod.sh"]
+RUN chmod +x /app/entrypoint-web.sh
+RUN chmod +x /app/entrypoint-celery.sh
