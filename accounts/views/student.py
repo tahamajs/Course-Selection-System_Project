@@ -2,10 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
-<<<<<<< HEAD
-=======
 
->>>>>>> d5d6a677372323d544ceb760168de074978c1ac4
 from accounts.models import EducationalDeputy
 from accounts.models.student import Student
 from accounts.serializers import StudentSerializer, StudentSerializerAllFields
