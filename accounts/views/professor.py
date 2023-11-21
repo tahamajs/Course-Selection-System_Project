@@ -1,4 +1,5 @@
 from rest_framework import viewsets, status
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
@@ -9,8 +10,9 @@ from accounts.permissions import EducationalDeputyOrStudentOrProfessorPermission
 
 
 class ProfessorViewSet(viewsets.ModelViewSet):
-    permission_classes = [EducationalDeputyOrStudentOrProfessorPermission]
+    permission_classes = [EducationalDeputyOrStudentOrProfessorPermission, IsAuthenticated]
     serializer_class = ProfessorSerializer
+    http_method_names = ['get', 'put']
 
     def get_serializer_class(self):
         if self.action == 'update':
