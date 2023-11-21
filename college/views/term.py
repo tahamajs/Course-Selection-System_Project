@@ -6,7 +6,7 @@ from accounts.permissions import IsITAdmin
 
 
 class TermViewSet(viewsets.ModelViewSet):
-    http_method_names = ['GET']
+    http_method_names = ['get']
     queryset = Term.objects.all()
     serializer_class = TermSerializer
     permission_classes = [IsAuthenticated, IsITAdmin]

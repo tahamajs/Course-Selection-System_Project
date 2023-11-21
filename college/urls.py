@@ -7,6 +7,6 @@ from .views.term import TermViewSet
 app_name = 'college'
 router = DefaultRouter()
 router.register(r'faculty', FacultyViewSet)
-router.register(r'term', TermViewSet)
+router.register(r'terms', TermViewSet, basename='term')
 
 urlpatterns = router.urls
