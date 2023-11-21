@@ -1,0 +1,19 @@
+FROM python:3.11.6-slim-bookworm
+
+WORKDIR /app
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+RUN apt-get update && apt-get install -y netcat
+
+COPY . .
+
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+COPY entrypoint.dev.sh .
+RUN sed -i 's/\r$//g' /app/entrypoint.dev.sh
+RUN chmod +x /app/entrypoint.dev.sh
+
+ENTRYPOINT ["/app/entrypoint.sh"]

@@ -1,13 +1,12 @@
 from django.core.mail import EmailMessage
 from django.conf import settings
 
+import celery
 
-# import celery
 
-
-# @celery.shared_task()
+@celery.shared_task()
 def send_email(subject, body, to):
-    return EmailMessage(from_email=settings.EMAIL_SENDER, subject=subject, body=body, to=[to, ])#.send()
+    EmailMessage(from_email=settings.EMAIL_SENDER, subject=subject, body=body, to=[to, ]).send()
 
 
 def send_password_reset_email(link, to):
