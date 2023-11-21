@@ -5,6 +5,7 @@ from course.serializers import TermCourseSerializer
 from accounts.permissions import IsITAdmin
 from course.permissions import IsEducationalDeputyOfTermCourseFaculty
 
+
 class TermCourseViewSet(viewsets.ModelViewSet):
     queryset = TermCourse.objects.all()
     serializer_class = TermCourseSerializer

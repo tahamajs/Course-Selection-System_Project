@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from accounts.models.helper.expertise import Expertise
 from .models import *
 from shared.admin import *
