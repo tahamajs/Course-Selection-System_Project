@@ -1,5 +1,5 @@
 from django.test import TestCase
-from accounts.models import User, FacultyUser, EducationalDeputy
+from accounts.models import User, EducationalDeputy
 from college.models import Faculty, FieldOfStudy
 from django.core.files.uploadedfile import SimpleUploadedFile
 
@@ -20,11 +20,7 @@ class CustomUserModelTest(TestCase):
                                     content=open(r"shared/files/avatar.jpg",
                                                  'rb').read(),
                                     content_type='image/jpeg')
-        self.faculty_user = FacultyUser.objects.create(base_user=self.base_user, user_no=5214, avatar=avatar,
-                                                       phone_number='+987654321', national_code='1547825478',
-                                                       gender='M',
-                                                       birth_date='1375-05-08')
-        self.educational_deputy = EducationalDeputy.objects.create(user=self.faculty_user, faculty=self.faculty,
+        self.educational_deputy = EducationalDeputy.objects.create(user=self.base_user, faculty=self.faculty,
                                                                    field_of_study=self.fos)
 
     def test_educational_deputy_create(self):

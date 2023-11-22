@@ -1,5 +1,5 @@
 from django.test import TestCase
-from accounts.models import Student, User, Professor, Expertise, Degree, FacultyUser
+from accounts.models import Student, User, Professor, Expertise, Degree
 from college.models import Faculty, FieldOfStudy
 from course.models import Course
 from django.core.files.uploadedfile import SimpleUploadedFile
@@ -21,20 +21,12 @@ class CustomUserModelTest(TestCase):
         self.taken_courses = [Course.objects.create(name='سیستم عامل', faculty=self.faculty,
                                                     credits=3, course_type='specialized'), ]
 
-        avatar = SimpleUploadedFile(name='test_image.jpg',
-                                    content=open(r"shared/files/avatar.jpg",
-                                                 'rb').read(),
-                                    content_type='image/jpeg')
-        self.faculty_user = FacultyUser.objects.create(base_user=self.base_user, user_no=5214, avatar=avatar,
-                                                       phone_number='+987654321', national_code='1547825478',
-                                                       gender='M',
-                                                       birth_date='1375-05-08')
         self.expertise = Expertise.objects.create(name='نرم افزار')
         self.degree = Degree.objects.create(name='دکترا')
-        self.professor = Professor.objects.create(user=self.faculty_user, faculty=self.faculty, field_of_study=self.fos,
+        self.professor = Professor.objects.create(user=self.base_user, faculty=self.faculty, field_of_study=self.fos,
                                                   expertise=self.expertise, degree=self.degree)
         self.professor.past_teaching_courses.add(*self.taken_courses)
-        self.student = Student.objects.create(user=self.faculty_user, entry_year='1375-10-10', entry_term=1, gpa=18.0,
+        self.student = Student.objects.create(user=self.base_user, entry_year='1375-10-10', entry_term=1, gpa=18.0,
                                               faculty=self.faculty, field_of_study=self.fos, supervisor=self.professor,
                                               military_service_status='SBJ',
                                               academic_years=2)
