@@ -1,6 +1,7 @@
 from .models import *
 from shared.admin import *
 from django.contrib.auth.models import Group
+from .models.helper.expertise import Expertise
 
 admin.site.unregister(Group)
 

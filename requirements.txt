@@ -17,3 +17,4 @@ python-dotenv
 django-storages
 boto3
 drf-spectacular
+drf_spectacular_sidecar

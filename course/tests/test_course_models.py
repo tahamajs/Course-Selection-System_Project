@@ -1,8 +1,8 @@
 import pytz
 from django.test import TestCase
 
-from accounts.models import Student, Professor, User, Expertise, Degree
-from django.core.files.uploadedfile import SimpleUploadedFile
+from accounts.models import Student, Professor, User, Degree
+from accounts.models.helper.expertise import Expertise
 from course.models import StudentCourse, Course, TermCourse
 from college.models import Term, Faculty, FieldOfStudy
 from jdatetime import time
@@ -46,6 +46,8 @@ class CourseModelTest(TestCase):
     def test_course_faculty(self):
         course = Course.objects.get(name='مبانی کامپیوتر')
         self.assertEqual(course.faculty.name, 'مهندسی کامپیوتر')
+
+
 #
 
 class StudentCourseTest(TestCase):
