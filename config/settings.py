@@ -14,7 +14,11 @@ from datetime import timedelta
 from pathlib import Path
 import dotenv
 
-env = dict(dotenv.dotenv_values('../.env'))
+env = dotenv.dotenv_values('.env')
+
+if env.get('DEBUG').strip() == '1':
+    env.update(dotenv.dotenv_values('.dev.env'))
+
 env.update(os.environ)
 
 
@@ -32,7 +36,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = getenv("SECRET_KEY", default='django-insecure-vzb@hch-oxho^dww91=tkj_p1s8pi-bb8@!*c3z0$#(5_x$&pv')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(getenv("DEBUG", default=1))
+DEBUG = bool(int(getenv("DEBUG", default=1)))
 
 ALLOWED_HOSTS = eval(getenv("DJANGO_ALLOWED_HOSTS", "['127.0.0.1', 'localhost']"))
 
@@ -91,12 +95,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": getenv("SQL_ENGINE", "django.db.backends.sqlite3"),
-        "NAME": getenv("SQL_DATABASE", BASE_DIR / "db.sqlite3"),
-        "USER": getenv("SQL_USER", "user"),
-        "PASSWORD": getenv("SQL_PASSWORD", "password"),
-        "HOST": getenv("SQL_HOST", "localhost"),
-        "PORT": getenv("SQL_PORT", "5432"),
+        "ENGINE": getenv("SQL_ENGINE"),
+        "NAME": getenv("SQL_DATABASE"),
+        "USER": getenv("SQL_USER"),
+        "PASSWORD": getenv("SQL_PASSWORD"),
+        "HOST": getenv("SQL_HOST"),
+        "PORT": getenv("SQL_PORT"),
     }
 }
 
@@ -193,7 +197,7 @@ SIMPLE_JWT = {
 CELERY_BROKER_URL = getenv("CELERY_BROKER_URL")
 CELERY_RESULT_BACKEND = getenv("CELERY_RESULT_BACKEND")
 
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+DEFAULT_FILE_STORAGE = getenv("DEFAULT_FILE_STORAGE")
 
 MINIO_ACCESS_KEY = getenv("MINIO_ROOT_USER")
 MINIO_SECRET_KEY = getenv("MINIO_ROOT_PASSWORD")

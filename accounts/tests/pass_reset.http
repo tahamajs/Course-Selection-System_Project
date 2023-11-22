@@ -7,7 +7,7 @@ Content-Type: application/json
 
 ###
 
-POST http://127.0.0.1:8000/accounts/change-password-action/MQ/bxilqn-4154123bfa5eec23cc121e0a3b769e49/
+POST http://127.0.0.1:8000/accounts/change-password-action/MQ/by31hd-aca5d68f2baf61519a0d97f896790839/
 Content-Type: application/json
 
 {
