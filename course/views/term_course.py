@@ -12,4 +12,4 @@ class TermCourseViewSet(viewsets.ModelViewSet):
     queryset = TermCourse.objects.all()
     serializer_class = TermCourseSerializer
     permission_classes = [IsAuthenticated, IsEducationalDeputyOfTermCourseFaculty | IsITAdmin, ]
-    http_method_names = ['get', 'put', 'delete']
+    http_method_names = ['get', 'put', 'delete', 'post']

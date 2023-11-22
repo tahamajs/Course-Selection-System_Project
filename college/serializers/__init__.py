@@ -1,1 +1,1 @@
-from .faculty import FacultySerializer
+from .serializer_term import TermSerializer

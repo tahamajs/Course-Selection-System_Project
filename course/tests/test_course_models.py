@@ -1,7 +1,7 @@
 import pytz
 from django.test import TestCase
 
-from accounts.models import Student, Professor, User, Expertise, Degree, FacultyUser
+from accounts.models import Student, Professor, User, Expertise, Degree
 from django.core.files.uploadedfile import SimpleUploadedFile
 from course.models import StudentCourse, Course, TermCourse
 from college.models import Term, Faculty, FieldOfStudy
@@ -126,21 +126,12 @@ class TermCourseTest(TestCase):
         self.taken_courses = [Course.objects.create(name='سیستم عامل', faculty=self.faculty,
                                                     credits=3, course_type='specialized'), ]
 
-        avatar = SimpleUploadedFile(name='test_image.jpg',
-                                    content=open(
-                                        r"shared/files/avatar.jpg",
-                                        'rb').read(),
-                                    content_type='image/png')
-        self.faculty_user = FacultyUser.objects.create(base_user=self.base_user, user_no=5214, avatar=avatar,
-                                                       phone_number='+987654321', national_code='1547825478',
-                                                       gender='M',
-                                                       birth_date='1375-05-08')
         self.expertise = Expertise.objects.create(name='نرم افزار')
         self.degree = Degree.objects.create(name='دکترا')
-        self.professor = Professor.objects.create(user=self.faculty_user, faculty=self.faculty, field_of_study=self.fos,
+        self.professor = Professor.objects.create(user=self.base_user, faculty=self.faculty, field_of_study=self.fos,
                                                   expertise=self.expertise, degree=self.degree)
         self.professor.past_teaching_courses.add(*self.taken_courses)
-        self.student = Student.objects.create(user=self.faculty_user, entry_year='1375-10-10', entry_term=1, gpa=18.0,
+        self.student = Student.objects.create(user=self.base_user, entry_year='1375-10-10', entry_term=1, gpa=18.0,
                                               faculty=self.faculty, field_of_study=self.fos, supervisor=self.professor,
                                               military_service_status='SBJ',
                                               academic_years=2)
@@ -190,12 +181,12 @@ class TermCourseTest(TestCase):
         self.assertEqual(self.term_course.exam_venue, "دانشکده مهندسی کامپیوتر")
 
     def test_professor(self):
-        self.assertEqual(self.term_course.professor.user.base_user.username, "testuser")
+        self.assertEqual(self.term_course.professor.user.username, "testuser")
 
     def test_term(self):
         self.assertEqual(self.term_course.term.name, "Spring Term")
-        self.assertEqual(self.term_course.term.students.first().user.base_user.username, "testuser")
-        self.assertEqual(self.term_course.term.professors.first().user.base_user.username, "testuser")
+        self.assertEqual(self.term_course.term.students.first().user.username, "testuser")
+        self.assertEqual(self.term_course.term.professors.first().user.username, "testuser")
 
     def test_delete_term_course(self):
         self.term_course.delete()
