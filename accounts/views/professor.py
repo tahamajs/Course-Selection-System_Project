@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -9,6 +10,7 @@ from accounts.serializers import ProfessorSerializer, ProfessorSerializerAllFiel
 from accounts.permissions import EducationalDeputyOrStudentOrProfessorPermission
 
 
+@extend_schema(tags=["Professor"])
 class ProfessorViewSet(viewsets.ModelViewSet):
     permission_classes = [EducationalDeputyOrStudentOrProfessorPermission, IsAuthenticated]
     serializer_class = ProfessorSerializer
