@@ -28,7 +28,7 @@ class CourseViewSet(viewsets.ModelViewSet):
             serializer = StudentCourseSerializer(student_courses, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': str(e)},  status=status.HTTP_503_SERVICE_UNAVAILABLE)
 
     @action(detail=True, methods=['get'], url_path='exam-schedule')
     def get_exam_schedule(self, request, pk=None):
@@ -37,4 +37,4 @@ class CourseViewSet(viewsets.ModelViewSet):
             serializer = TermCourseSerializer(term_courses, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': str(e)},  status=status.HTTP_503_SERVICE_UNAVAILABLE)
