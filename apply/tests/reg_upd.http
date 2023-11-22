@@ -1,0 +1,42 @@
+GET http://127.0.0.1:8000/apply/registration-update/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1MzMyMjkzLCJpYXQiOjE3MDAxNDgyOTMsImp0aSI6IjNjNTZjNmU2ZmQ5YjQ1OTFiM2ExOGNjOGVlNDgyZGU3IiwidXNlcl9pZCI6MX0.EkgfxlKNFvKhy3UiG7s53NIk7AqbdIwdwtOUODhLjjU
+
+###
+
+POST http://127.0.0.1:8000/apply/registration-update/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1MzMyMjkzLCJpYXQiOjE3MDAxNDgyOTMsImp0aSI6IjNjNTZjNmU2ZmQ5YjQ1OTFiM2ExOGNjOGVlNDgyZGU3IiwidXNlcl9pZCI6MX0.EkgfxlKNFvKhy3UiG7s53NIk7AqbdIwdwtOUODhLjjU
+Content-Type: application/json
+
+{
+  "add_courses": [
+    1
+  ],
+  "del_courses": [
+    2
+  ]
+}
+
+###
+
+PATCH http://127.0.0.1:8000/course/courses/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1MzMyMjkzLCJpYXQiOjE3MDAxNDgyOTMsImp0aSI6IjNjNTZjNmU2ZmQ5YjQ1OTFiM2ExOGNjOGVlNDgyZGU3IiwidXNlcl9pZCI6MX0.EkgfxlKNFvKhy3UiG7s53NIk7AqbdIwdwtOUODhLjjU
+Content-Type: application/json
+
+{
+  "credits": 85
+}
+
+###
+
+PUT http://127.0.0.1:8000/course/courses/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1MzMyMjkzLCJpYXQiOjE3MDAxNDgyOTMsImp0aSI6IjNjNTZjNmU2ZmQ5YjQ1OTFiM2ExOGNjOGVlNDgyZGU3IiwidXNlcl9pZCI6MX0.EkgfxlKNFvKhy3UiG7s53NIk7AqbdIwdwtOUODhLjjU
+Content-Type: application/json
+
+{
+  "name": "c30",
+  "credits": 60,
+  "course_type": "core",
+  "faculty": 1,
+  "pre_requisite": [],
+  "co_requisite": []
+}

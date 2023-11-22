@@ -9,18 +9,23 @@ from django.utils.encoding import smart_bytes
 from django.utils.http import urlsafe_base64_encode
 import shared.utils as utils
 from django.contrib.auth import get_user_model
+from accounts.serializers import ChangePasswordRequestSerializer
 
 User = get_user_model()
 
 
 class ChangePasswordRequestView(generics.GenericAPIView):
     queryset = User.objects.all()
+    serializer_class = ChangePasswordRequestSerializer
 
-    def post(self, request):
-        email = request.data['email']
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
 
-        if User.objects.filter(email=email).exists():
-            user = User.objects.get(email=email)
+        email = serializer.validated_data['email']
+
+        if self.queryset.filter(email=email).exists():
+            user = self.queryset.get(email=email)
             user_id_b64 = urlsafe_base64_encode(smart_bytes(user.id))
             token = PasswordResetTokenGenerator().make_token(user)
 

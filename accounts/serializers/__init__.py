@@ -1,1 +1,6 @@
 from .serializer_professor import ProfessorSerializer
+from .change_password_action import ChangePasswordActionSerializer
+from .professor import ProfessorSerializer, ProfessorSerializerAllFields
+from .student import StudentSerializer, StudentSerializerAllFields
+from .logout import LogoutSerializer
+from . change_password_request import ChangePasswordRequestSerializer

@@ -1,0 +1,2 @@
+from .educational_deputy_of_course_faculty import IsEducationalDeputyOfCourseFaculty
+from .educational_deputy_of_term_course_faculty import IsEducationalDeputyOfTermCourseFaculty

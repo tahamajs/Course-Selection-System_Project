@@ -1,0 +1,1 @@
+from .registration_update import RegistrationUpdateSerializer
