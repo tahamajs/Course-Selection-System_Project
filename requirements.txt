@@ -12,4 +12,8 @@ django-filter
 celery[redis]
 psycopg2-binary
 markdown
+gunicorn
+python-dotenv
+django-storages
+boto3
 drf-spectacular

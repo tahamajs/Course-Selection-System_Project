@@ -12,6 +12,7 @@ import shared.utils as utils
 from django.contrib.auth import get_user_model
 from accounts.serializers import ChangePasswordRequestSerializer
 
+
 User = get_user_model()
 
 
@@ -19,7 +20,7 @@ User = get_user_model()
 class ChangePasswordRequestView(generics.GenericAPIView):
     queryset = User.objects.all()
     serializer_class = ChangePasswordRequestSerializer
-
+    
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)

@@ -3,9 +3,9 @@ from django.db import models
 from django_jalali.db import models as jmodels
 from django.utils.translation import gettext_lazy as _
 
-
-def upload_dir(instance, filename):
+"""def upload_dir(instance, filename):
     return f'uploads/user_{instance.base_user.username}_{instance.base_user.id}/{filename}'
+"""
 
 
 class User(AbstractUser):
