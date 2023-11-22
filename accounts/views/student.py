@@ -2,13 +2,14 @@ from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
-
+from drf_spectacular.utils import extend_schema
 from accounts.models import EducationalDeputy
 from accounts.models.student import Student
 from accounts.serializers import StudentSerializer, StudentSerializerAllFields
 from accounts.permissions import EducationalDeputyOrStudentOrProfessorPermission
 
 
+@extend_schema(tags=["Student"])
 class StudentViewSet(viewsets.ModelViewSet):
     permission_classes = [EducationalDeputyOrStudentOrProfessorPermission, IsAuthenticated]
     serializer_class = StudentSerializer
