@@ -5,9 +5,9 @@ if input("ARE YOU SURE ? (Yes/no)") != 'Yes':
     print('Good Decision.')
     sys.exit()
 
-for path in pathlib.Path('.').glob('**/*.py'):
+for path in list(pathlib.Path('.').glob('**/*.py')):
     if ('venv' not in path.parts) and ('migrations' in path.parts) and ('__init__.py' not in path.parts):
-        print(path.parts)
+        # print(path.absolute())
         print(path.relative_to('.'))
         try:
             path.unlink()

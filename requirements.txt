@@ -5,6 +5,11 @@ Django==4.2.7
 django-jalali==6.0.1
 jdatetime==4.1.1
 sqlparse==0.4.4
-pytz
+pytz~=2023.3.post1
 djangorestframework_simplejwt
 djangorestframework
+django-filter
+celery[redis]
+psycopg2-binary
+markdown
+drf-spectacular
