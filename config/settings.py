@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
     'rest_framework',
     'accounts',
     'college',
@@ -156,14 +157,14 @@ PASSWORD_HASHERS = (
 
 AUTH_USER_MODEL = 'accounts.User'
 
-EMAIL_BACKEND = getenv("EMAIL_BACKEND", "django.core.mail.backends.smtp.EmailBackend")
-EMAIL_PORT = getenv("EMAIL_PORT", 587)
-EMAIL_USE_TLS = getenv("EMAIL_USE_TLS", True)
+EMAIL_BACKEND = getenv("EMAIL_BACKEND")
+EMAIL_PORT = getenv("EMAIL_PORT")
+EMAIL_USE_TLS = getenv("EMAIL_USE_TLS")
 EMAIL_USE_SSL = False
-EMAIL_HOST = getenv("EMAIL_HOST", 'smtp.gmail.com')
-EMAIL_HOST_USER = getenv("EMAIL_HOST_USER", "pychicss@gmail.com")
+EMAIL_HOST = getenv("EMAIL_HOST")
+EMAIL_HOST_USER = getenv("EMAIL_HOST_USER")
 EMAIL_SENDER = EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = getenv("EMAIL_HOST_PASSWORD", "sawgojyooxtqvfnn")
+EMAIL_HOST_PASSWORD = getenv("EMAIL_HOST_PASSWORD")
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [

@@ -54,9 +54,9 @@ services:
       /bin/sh -c "
       apk add nc &&
       while ! nc -z minio 9000; do echo 'Wait minio to startup...' && sleep 0.1; done; sleep 5 &&
-      /usr/bin/mc config host add myminio http://minio:9000 access-key secret-key;
-      /usr/bin/mc mb myminio/my-local-bucket;
-      /usr/bin/mc policy download myminio/my-local-bucket;
+      /usr/bin/mc config host add myminio http://s3:9000 minioadmin minioadmin;
+      /usr/bin/mc mb myminio/django-files;
+      /usr/bin/mc policy download myminio/django-files;
       exit 0;
       "      
 
