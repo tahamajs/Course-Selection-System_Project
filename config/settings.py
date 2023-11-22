@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
+import pathlib
 from datetime import timedelta
 from pathlib import Path
 import dotenv
@@ -203,7 +204,6 @@ SIMPLE_JWT = {
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
 
-
 CELERY_BROKER_URL = getenv("CELERY_BROKER_URL")
 CELERY_RESULT_BACKEND = getenv("CELERY_RESULT_BACKEND")
 
@@ -221,6 +221,10 @@ AWS_S3_ENDPOINT_URL = MINIO_ENDPOINT
 AWS_DEFAULT_ACL = None
 AWS_QUERYSTRING_AUTH = True
 AWS_S3_FILE_OVERWRITE = False
+
+logs_dir = pathlib.Path('logs')
+logs_dir.mkdir(parents=True, exist_ok=True)
+(logs_dir / 'http_requests.log').touch(exist_ok=True)
 
 LOGGING = {
     'version': 1,

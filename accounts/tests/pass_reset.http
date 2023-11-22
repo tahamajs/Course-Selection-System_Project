@@ -2,12 +2,12 @@ POST http://127.0.0.1:8000/accounts/change-password-request/
 Content-Type: application/json
 
 {
-  "email": "sahand.u99@gmail.com"
+  "email": "hbpubgm@gmail.com"
 }
 
 ###
 
-POST http://127.0.0.1:8000/accounts/change-password-action/MQ/by31hd-aca5d68f2baf61519a0d97f896790839/
+POST http://127.0.0.1:8000/accounts/change-password-action/MQ/by36ea-fddbbc5ee20309b7866b39558b713c8b/
 Content-Type: application/json
 
 {

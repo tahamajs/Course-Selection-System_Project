@@ -1,1 +1,1 @@
-from .veiw_term import TermListAPIView , TermDetailAPIView , StudentCoursesAPIView , TermViewSet
+from .term import TermListAPIView, TermDetailAPIView, StudentCoursesAPIView, TermViewSet
