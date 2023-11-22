@@ -1,8 +1,10 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django_jalali.db import models as jmodels
+from shared.models import BaseModel
 
 
-class Course(models.Model):
+class Course(BaseModel):
     name = models.CharField(max_length=50, verbose_name=_('نام درس'))
     faculty = models.ForeignKey(to='college.Faculty', on_delete=models.CASCADE, related_name='course_faculty',
                                 verbose_name=_('دانشکده ارایه دهنده'))

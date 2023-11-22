@@ -3,11 +3,9 @@ from rest_framework.routers import DefaultRouter
 from accounts.views.educational_deputy import EducationalDeputyViewSet
 from .views import *
 from rest_framework_simplejwt import views as jwt_views
-
-app_name = 'users'
-router = DefaultRouter()
-router.register(r'admin/educationaldeputies', EducationalDeputyViewSet, basename='educationaldeputy')
-
+from .views.educational_deputy import EducationalDeputyViewSet
+from .views.view_professor import ProfessorViewSetITAdmin
+from .views.view_student import StudentViewSetITAdmin
 from .views.professor import ProfessorViewSet
 from .views.student import StudentViewSet
 
@@ -15,6 +13,14 @@ app_name = 'accounts'
 router = DefaultRouter()
 router.register(r'students', StudentViewSet, basename='student')
 router.register(r'professors', ProfessorViewSet, basename='professor')
+router.register(r'admin/students-itadmin', StudentViewSetITAdmin, basename='student-itadmin')
+router.register(r'admin/professors-itadmin', ProfessorViewSetITAdmin, basename='professor-itadmin')
+
+
+
+router = DefaultRouter 
+router.register(r'admin/educationaldeputies', EducationalDeputyViewSet, basename='educationaldeputy')
+
 
 urlpatterns = [
     path('login/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),

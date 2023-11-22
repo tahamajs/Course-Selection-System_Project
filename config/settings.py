@@ -46,12 +46,13 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework_simplejwt',
     'rest_framework',
+    'django_filters',
+    'drf_spectacular',
+
     'accounts',
     'college',
     'course',
-    'apply',
-    'drf_spectacular',
-    # 'shared',
+    'apply'
 ]
 
 MIDDLEWARE = [

@@ -7,7 +7,7 @@
 # from accounts.models import Student
 # from college.models import Term
 # from apply.models import Registration
-# from apply.serializer import RegistrationSerializer
+from apply.serializers.registration import RegistrationSerializer
 #
 #
 # class RegistrationView(viewsets.ModelViewSet):

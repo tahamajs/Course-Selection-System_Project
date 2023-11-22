@@ -1,10 +1,12 @@
 from django.db import models
 from django_jalali.db import models as jmodels
 from django.utils.translation import gettext_lazy as _
+from shared.models import BaseModel
+from .course import Course
 
 
-class StudentCourse(models.Model):
-    course = models.ForeignKey("Course", on_delete=models.CASCADE, related_name='student_course_course',
+class StudentCourse(BaseModel):
+    course = models.ForeignKey(to=Course, on_delete=models.CASCADE, related_name='student_course_course',
                                verbose_name=_('نام درس'))
     course_state = models.CharField(max_length=50, choices=[('passed', 'قبول'), ('failed', 'مردود')],
                                     verbose_name=_('وضعیت درس'))

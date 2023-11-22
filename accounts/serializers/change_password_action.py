@@ -6,7 +6,3 @@ class ChangePasswordActionSerializer(serializers.Serializer):
     new_password = serializers.CharField(required=True)
 
 
-class FacultySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Faculty
-        fields = '__all__'

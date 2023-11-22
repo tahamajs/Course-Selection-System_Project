@@ -1,9 +1,10 @@
 from django.db import models
 from django_jalali.db import models as jmodels
 from django.utils.translation import gettext_lazy as _
+from shared.models import BaseModel
 
 
-class Term(models.Model):
+class Term(BaseModel):
     name = models.CharField(max_length=256, verbose_name=_('نام ترم'))
     students = models.ManyToManyField(to='accounts.Student', related_name='term_student', blank=True,
                                       verbose_name=_('دانشجو ها'))
