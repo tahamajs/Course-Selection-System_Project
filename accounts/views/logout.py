@@ -6,6 +6,7 @@ from drf_spectacular.utils import extend_schema
 from accounts.serializers import LogoutSerializer
 
 
+@extend_schema(tags=["LogOut"])
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
     serializer_class = LogoutSerializer
