@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
@@ -11,6 +12,7 @@ import shared.utils as utils
 from accounts.serializers import ChangePasswordRequestSerializer
 
 
+@extend_schema(tags=["Change password request"])
 class ChangePasswordRequestView(generics.GenericAPIView):
     queryset = User.objects.all()
     serializer_class = ChangePasswordRequestSerializer

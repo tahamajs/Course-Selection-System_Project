@@ -10,6 +10,7 @@ from rest_framework import exceptions
 from drf_spectacular.views import extend_schema
 
 
+@extend_schema(tags=["Change password action"])
 class ChangePasswordActionView(generics.GenericAPIView):
     serializer_class = ChangePasswordActionSerializer
 

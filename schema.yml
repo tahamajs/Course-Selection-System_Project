@@ -1051,21 +1051,30 @@ components:
           readOnly: true
         name:
           type: string
+          title: نام درس
           maxLength: 50
         credits:
           type: integer
+          title: تعداد واحد درس
         course_type:
-          $ref: '#/components/schemas/CourseTypeEnum'
+          allOf:
+          - $ref: '#/components/schemas/CourseTypeEnum'
+          title: نوع درس
         faculty:
           type: integer
+          title: دانشکده ارایه دهنده
         pre_requisite:
           type: array
           items:
             type: integer
+            title: پیش نیازها
+          title: پیش نیازها
         co_requisite:
           type: array
           items:
             type: integer
+            title: هم نیازها
+          title: هم نیازها
       required:
       - course_type
       - credits
@@ -1184,20 +1193,25 @@ components:
         user_no:
           type: integer
           nullable: true
+          title: شماره کاربری
         avatar:
           type: string
           format: uri
           nullable: true
+          title: عکس پروفایل
         phone_number:
           type: string
           nullable: true
+          title: شماره تلفن
           maxLength: 12
         national_code:
           type: string
           nullable: true
+          title: کد ملی
           maxLength: 12
         gender:
           nullable: true
+          title: جنسیت
           oneOf:
           - $ref: '#/components/schemas/GenderEnum'
           - $ref: '#/components/schemas/BlankEnum'
@@ -1206,6 +1220,7 @@ components:
           type: string
           format: date
           nullable: true
+          title: تاریخ تولد
         groups:
           type: array
           items:
@@ -1332,27 +1347,37 @@ components:
           readOnly: true
         name:
           type: string
+          title: نام درس
           maxLength: 50
         credits:
           type: integer
+          title: تعداد واحد درس
         course_type:
-          $ref: '#/components/schemas/CourseTypeEnum'
+          allOf:
+          - $ref: '#/components/schemas/CourseTypeEnum'
+          title: نوع درس
         faculty:
           type: integer
+          title: دانشکده ارایه دهنده
         pre_requisite:
           type: array
           items:
             type: integer
+            title: پیش نیازها
+          title: پیش نیازها
         co_requisite:
           type: array
           items:
             type: integer
+            title: هم نیازها
+          title: هم نیازها
     PatchedProfessor:
       type: object
       properties:
         user_user_no:
           type: integer
           nullable: true
+          title: شماره کاربری
           readOnly: true
         user_first_name:
           type: string
@@ -1369,20 +1394,26 @@ components:
           type: array
           items:
             type: integer
+            title: دروس اضافه
+          title: دروس اضافه
         del_courses:
           type: array
           items:
             type: integer
+            title: دروس حذف
+          title: دروس حذف
         approval_status:
           allOf:
           - $ref: '#/components/schemas/ApprovalStatusEnum'
           readOnly: true
+          title: وضعیت تایید
     PatchedStudent:
       type: object
       properties:
         user_user_no:
           type: integer
           nullable: true
+          title: شماره کاربری
           readOnly: true
         user_first_name:
           type: string
@@ -1401,28 +1432,38 @@ components:
         exam_date_time:
           type: string
           format: date-time
+          title: زمان امتحان
         exam_venue:
           type: string
+          title: مکان امتحان
           maxLength: 50
         capacity:
           type: integer
+          title: ظرفیت درس
         time:
           type: string
           format: time
+          title: زمان
         day:
-          $ref: '#/components/schemas/DayEnum'
+          allOf:
+          - $ref: '#/components/schemas/DayEnum'
+          title: روز
         course:
           type: integer
+          title: نام درس
         term:
           type: integer
+          title: ترم تحصیلی
         professor:
           type: integer
+          title: استاد درس
     Professor:
       type: object
       properties:
         user_user_no:
           type: integer
           nullable: true
+          title: شماره کاربری
           readOnly: true
         user_first_name:
           type: string
@@ -1484,14 +1525,19 @@ components:
           type: array
           items:
             type: integer
+            title: دروس اضافه
+          title: دروس اضافه
         del_courses:
           type: array
           items:
             type: integer
+            title: دروس حذف
+          title: دروس حذف
         approval_status:
           allOf:
           - $ref: '#/components/schemas/ApprovalStatusEnum'
           readOnly: true
+          title: وضعیت تایید
       required:
       - approval_status
     Student:
@@ -1500,6 +1546,7 @@ components:
         user_user_no:
           type: integer
           nullable: true
+          title: شماره کاربری
           readOnly: true
         user_first_name:
           type: string
@@ -1524,16 +1571,23 @@ components:
         entry_year:
           type: string
           format: date
+          title: سال ورودی
         entry_term:
-          $ref: '#/components/schemas/EntryTermEnum'
+          allOf:
+          - $ref: '#/components/schemas/EntryTermEnum'
+          title: ترم ورودی
         gpa:
           type: string
           format: decimal
           pattern: ^-?\d{0,2}(?:\.\d{0,3})?$
+          title: معدل
         military_service_status:
-          $ref: '#/components/schemas/MilitaryServiceStatusEnum'
+          allOf:
+          - $ref: '#/components/schemas/MilitaryServiceStatusEnum'
+          title: وضعیت نظام وظیفه
         academic_years:
           type: integer
+          title: سنوات
         user:
           allOf:
           - $ref: '#/components/schemas/Nested'
@@ -1582,22 +1636,31 @@ components:
         exam_date_time:
           type: string
           format: date-time
+          title: زمان امتحان
         exam_venue:
           type: string
+          title: مکان امتحان
           maxLength: 50
         capacity:
           type: integer
+          title: ظرفیت درس
         time:
           type: string
           format: time
+          title: زمان
         day:
-          $ref: '#/components/schemas/DayEnum'
+          allOf:
+          - $ref: '#/components/schemas/DayEnum'
+          title: روز
         course:
           type: integer
+          title: نام درس
         term:
           type: integer
+          title: ترم تحصیلی
         professor:
           type: integer
+          title: استاد درس
       required:
       - capacity
       - course
