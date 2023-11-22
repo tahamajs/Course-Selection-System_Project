@@ -9,7 +9,7 @@ from accounts.serializers import StudentSerializer, StudentSerializerAllFields
 from accounts.permissions import EducationalDeputyOrStudentOrProfessorPermission
 
 
-@extend_schema(tags=["Student"])
+@extend_schema(tags=["student"])
 class StudentViewSet(viewsets.ModelViewSet):
     permission_classes = [EducationalDeputyOrStudentOrProfessorPermission, IsAuthenticated]
     serializer_class = StudentSerializer
