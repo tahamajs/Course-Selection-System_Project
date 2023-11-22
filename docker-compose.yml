@@ -19,7 +19,7 @@ services:
     volumes:
       - postgres_data_prod:/var/lib/postgresql/data/
     env_file:
-      - .env
+      - .db.env
     expose:
       - 5432
 
@@ -36,16 +36,29 @@ services:
     expose:
       - 9000
       - 9090
-    environment:
-      MINIO_ROOT_USER: minio
-      MINIO_ROOT_PASSWORD: minio123
+    env_file:
+      - .minio.env
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
       interval: 30s
       timeout: 20s
       retries: 3
     volumes:
-      - s3:/data
+      - s3_data:/data
+
+  s3_create_buckets:
+    image: minio/mc
+    depends_on:
+      - s3
+    entrypoint: >
+      /bin/sh -c "
+      apk add nc &&
+      while ! nc -z minio 9000; do echo 'Wait minio to startup...' && sleep 0.1; done; sleep 5 &&
+      /usr/bin/mc config host add myminio http://minio:9000 access-key secret-key;
+      /usr/bin/mc mb myminio/my-local-bucket;
+      /usr/bin/mc policy download myminio/my-local-bucket;
+      exit 0;
+      "      
 
   web:
     restart: unless-stopped
@@ -86,3 +99,4 @@ volumes:
   postgres_data_prod:
   static_volume:
   media_volume:
+  s3_data:

@@ -12,4 +12,4 @@ def send_email(subject, body, to):
 def send_password_reset_email(link, to):
     body = 'Hi, \nUse link below to reset your password \n' + link
     subject = 'Reset Your Password'
-    send_email(subject, body, to)
+    send_email.delay(subject, body, to)

@@ -13,3 +13,4 @@ celery[redis]
 psycopg2-binary
 markdown
 gunicorn
+python-dotenv

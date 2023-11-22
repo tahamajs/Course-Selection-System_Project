@@ -5,12 +5,10 @@ RUN mkdir -p /app
 RUN addgroup --system app && adduser --system --group app
 
 ENV APP_HOME=/app
-RUN mkdir $APP_HOME
-RUN mkdir $APP_HOME/staticfiles
-RUN mkdir $APP_HOME/mediafiles
+RUN mkdir -p $APP_HOME
+RUN mkdir -p $APP_HOME/staticfiles
+RUN mkdir -p $APP_HOME/mediafiles
 WORKDIR $APP_HOME
-
-RUN apt-get update && apt-get install -y --no-install-recommends netcat
 
 COPY . .
 

@@ -6,4 +6,4 @@ do
 done
 
 # run a worker :)
-celery -A backend worker --loglevel=info --concurrency 1 -E
+celery -A config worker --loglevel=info --concurrency 1 -E

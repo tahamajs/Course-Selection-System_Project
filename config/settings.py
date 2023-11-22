@@ -12,6 +12,15 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from datetime import timedelta
 from pathlib import Path
+import dotenv
+
+env = dict(dotenv.dotenv_values('../.env'))
+env.update(os.environ)
+
+
+def getenv(key: str, default=None) -> str:
+    return env.get(key, default).strip()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +29,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = getenv("SECRET_KEY", default='django-insecure-vzb@hch-oxho^dww91=tkj_p1s8pi-bb8@!*c3z0$#(5_x$&pv')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.environ.get("DEBUG", default=0))
+DEBUG = bool(getenv("DEBUG", default=1))
 
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = eval(getenv("DJANGO_ALLOWED_HOSTS", "['127.0.0.1', 'localhost']"))
 
 # Application definition
 
@@ -81,12 +90,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
-        "NAME": os.environ.get("SQL_DATABASE", BASE_DIR / "db.sqlite3"),
-        "USER": os.environ.get("SQL_USER", "user"),
-        "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
-        "HOST": os.environ.get("SQL_HOST", "localhost"),
-        "PORT": os.environ.get("SQL_PORT", "5432"),
+        "ENGINE": getenv("SQL_ENGINE", "django.db.backends.sqlite3"),
+        "NAME": getenv("SQL_DATABASE", BASE_DIR / "db.sqlite3"),
+        "USER": getenv("SQL_USER", "user"),
+        "PASSWORD": getenv("SQL_PASSWORD", "password"),
+        "HOST": getenv("SQL_HOST", "localhost"),
+        "PORT": getenv("SQL_PORT", "5432"),
     }
 }
 
@@ -147,14 +156,14 @@ PASSWORD_HASHERS = (
 
 AUTH_USER_MODEL = 'accounts.User'
 
-EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
-EMAIL_PORT = os.getenv("EMAIL_PORT")
-EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
-EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL")
-EMAIL_HOST = os.getenv("EMAIL_HOST")
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_BACKEND = getenv("EMAIL_BACKEND", "django.core.mail.backends.smtp.EmailBackend")
+EMAIL_PORT = getenv("EMAIL_PORT", 587)
+EMAIL_USE_TLS = getenv("EMAIL_USE_TLS", True)
+EMAIL_USE_SSL = False
+EMAIL_HOST = getenv("EMAIL_HOST", 'smtp.gmail.com')
+EMAIL_HOST_USER = getenv("EMAIL_HOST_USER", "pychicss@gmail.com")
 EMAIL_SENDER = EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_HOST_PASSWORD = getenv("EMAIL_HOST_PASSWORD", "sawgojyooxtqvfnn")
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -180,15 +189,15 @@ SIMPLE_JWT = {
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
 
-CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
-CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND")
+CELERY_BROKER_URL = getenv("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = getenv("CELERY_RESULT_BACKEND")
 
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
-MINIO_ACCESS_KEY = os.getenv("MINIO_ROOT_USER")
-MINIO_SECRET_KEY = os.getenv("MINIO_ROOT_PASSWORD")
-MINIO_BUCKET_NAME = os.getenv("MINIO_BUCKET_NAME")
-MINIO_ENDPOINT = os.getenv("MINIO_ENDPOINT")
+MINIO_ACCESS_KEY = getenv("MINIO_ROOT_USER")
+MINIO_SECRET_KEY = getenv("MINIO_ROOT_PASSWORD")
+MINIO_BUCKET_NAME = getenv("MINIO_BUCKET_NAME")
+MINIO_ENDPOINT = getenv("MINIO_ENDPOINT")
 
 AWS_ACCESS_KEY_ID = MINIO_ACCESS_KEY
 AWS_SECRET_ACCESS_KEY = MINIO_SECRET_KEY
