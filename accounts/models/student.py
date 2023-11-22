@@ -1,18 +1,21 @@
 from django.db import models
 from django_jalali.db import models as jmodels
 from .professor import Professor
-from .user import User
+from django.contrib.auth import get_user_model
+from shared.models import BaseModel
 from django.utils.translation import gettext_lazy as _
 
+User = get_user_model()
 
-class Student(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name=_('یوزر'))
+
+class Student(BaseModel):
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name=_('یوزر'))
     entry_year = jmodels.jDateField(verbose_name=_('سال ورودی'))
     entry_term = models.IntegerField(choices=((1, 'نیمه اول'), (2, 'نیمه دوم')), verbose_name=_('ترم ورودی'))
     gpa = models.DecimalField(max_digits=5, decimal_places=3, verbose_name=_('معدل'))  # معدل => grade point average
-    faculty = models.OneToOneField(to='college.Faculty', on_delete=models.CASCADE, related_name='student_faculty',
+    faculty = models.ForeignKey(to='college.Faculty', on_delete=models.CASCADE, related_name='student_faculty',
                                    verbose_name=_('دانشکده'))
-    field_of_study = models.OneToOneField(to='college.FieldOfStudy', on_delete=models.CASCADE,
+    field_of_study = models.ForeignKey(to='college.FieldOfStudy', on_delete=models.CASCADE,
                                           related_name='student_field_of_study', verbose_name=_('رشته تحصیلی'))
     courses_passed = models.ManyToManyField(to='course.Course',
                                             related_name='student_courses_passed', blank=True,

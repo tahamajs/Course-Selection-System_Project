@@ -1,10 +1,12 @@
 from django.db import models
 from django_jalali.db import models as jmodels
 from django.utils.translation import gettext_lazy as _
+from shared.models import BaseModel
+from .course import Course
 
 
-class TermCourse(models.Model):
-    course = models.ForeignKey("Course", on_delete=models.CASCADE, related_name='term_course_course',
+class TermCourse(BaseModel):
+    course = models.ForeignKey(to=Course, on_delete=models.CASCADE, related_name='term_course_course',
                                verbose_name=_('نام درس'))
     term = models.ForeignKey(to='college.Term', on_delete=models.CASCADE, related_name='term_course_term',
                              verbose_name=_('ترم تحصیلی'))

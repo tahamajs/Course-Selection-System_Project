@@ -1,5 +1,5 @@
 from django.test import TestCase
-from accounts.models import Student, User, Professor, Expertise, Degree, FacultyUser
+from accounts.models import Student, User, Professor, Expertise, Degree
 from college.models import FieldOfStudy, Faculty, Term
 from apply.models.term_drop import TermDrop
 from course.models.course import Course
@@ -25,7 +25,7 @@ class TermDropModelTest(TestCase):
                                     content=open(r"shared/files/avatar.jpg",
                                                  'rb').read(),
                                     content_type='image/jpeg')
-        self.faculty_user = FacultyUser.objects.create(base_user=self.user, user_no=5214, avatar=avatar,
+        self.faculty_user = User.objects.create(base_user=self.user, user_no=5214, avatar=avatar,
                                                        phone_number='+987654321', national_code='1547825478',
                                                        gender='M',
                                                        birth_date='1375-05-08')
