@@ -1,3 +1,5 @@
+from django.contrib import admin
+from accounts.models.helper.expertise import Expertise
 from .models import *
 from shared.admin import *
 from django.contrib.auth.models import Group
