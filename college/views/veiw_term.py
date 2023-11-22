@@ -16,6 +16,8 @@ class TermViewSet(viewsets.ModelViewSet):
     permission_classes = [IsITAdmin, ]
     queryset = Term.objects.all()
     serializer_class = TermSerializer
+    http_method_names = ['get', 'post', 'put', 'delete']
+
 
     def perform_create(self, serializer):
         serializer.save()
