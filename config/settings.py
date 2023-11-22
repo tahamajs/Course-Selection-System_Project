@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework_simplejwt',
     'rest_framework',
-    'django_filters',
     'drf_spectacular',
 
     'accounts',

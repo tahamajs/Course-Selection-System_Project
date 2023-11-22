@@ -1,4 +1,4 @@
-from .serializer_professor import ProfessorSerializer
+from .serializer_professor import ProfessorSerializerITAdmin
 from .change_password_action import ChangePasswordActionSerializer
 from .professor import ProfessorSerializer, ProfessorSerializerAllFields
 from .student import StudentSerializer, StudentSerializerAllFields
