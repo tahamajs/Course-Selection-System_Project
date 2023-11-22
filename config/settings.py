@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework',
     'drf_spectacular',
-
+    'drf_spectacular_sidecar',
     'accounts',
     'college',
     'course',
@@ -168,8 +168,13 @@ REST_FRAMEWORK = {
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Course Selection',
+    'TITLE': 'pychi',
+    'DESCRIPTION': 'Course selection',
     'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SWAGGER_UI_DIST': 'SIDECAR',
+    'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
+    'REDOC_DIST': 'SIDECAR'
 }
 
 PASSWORD_RESET_TIMEOUT = 5 * 60
@@ -190,36 +195,36 @@ SIMPLE_JWT = {
 
 # settings.py
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'logs' / 'http_requests.log',
-            'formatter': 'detailed_http_request_format',
-        },
-    },
-    'formatters': {
-        'detailed_http_request_format': {
-            'format': '{asctime} - {levelname} - {message}',
-            'style': '{',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-        'django.request': {
-            'handlers': ['file'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-    },
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'file': {
+#             'level': 'INFO',
+#             'class': 'logging.FileHandler',
+#             'filename': BASE_DIR / 'logs' / 'http_requests.log',
+#             'formatter': 'detailed_http_request_format',
+#         },
+#     },
+#     'formatters': {
+#         'detailed_http_request_format': {
+#             'format': '{asctime} - {levelname} - {message}',
+#             'style': '{',
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file'],
+#             'level': 'INFO',
+#             'propagate': True,
+#         },
+#         'django.request': {
+#             'handlers': ['file'],
+#             'level': 'INFO',
+#             'propagate': False,
+#         },
+#     },
+# }
 
 
 # CELERY_BROKER_URL = "redis://localhost:6379/0"

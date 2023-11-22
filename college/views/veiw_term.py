@@ -23,14 +23,14 @@ class TermViewSet(viewsets.ModelViewSet):
 
 @extend_schema(tags=["term"])
 class TermListAPIView(generics.ListAPIView):
-    permission_classes = (IsStudent | IsProfessor)
+    permission_classes = [IsStudent | IsProfessor]
     queryset = Term.objects.all()
     serializer_class = TermSerializer
 
 
 @extend_schema(tags=["term"])
 class TermDetailAPIView(generics.RetrieveAPIView):
-    permission_classes = (IsStudent | IsProfessor,)
+    permission_classes = [IsStudent | IsProfessor]
     queryset = Term.objects.all()
     serializer_class = TermSerializer
     lookup_field = 'pk'
@@ -39,7 +39,7 @@ class TermDetailAPIView(generics.RetrieveAPIView):
 @extend_schema(tags=["term"])
 class StudentCoursesAPIView(generics.ListAPIView):
     serializer_class = CourseSerializer
-    permission_classes = (IsStudent | IsProfessor)
+    permission_classes = [IsStudent | IsProfessor]
 
     def get_queryset(self):
 

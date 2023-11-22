@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from accounts.models import professor
+from accounts.models import Professor
 
 
 class ProfessorSerializerITAdmin(serializers.ModelSerializer):
     class Meta:
-        model = professor
+        model = Professor
         fields = '__all__'

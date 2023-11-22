@@ -11,3 +11,4 @@ class FacultyViewSet(ModelViewSet):
     queryset = Faculty.objects.all()
     serializer_class = FacultySerializer
     permission_classes = [IsAuthenticated, IsITAdmin]
+    http_method_names = ['get', 'post', 'put', 'delete']

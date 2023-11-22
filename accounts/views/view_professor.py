@@ -10,3 +10,4 @@ class ProfessorViewSetITAdmin(viewsets.ModelViewSet):
     model = Professor
     permission_classes = [IsITAdmin]
     serializer_class = ProfessorSerializerITAdmin
+    http_method_names = ['get', 'post', 'put', 'delete']

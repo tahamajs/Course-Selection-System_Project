@@ -1,0 +1,4377 @@
+openapi: 3.0.3
+info:
+  title: pychi
+  version: 1.0.0
+  description: Course selection
+paths:
+  /accounts/admin/educationaldeputies/:
+    get:
+      operationId: accounts_admin_educationaldeputies_list
+      parameters:
+      - in: query
+        name: faculty__name
+        schema:
+          type: string
+      - in: query
+        name: faculty__name__icontains
+        schema:
+          type: string
+      - in: query
+        name: field_of_study__name
+        schema:
+          type: string
+      - in: query
+        name: field_of_study__name__icontains
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - in: query
+        name: user__first_name
+        schema:
+          type: string
+      - in: query
+        name: user__first_name__icontains
+        schema:
+          type: string
+      - in: query
+        name: user__last_name
+        schema:
+          type: string
+      - in: query
+        name: user__last_name__icontains
+        schema:
+          type: string
+      - in: query
+        name: user__national_code
+        schema:
+          type: string
+      - in: query
+        name: user__national_code__icontains
+        schema:
+          type: string
+      - in: query
+        name: user__user_no
+        schema:
+          type: integer
+      - in: query
+        name: user__user_no__icontains
+        schema:
+          type: integer
+      tags:
+      - educational_deputy
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEducationalDeputyList'
+          description: ''
+    post:
+      operationId: accounts_admin_educationaldeputies_create
+      tags:
+      - educational_deputy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EducationalDeputy'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EducationalDeputy'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EducationalDeputy'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EducationalDeputy'
+          description: ''
+  /accounts/admin/educationaldeputies/{id}/:
+    get:
+      operationId: accounts_admin_educationaldeputies_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this educational deputy.
+        required: true
+      tags:
+      - educational_deputy
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EducationalDeputy'
+          description: ''
+    put:
+      operationId: accounts_admin_educationaldeputies_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this educational deputy.
+        required: true
+      tags:
+      - educational_deputy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EducationalDeputy'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EducationalDeputy'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EducationalDeputy'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EducationalDeputy'
+          description: ''
+    patch:
+      operationId: accounts_admin_educationaldeputies_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this educational deputy.
+        required: true
+      tags:
+      - educational_deputy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedEducationalDeputy'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedEducationalDeputy'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedEducationalDeputy'
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EducationalDeputy'
+          description: ''
+    delete:
+      operationId: accounts_admin_educationaldeputies_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this educational deputy.
+        required: true
+      tags:
+      - educational_deputy
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /accounts/admin/professors-itadmin/:
+    get:
+      operationId: accounts_admin_professors_itadmin_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - professor
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProfessorSerializerITAdminList'
+          description: ''
+    post:
+      operationId: accounts_admin_professors_itadmin_create
+      tags:
+      - professor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          description: ''
+  /accounts/admin/professors-itadmin/{id}/:
+    get:
+      operationId: accounts_admin_professors_itadmin_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - professor
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          description: ''
+    put:
+      operationId: accounts_admin_professors_itadmin_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - professor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          description: ''
+    patch:
+      operationId: accounts_admin_professors_itadmin_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - professor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProfessorSerializerITAdmin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedProfessorSerializerITAdmin'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedProfessorSerializerITAdmin'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          description: ''
+    delete:
+      operationId: accounts_admin_professors_itadmin_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - professor
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /accounts/admin/students-itadmin/:
+    get:
+      operationId: accounts_admin_students_itadmin_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedStudentSerializerITAdminList'
+          description: ''
+    post:
+      operationId: accounts_admin_students_itadmin_create
+      tags:
+      - student
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentSerializerITAdmin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/StudentSerializerITAdmin'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/StudentSerializerITAdmin'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentSerializerITAdmin'
+          description: ''
+  /accounts/admin/students-itadmin/{id}/:
+    get:
+      operationId: accounts_admin_students_itadmin_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentSerializerITAdmin'
+          description: ''
+    put:
+      operationId: accounts_admin_students_itadmin_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - student
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentSerializerITAdmin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/StudentSerializerITAdmin'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/StudentSerializerITAdmin'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentSerializerITAdmin'
+          description: ''
+    patch:
+      operationId: accounts_admin_students_itadmin_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - student
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedStudentSerializerITAdmin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedStudentSerializerITAdmin'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedStudentSerializerITAdmin'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentSerializerITAdmin'
+          description: ''
+    delete:
+      operationId: accounts_admin_students_itadmin_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /accounts/change-password-action/{uidb64}/{token}/:
+    post:
+      operationId: accounts_change_password_action_create
+      parameters:
+      - in: path
+        name: token
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: uidb64
+        schema:
+          type: string
+        required: true
+      tags:
+      - Change password action
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordAction'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordAction'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordAction'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangePasswordAction'
+          description: ''
+  /accounts/change-password-request/:
+    post:
+      operationId: accounts_change_password_request_create
+      tags:
+      - Change password request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangePasswordRequest'
+          description: ''
+  /accounts/login/token/:
+    post:
+      operationId: accounts_login_token_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenObtainPair'
+          description: ''
+  /accounts/login/token/refresh/:
+    post:
+      operationId: accounts_login_token_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /accounts/logout/:
+    post:
+      operationId: accounts_logout_create
+      tags:
+      - LogOut
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Logout'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Logout'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Logout'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Logout'
+          description: ''
+  /accounts/professors/:
+    get:
+      operationId: accounts_professors_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - professor
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProfessorSerializerAllFieldsList'
+          description: ''
+  /accounts/professors/{id}/:
+    get:
+      operationId: accounts_professors_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - professor
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfessorSerializerAllFields'
+          description: ''
+    put:
+      operationId: accounts_professors_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - professor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Professor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Professor'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Professor'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Professor'
+          description: ''
+  /accounts/students/:
+    get:
+      operationId: accounts_students_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedStudentSerializerAllFieldsList'
+          description: ''
+  /accounts/students/{id}/:
+    get:
+      operationId: accounts_students_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentSerializerAllFields'
+          description: ''
+    put:
+      operationId: accounts_students_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - student
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Student'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Student'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+          description: ''
+  /admin/admin/educationaldeputies/:
+    get:
+      operationId: admin_admin_educationaldeputies_list
+      parameters:
+      - in: query
+        name: faculty__name
+        schema:
+          type: string
+      - in: query
+        name: faculty__name__icontains
+        schema:
+          type: string
+      - in: query
+        name: field_of_study__name
+        schema:
+          type: string
+      - in: query
+        name: field_of_study__name__icontains
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - in: query
+        name: user__first_name
+        schema:
+          type: string
+      - in: query
+        name: user__first_name__icontains
+        schema:
+          type: string
+      - in: query
+        name: user__last_name
+        schema:
+          type: string
+      - in: query
+        name: user__last_name__icontains
+        schema:
+          type: string
+      - in: query
+        name: user__national_code
+        schema:
+          type: string
+      - in: query
+        name: user__national_code__icontains
+        schema:
+          type: string
+      - in: query
+        name: user__user_no
+        schema:
+          type: integer
+      - in: query
+        name: user__user_no__icontains
+        schema:
+          type: integer
+      tags:
+      - educational_deputy
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEducationalDeputyList'
+          description: ''
+    post:
+      operationId: admin_admin_educationaldeputies_create
+      tags:
+      - educational_deputy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EducationalDeputy'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EducationalDeputy'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EducationalDeputy'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EducationalDeputy'
+          description: ''
+  /admin/admin/educationaldeputies/{id}/:
+    get:
+      operationId: admin_admin_educationaldeputies_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this educational deputy.
+        required: true
+      tags:
+      - educational_deputy
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EducationalDeputy'
+          description: ''
+    put:
+      operationId: admin_admin_educationaldeputies_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this educational deputy.
+        required: true
+      tags:
+      - educational_deputy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EducationalDeputy'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EducationalDeputy'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EducationalDeputy'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EducationalDeputy'
+          description: ''
+    patch:
+      operationId: admin_admin_educationaldeputies_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this educational deputy.
+        required: true
+      tags:
+      - educational_deputy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedEducationalDeputy'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedEducationalDeputy'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedEducationalDeputy'
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EducationalDeputy'
+          description: ''
+    delete:
+      operationId: admin_admin_educationaldeputies_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this educational deputy.
+        required: true
+      tags:
+      - educational_deputy
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /admin/admin/professors-itadmin/:
+    get:
+      operationId: admin_admin_professors_itadmin_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - professor
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProfessorSerializerITAdminList'
+          description: ''
+    post:
+      operationId: admin_admin_professors_itadmin_create
+      tags:
+      - professor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          description: ''
+  /admin/admin/professors-itadmin/{id}/:
+    get:
+      operationId: admin_admin_professors_itadmin_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - professor
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          description: ''
+    put:
+      operationId: admin_admin_professors_itadmin_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - professor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          description: ''
+    patch:
+      operationId: admin_admin_professors_itadmin_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - professor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProfessorSerializerITAdmin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedProfessorSerializerITAdmin'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedProfessorSerializerITAdmin'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          description: ''
+    delete:
+      operationId: admin_admin_professors_itadmin_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - professor
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /admin/admin/students-itadmin/:
+    get:
+      operationId: admin_admin_students_itadmin_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedStudentSerializerITAdminList'
+          description: ''
+    post:
+      operationId: admin_admin_students_itadmin_create
+      tags:
+      - student
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentSerializerITAdmin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/StudentSerializerITAdmin'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/StudentSerializerITAdmin'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentSerializerITAdmin'
+          description: ''
+  /admin/admin/students-itadmin/{id}/:
+    get:
+      operationId: admin_admin_students_itadmin_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentSerializerITAdmin'
+          description: ''
+    put:
+      operationId: admin_admin_students_itadmin_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - student
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentSerializerITAdmin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/StudentSerializerITAdmin'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/StudentSerializerITAdmin'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentSerializerITAdmin'
+          description: ''
+    patch:
+      operationId: admin_admin_students_itadmin_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - student
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedStudentSerializerITAdmin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedStudentSerializerITAdmin'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedStudentSerializerITAdmin'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentSerializerITAdmin'
+          description: ''
+    delete:
+      operationId: admin_admin_students_itadmin_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /admin/change-password-action/{uidb64}/{token}/:
+    post:
+      operationId: admin_change_password_action_create
+      parameters:
+      - in: path
+        name: token
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: uidb64
+        schema:
+          type: string
+        required: true
+      tags:
+      - Change password action
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordAction'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordAction'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordAction'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangePasswordAction'
+          description: ''
+  /admin/change-password-request/:
+    post:
+      operationId: admin_change_password_request_create
+      tags:
+      - Change password request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangePasswordRequest'
+          description: ''
+  /admin/login/token/:
+    post:
+      operationId: admin_login_token_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenObtainPair'
+          description: ''
+  /admin/login/token/refresh/:
+    post:
+      operationId: admin_login_token_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /admin/logout/:
+    post:
+      operationId: admin_logout_create
+      tags:
+      - LogOut
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Logout'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Logout'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Logout'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Logout'
+          description: ''
+  /admin/professors/:
+    get:
+      operationId: admin_professors_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - professor
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProfessorSerializerAllFieldsList'
+          description: ''
+  /admin/professors/{id}/:
+    get:
+      operationId: admin_professors_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - professor
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfessorSerializerAllFields'
+          description: ''
+    put:
+      operationId: admin_professors_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - professor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Professor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Professor'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Professor'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Professor'
+          description: ''
+  /admin/students/:
+    get:
+      operationId: admin_students_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedStudentSerializerAllFieldsList'
+          description: ''
+  /admin/students/{id}/:
+    get:
+      operationId: admin_students_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentSerializerAllFields'
+          description: ''
+    put:
+      operationId: admin_students_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - student
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Student'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Student'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+          description: ''
+  /apply/registration-update/:
+    get:
+      operationId: apply_registration_update_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - registration update
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedRegistrationUpdateList'
+          description: ''
+    post:
+      operationId: apply_registration_update_create
+      tags:
+      - registration update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationUpdate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RegistrationUpdate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RegistrationUpdate'
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegistrationUpdate'
+          description: ''
+  /apply/registration-update/{id}/:
+    get:
+      operationId: apply_registration_update_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this registration update.
+        required: true
+      tags:
+      - registration update
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegistrationUpdate'
+          description: ''
+    put:
+      operationId: apply_registration_update_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this registration update.
+        required: true
+      tags:
+      - registration update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationUpdate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RegistrationUpdate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RegistrationUpdate'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegistrationUpdate'
+          description: ''
+    patch:
+      operationId: apply_registration_update_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this registration update.
+        required: true
+      tags:
+      - registration update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedRegistrationUpdate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedRegistrationUpdate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedRegistrationUpdate'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegistrationUpdate'
+          description: ''
+    delete:
+      operationId: apply_registration_update_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this registration update.
+        required: true
+      tags:
+      - registration update
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /college/admin/term/:
+    get:
+      operationId: college_admin_term_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - term
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedTermList'
+          description: ''
+    post:
+      operationId: college_admin_term_create
+      tags:
+      - term
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Term'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Term'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Term'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Term'
+          description: ''
+  /college/admin/term/{id}/:
+    get:
+      operationId: college_admin_term_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - term
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Term'
+          description: ''
+    put:
+      operationId: college_admin_term_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - term
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Term'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Term'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Term'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Term'
+          description: ''
+    delete:
+      operationId: college_admin_term_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - term
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /college/faculty/:
+    get:
+      operationId: college_faculty_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - faculty
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFacultyList'
+          description: ''
+    post:
+      operationId: college_faculty_create
+      tags:
+      - faculty
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Faculty'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Faculty'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Faculty'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Faculty'
+          description: ''
+  /college/faculty/{id}/:
+    get:
+      operationId: college_faculty_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this faculty.
+        required: true
+      tags:
+      - faculty
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Faculty'
+          description: ''
+    put:
+      operationId: college_faculty_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this faculty.
+        required: true
+      tags:
+      - faculty
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Faculty'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Faculty'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Faculty'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Faculty'
+          description: ''
+    patch:
+      operationId: college_faculty_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this faculty.
+        required: true
+      tags:
+      - faculty
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedFaculty'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedFaculty'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedFaculty'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Faculty'
+          description: ''
+    delete:
+      operationId: college_faculty_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this faculty.
+        required: true
+      tags:
+      - faculty
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /college/student/{id}/my-courses/:
+    get:
+      operationId: college_student_my_courses_list
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - term
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCourseList'
+          description: ''
+  /college/term/{id}/:
+    get:
+      operationId: college_term_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - term
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Term'
+          description: ''
+  /college/terms/:
+    get:
+      operationId: college_terms_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - term
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedTermList'
+          description: ''
+    post:
+      operationId: college_terms_create
+      tags:
+      - term
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Term'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Term'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Term'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Term'
+          description: ''
+  /college/terms/{id}/:
+    get:
+      operationId: college_terms_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this term.
+        required: true
+      tags:
+      - term
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Term'
+          description: ''
+    put:
+      operationId: college_terms_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this term.
+        required: true
+      tags:
+      - term
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Term'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Term'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Term'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Term'
+          description: ''
+    patch:
+      operationId: college_terms_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this term.
+        required: true
+      tags:
+      - term
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedTerm'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedTerm'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedTerm'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Term'
+          description: ''
+    delete:
+      operationId: college_terms_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this term.
+        required: true
+      tags:
+      - term
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /course/courses/:
+    get:
+      operationId: course_courses_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - Course
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCourseList'
+          description: ''
+    post:
+      operationId: course_courses_create
+      tags:
+      - Course
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Course'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Course'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Course'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+          description: ''
+  /course/courses/{id}/:
+    get:
+      operationId: course_courses_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this course.
+        required: true
+      tags:
+      - Course
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+          description: ''
+    put:
+      operationId: course_courses_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this course.
+        required: true
+      tags:
+      - Course
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Course'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Course'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Course'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+          description: ''
+    delete:
+      operationId: course_courses_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this course.
+        required: true
+      tags:
+      - Course
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /course/courses/{id}/class-schedule/:
+    get:
+      operationId: course_courses_class_schedule_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this course.
+        required: true
+      tags:
+      - Course
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+          description: ''
+  /course/courses/{id}/exam-schedule/:
+    get:
+      operationId: course_courses_exam_schedule_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this course.
+        required: true
+      tags:
+      - Course
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+          description: ''
+  /course/term-courses/:
+    get:
+      operationId: course_term_courses_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - TermCourse
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedTermCourseList'
+          description: ''
+    post:
+      operationId: course_term_courses_create
+      tags:
+      - TermCourse
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TermCourse'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TermCourse'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TermCourse'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TermCourse'
+          description: ''
+  /course/term-courses/{id}/:
+    get:
+      operationId: course_term_courses_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this term course.
+        required: true
+      tags:
+      - TermCourse
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TermCourse'
+          description: ''
+    put:
+      operationId: course_term_courses_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this term course.
+        required: true
+      tags:
+      - TermCourse
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TermCourse'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TermCourse'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TermCourse'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TermCourse'
+          description: ''
+    delete:
+      operationId: course_term_courses_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this term course.
+        required: true
+      tags:
+      - TermCourse
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /users/admin/educationaldeputies/:
+    get:
+      operationId: users_admin_educationaldeputies_list
+      parameters:
+      - in: query
+        name: faculty__name
+        schema:
+          type: string
+      - in: query
+        name: faculty__name__icontains
+        schema:
+          type: string
+      - in: query
+        name: field_of_study__name
+        schema:
+          type: string
+      - in: query
+        name: field_of_study__name__icontains
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - in: query
+        name: user__first_name
+        schema:
+          type: string
+      - in: query
+        name: user__first_name__icontains
+        schema:
+          type: string
+      - in: query
+        name: user__last_name
+        schema:
+          type: string
+      - in: query
+        name: user__last_name__icontains
+        schema:
+          type: string
+      - in: query
+        name: user__national_code
+        schema:
+          type: string
+      - in: query
+        name: user__national_code__icontains
+        schema:
+          type: string
+      - in: query
+        name: user__user_no
+        schema:
+          type: integer
+      - in: query
+        name: user__user_no__icontains
+        schema:
+          type: integer
+      tags:
+      - educational_deputy
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEducationalDeputyList'
+          description: ''
+    post:
+      operationId: users_admin_educationaldeputies_create
+      tags:
+      - educational_deputy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EducationalDeputy'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EducationalDeputy'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EducationalDeputy'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EducationalDeputy'
+          description: ''
+  /users/admin/educationaldeputies/{id}/:
+    get:
+      operationId: users_admin_educationaldeputies_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this educational deputy.
+        required: true
+      tags:
+      - educational_deputy
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EducationalDeputy'
+          description: ''
+    put:
+      operationId: users_admin_educationaldeputies_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this educational deputy.
+        required: true
+      tags:
+      - educational_deputy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EducationalDeputy'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EducationalDeputy'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EducationalDeputy'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EducationalDeputy'
+          description: ''
+    patch:
+      operationId: users_admin_educationaldeputies_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this educational deputy.
+        required: true
+      tags:
+      - educational_deputy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedEducationalDeputy'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedEducationalDeputy'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedEducationalDeputy'
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EducationalDeputy'
+          description: ''
+    delete:
+      operationId: users_admin_educationaldeputies_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this educational deputy.
+        required: true
+      tags:
+      - educational_deputy
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /users/admin/professors-itadmin/:
+    get:
+      operationId: users_admin_professors_itadmin_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - professor
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProfessorSerializerITAdminList'
+          description: ''
+    post:
+      operationId: users_admin_professors_itadmin_create
+      tags:
+      - professor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          description: ''
+  /users/admin/professors-itadmin/{id}/:
+    get:
+      operationId: users_admin_professors_itadmin_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - professor
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          description: ''
+    put:
+      operationId: users_admin_professors_itadmin_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - professor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          description: ''
+    patch:
+      operationId: users_admin_professors_itadmin_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - professor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProfessorSerializerITAdmin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedProfessorSerializerITAdmin'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedProfessorSerializerITAdmin'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+          description: ''
+    delete:
+      operationId: users_admin_professors_itadmin_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - professor
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /users/admin/students-itadmin/:
+    get:
+      operationId: users_admin_students_itadmin_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedStudentSerializerITAdminList'
+          description: ''
+    post:
+      operationId: users_admin_students_itadmin_create
+      tags:
+      - student
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentSerializerITAdmin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/StudentSerializerITAdmin'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/StudentSerializerITAdmin'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentSerializerITAdmin'
+          description: ''
+  /users/admin/students-itadmin/{id}/:
+    get:
+      operationId: users_admin_students_itadmin_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentSerializerITAdmin'
+          description: ''
+    put:
+      operationId: users_admin_students_itadmin_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - student
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentSerializerITAdmin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/StudentSerializerITAdmin'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/StudentSerializerITAdmin'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentSerializerITAdmin'
+          description: ''
+    patch:
+      operationId: users_admin_students_itadmin_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - student
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedStudentSerializerITAdmin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedStudentSerializerITAdmin'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedStudentSerializerITAdmin'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentSerializerITAdmin'
+          description: ''
+    delete:
+      operationId: users_admin_students_itadmin_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /users/change-password-action/{uidb64}/{token}/:
+    post:
+      operationId: users_change_password_action_create
+      parameters:
+      - in: path
+        name: token
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: uidb64
+        schema:
+          type: string
+        required: true
+      tags:
+      - Change password action
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordAction'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordAction'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordAction'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangePasswordAction'
+          description: ''
+  /users/change-password-request/:
+    post:
+      operationId: users_change_password_request_create
+      tags:
+      - Change password request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangePasswordRequest'
+          description: ''
+  /users/login/token/:
+    post:
+      operationId: users_login_token_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenObtainPair'
+          description: ''
+  /users/login/token/refresh/:
+    post:
+      operationId: users_login_token_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /users/logout/:
+    post:
+      operationId: users_logout_create
+      tags:
+      - LogOut
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Logout'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Logout'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Logout'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Logout'
+          description: ''
+  /users/professors/:
+    get:
+      operationId: users_professors_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - professor
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProfessorSerializerAllFieldsList'
+          description: ''
+  /users/professors/{id}/:
+    get:
+      operationId: users_professors_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - professor
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfessorSerializerAllFields'
+          description: ''
+    put:
+      operationId: users_professors_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - professor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Professor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Professor'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Professor'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Professor'
+          description: ''
+  /users/students/:
+    get:
+      operationId: users_students_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedStudentSerializerAllFieldsList'
+          description: ''
+  /users/students/{id}/:
+    get:
+      operationId: users_students_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentSerializerAllFields'
+          description: ''
+    put:
+      operationId: users_students_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - student
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Student'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Student'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+          description: ''
+components:
+  schemas:
+    ApprovalStatusEnum:
+      enum:
+      - E
+      - P
+      - A
+      - D
+      type: string
+      description: |-
+        * `E` - درحال انجام توسط دانشجو
+        * `P` - منتظر نظر استاد
+        * `A` - تایید شده
+        * `D` - رد شده
+    BlankEnum:
+      enum:
+      - ''
+    ChangePasswordAction:
+      type: object
+      properties:
+        new_password:
+          type: string
+      required:
+      - new_password
+    ChangePasswordRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+      - email
+    Course:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        name:
+          type: string
+          title: نام درس
+          maxLength: 50
+        credits:
+          type: integer
+          title: تعداد واحد درس
+        course_type:
+          allOf:
+          - $ref: '#/components/schemas/CourseTypeEnum'
+          title: نوع درس
+        faculty:
+          type: integer
+          title: دانشکده ارایه دهنده
+        pre_requisite:
+          type: array
+          items:
+            type: integer
+            title: پیش نیازها
+          title: پیش نیازها
+        co_requisite:
+          type: array
+          items:
+            type: integer
+            title: هم نیازها
+          title: هم نیازها
+      required:
+      - course_type
+      - created_at
+      - credits
+      - faculty
+      - id
+      - name
+      - updated_at
+    CourseTypeEnum:
+      enum:
+      - core
+      - specialized
+      - foundation
+      - elective
+      type: string
+      description: |-
+        * `core` - عمومی
+        * `specialized` - تخصصی
+        * `foundation` - پایه
+        * `elective` - اختیاری
+    DayEnum:
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      type: integer
+      description: |-
+        * `1` - شنبه
+        * `2` - یکشنبه
+        * `3` - دوشنبه
+        * `4` - سه شنبه
+        * `5` - چهارشنبه
+        * `6` - پنجشنبه
+        * `7` - جمعه
+    EducationalDeputy:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: integer
+          title: یوزر
+        faculty:
+          type: integer
+          title: دانشکده
+        field_of_study:
+          type: integer
+          title: رشته
+      required:
+      - created_at
+      - faculty
+      - field_of_study
+      - id
+      - updated_at
+      - user
+    EntryTermEnum:
+      enum:
+      - 1
+      - 2
+      type: integer
+      description: |-
+        * `1` - نیمه اول
+        * `2` - نیمه دوم
+    Faculty:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        name:
+          type: string
+          title: نام دانشکده
+          maxLength: 256
+      required:
+      - created_at
+      - id
+      - name
+      - updated_at
+    GenderEnum:
+      enum:
+      - M
+      - F
+      type: string
+      description: |-
+        * `M` - مرد
+        * `F` - زن
+    Logout:
+      type: object
+      properties:
+        message:
+          type: string
+          default: Logout successful
+    MilitaryServiceStatusEnum:
+      enum:
+      - SBJ
+      - MEE
+      - MES
+      type: string
+      description: |-
+        * `SBJ` - مشمول
+        * `MEE` - معافیت تحصیلی
+        * `MES` - پایان خدمت
+    Nested:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        password:
+          type: string
+          maxLength: 128
+        last_login:
+          type: string
+          format: date-time
+          nullable: true
+        is_superuser:
+          type: boolean
+          title: Superuser status
+          description: Designates that this user has all permissions without explicitly
+            assigning them.
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+        is_staff:
+          type: boolean
+          title: Staff status
+          description: Designates whether the user can log into this admin site.
+        is_active:
+          type: boolean
+          title: Active
+          description: Designates whether this user should be treated as active. Unselect
+            this instead of deleting accounts.
+        date_joined:
+          type: string
+          format: date-time
+        user_no:
+          type: integer
+          nullable: true
+          title: شماره کاربری
+        avatar:
+          type: string
+          format: uri
+          nullable: true
+          title: عکس پروفایل
+        phone_number:
+          type: string
+          nullable: true
+          title: شماره تلفن
+          maxLength: 12
+        national_code:
+          type: string
+          nullable: true
+          title: کد ملی
+          maxLength: 12
+        gender:
+          nullable: true
+          title: جنسیت
+          oneOf:
+          - $ref: '#/components/schemas/GenderEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        birth_date:
+          type: string
+          format: date
+          nullable: true
+          title: تاریخ تولد
+        groups:
+          type: array
+          items:
+            type: integer
+          description: The groups this user belongs to. A user will get all permissions
+            granted to each of their groups.
+        user_permissions:
+          type: array
+          items:
+            type: integer
+          description: Specific permissions for this user.
+      required:
+      - id
+      - password
+      - username
+    NullEnum:
+      enum:
+      - null
+    PaginatedCourseList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Course'
+    PaginatedEducationalDeputyList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/EducationalDeputy'
+    PaginatedFacultyList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Faculty'
+    PaginatedProfessorSerializerAllFieldsList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProfessorSerializerAllFields'
+    PaginatedProfessorSerializerITAdminList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProfessorSerializerITAdmin'
+    PaginatedRegistrationUpdateList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/RegistrationUpdate'
+    PaginatedStudentSerializerAllFieldsList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/StudentSerializerAllFields'
+    PaginatedStudentSerializerITAdminList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/StudentSerializerITAdmin'
+    PaginatedTermCourseList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/TermCourse'
+    PaginatedTermList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Term'
+    PatchedEducationalDeputy:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: integer
+          title: یوزر
+        faculty:
+          type: integer
+          title: دانشکده
+        field_of_study:
+          type: integer
+          title: رشته
+    PatchedFaculty:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        name:
+          type: string
+          title: نام دانشکده
+          maxLength: 256
+    PatchedProfessorSerializerITAdmin:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: integer
+          title: یوزر
+        faculty:
+          type: integer
+          nullable: true
+          title: دانشکده
+        field_of_study:
+          type: integer
+          title: رشته
+        expertise:
+          type: integer
+          title: تخصص
+        degree:
+          type: integer
+          title: مرتبه
+        past_teaching_courses:
+          type: array
+          items:
+            type: integer
+            title: دروس تدریسی گذشته
+          title: دروس تدریسی گذشته
+    PatchedRegistrationUpdate:
+      type: object
+      properties:
+        add_courses:
+          type: array
+          items:
+            type: integer
+            title: دروس اضافه
+          title: دروس اضافه
+        del_courses:
+          type: array
+          items:
+            type: integer
+            title: دروس حذف
+          title: دروس حذف
+        approval_status:
+          allOf:
+          - $ref: '#/components/schemas/ApprovalStatusEnum'
+          readOnly: true
+          title: وضعیت تایید
+    PatchedStudentSerializerITAdmin:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        entry_year:
+          type: string
+          format: date
+          title: سال ورودی
+        entry_term:
+          allOf:
+          - $ref: '#/components/schemas/EntryTermEnum'
+          title: ترم ورودی
+        gpa:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,2}(?:\.\d{0,3})?$
+          title: معدل
+        military_service_status:
+          allOf:
+          - $ref: '#/components/schemas/MilitaryServiceStatusEnum'
+          title: وضعیت نظام وظیفه
+        academic_years:
+          type: integer
+          title: سنوات
+        user:
+          type: integer
+          title: یوزر
+        faculty:
+          type: integer
+          title: دانشکده
+        field_of_study:
+          type: integer
+          title: رشته تحصیلی
+        supervisor:
+          type: integer
+          title: استاد راهنما
+        courses_passed:
+          type: array
+          items:
+            type: integer
+            title: دروس گذرانده
+          title: دروس گذرانده
+        courses_taken:
+          type: array
+          items:
+            type: integer
+            title: دروس در حال گذراندن
+          title: دروس در حال گذراندن
+    PatchedTerm:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        name:
+          type: string
+          title: نام ترم
+          maxLength: 256
+        selection_start_time:
+          type: string
+          format: date-time
+          title: زمان شروع انتخاب واحد
+        selection_end_time:
+          type: string
+          format: date-time
+          title: زمان پایان انتخاب واحد
+        classes_start_time:
+          type: string
+          format: date-time
+          title: زمان شروع کلاس ها
+        classes_end_time:
+          type: string
+          format: date-time
+          title: زمان پایان کلاس ها
+        update_start_time:
+          type: string
+          format: date-time
+          title: زمان شروع ترمیم
+        update_end_time:
+          type: string
+          format: date-time
+          title: زمان پایان ترمیم
+        emergency_cancellation_end_time:
+          type: string
+          format: date-time
+          title: زمان پایان حذف اضطراری
+        exams_start_time:
+          type: string
+          format: date
+          title: زمان شروع امتحانات
+        term_end_time:
+          type: string
+          format: date
+          title: زمان پایان ترم
+        students:
+          type: array
+          items:
+            type: integer
+            title: دانشجو ها
+          title: دانشجو ها
+        professors:
+          type: array
+          items:
+            type: integer
+            title: اساتید
+          title: اساتید
+    Professor:
+      type: object
+      properties:
+        user_user_no:
+          type: integer
+          nullable: true
+          title: شماره کاربری
+          readOnly: true
+        user_first_name:
+          type: string
+        user_last_name:
+          type: string
+        user_email:
+          type: string
+        user_phone_number:
+          type: string
+      required:
+      - user_email
+      - user_first_name
+      - user_last_name
+      - user_phone_number
+      - user_user_no
+    ProfessorSerializerAllFields:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+        faculty:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+        field_of_study:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+        expertise:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+        degree:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+        past_teaching_courses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nested'
+          readOnly: true
+      required:
+      - created_at
+      - degree
+      - expertise
+      - faculty
+      - field_of_study
+      - id
+      - past_teaching_courses
+      - updated_at
+      - user
+    ProfessorSerializerITAdmin:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: integer
+          title: یوزر
+        faculty:
+          type: integer
+          nullable: true
+          title: دانشکده
+        field_of_study:
+          type: integer
+          title: رشته
+        expertise:
+          type: integer
+          title: تخصص
+        degree:
+          type: integer
+          title: مرتبه
+        past_teaching_courses:
+          type: array
+          items:
+            type: integer
+            title: دروس تدریسی گذشته
+          title: دروس تدریسی گذشته
+      required:
+      - created_at
+      - degree
+      - expertise
+      - field_of_study
+      - id
+      - updated_at
+      - user
+    RegistrationUpdate:
+      type: object
+      properties:
+        add_courses:
+          type: array
+          items:
+            type: integer
+            title: دروس اضافه
+          title: دروس اضافه
+        del_courses:
+          type: array
+          items:
+            type: integer
+            title: دروس حذف
+          title: دروس حذف
+        approval_status:
+          allOf:
+          - $ref: '#/components/schemas/ApprovalStatusEnum'
+          readOnly: true
+          title: وضعیت تایید
+      required:
+      - approval_status
+    Student:
+      type: object
+      properties:
+        user_user_no:
+          type: integer
+          nullable: true
+          title: شماره کاربری
+          readOnly: true
+        user_first_name:
+          type: string
+        user_last_name:
+          type: string
+        user_email:
+          type: string
+        user_phone_number:
+          type: string
+      required:
+      - user_email
+      - user_first_name
+      - user_last_name
+      - user_phone_number
+      - user_user_no
+    StudentSerializerAllFields:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        entry_year:
+          type: string
+          format: date
+          title: سال ورودی
+        entry_term:
+          allOf:
+          - $ref: '#/components/schemas/EntryTermEnum'
+          title: ترم ورودی
+        gpa:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,2}(?:\.\d{0,3})?$
+          title: معدل
+        military_service_status:
+          allOf:
+          - $ref: '#/components/schemas/MilitaryServiceStatusEnum'
+          title: وضعیت نظام وظیفه
+        academic_years:
+          type: integer
+          title: سنوات
+        user:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+        faculty:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+        field_of_study:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+        supervisor:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+        courses_passed:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nested'
+          readOnly: true
+        courses_taken:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nested'
+          readOnly: true
+      required:
+      - academic_years
+      - courses_passed
+      - courses_taken
+      - created_at
+      - entry_term
+      - entry_year
+      - faculty
+      - field_of_study
+      - gpa
+      - id
+      - military_service_status
+      - supervisor
+      - updated_at
+      - user
+    StudentSerializerITAdmin:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        entry_year:
+          type: string
+          format: date
+          title: سال ورودی
+        entry_term:
+          allOf:
+          - $ref: '#/components/schemas/EntryTermEnum'
+          title: ترم ورودی
+        gpa:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,2}(?:\.\d{0,3})?$
+          title: معدل
+        military_service_status:
+          allOf:
+          - $ref: '#/components/schemas/MilitaryServiceStatusEnum'
+          title: وضعیت نظام وظیفه
+        academic_years:
+          type: integer
+          title: سنوات
+        user:
+          type: integer
+          title: یوزر
+        faculty:
+          type: integer
+          title: دانشکده
+        field_of_study:
+          type: integer
+          title: رشته تحصیلی
+        supervisor:
+          type: integer
+          title: استاد راهنما
+        courses_passed:
+          type: array
+          items:
+            type: integer
+            title: دروس گذرانده
+          title: دروس گذرانده
+        courses_taken:
+          type: array
+          items:
+            type: integer
+            title: دروس در حال گذراندن
+          title: دروس در حال گذراندن
+      required:
+      - academic_years
+      - courses_taken
+      - created_at
+      - entry_term
+      - entry_year
+      - faculty
+      - field_of_study
+      - gpa
+      - id
+      - military_service_status
+      - supervisor
+      - updated_at
+      - user
+    Term:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        name:
+          type: string
+          title: نام ترم
+          maxLength: 256
+        selection_start_time:
+          type: string
+          format: date-time
+          title: زمان شروع انتخاب واحد
+        selection_end_time:
+          type: string
+          format: date-time
+          title: زمان پایان انتخاب واحد
+        classes_start_time:
+          type: string
+          format: date-time
+          title: زمان شروع کلاس ها
+        classes_end_time:
+          type: string
+          format: date-time
+          title: زمان پایان کلاس ها
+        update_start_time:
+          type: string
+          format: date-time
+          title: زمان شروع ترمیم
+        update_end_time:
+          type: string
+          format: date-time
+          title: زمان پایان ترمیم
+        emergency_cancellation_end_time:
+          type: string
+          format: date-time
+          title: زمان پایان حذف اضطراری
+        exams_start_time:
+          type: string
+          format: date
+          title: زمان شروع امتحانات
+        term_end_time:
+          type: string
+          format: date
+          title: زمان پایان ترم
+        students:
+          type: array
+          items:
+            type: integer
+            title: دانشجو ها
+          title: دانشجو ها
+        professors:
+          type: array
+          items:
+            type: integer
+            title: اساتید
+          title: اساتید
+      required:
+      - classes_end_time
+      - classes_start_time
+      - created_at
+      - emergency_cancellation_end_time
+      - exams_start_time
+      - id
+      - name
+      - selection_end_time
+      - selection_start_time
+      - term_end_time
+      - update_end_time
+      - update_start_time
+      - updated_at
+    TermCourse:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        exam_date_time:
+          type: string
+          format: date-time
+          title: زمان امتحان
+        exam_venue:
+          type: string
+          title: مکان امتحان
+          maxLength: 50
+        capacity:
+          type: integer
+          title: ظرفیت درس
+        time:
+          type: string
+          format: time
+          title: زمان
+        day:
+          allOf:
+          - $ref: '#/components/schemas/DayEnum'
+          title: روز
+        course:
+          type: integer
+          title: نام درس
+        term:
+          type: integer
+          title: ترم تحصیلی
+        professor:
+          type: integer
+          title: استاد درس
+      required:
+      - capacity
+      - course
+      - created_at
+      - day
+      - exam_date_time
+      - exam_venue
+      - id
+      - professor
+      - term
+      - time
+      - updated_at
+    TokenObtainPair:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          readOnly: true
+      required:
+      - access
+      - password
+      - refresh
+      - username
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          writeOnly: true
+      required:
+      - access
+      - refresh
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
