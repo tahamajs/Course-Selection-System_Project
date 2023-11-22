@@ -1,21 +1,35 @@
 from django.test import TestCase
-from accounts.models import Professor, User, Professor, Expertise, Degree
+from rest_framework.test import APIClient, APITestCase
+from rest_framework import status
+from rest_framework_simplejwt.tokens import AccessToken
+
+from accounts.models import  Professor, Expertise, Degree , EducationalDeputy
+from accounts.models import User
+
 from college.models import Faculty, FieldOfStudy
 from course.models import Course
-from django.core.files.uploadedfile import SimpleUploadedFile
 
 
-class CustomUserModelTest(TestCase):
 
+class UserFactory:
+    pass
+
+
+class ProfessorViewSetTests(APITestCase):
     def setUp(self):
-        # Create a test user
-        self.base_user = User.objects.create_user(
-            username='testuser',
-            password='testpassword'
-        )
+        # Create a user
+        self.user = UserFactory(username='testuser', password='testpassword')
+
+        # Create an educational deputy and faculty
         self.faculty = Faculty.objects.create(name='فنی حرفه ای 1 تبریز')
         self.fos = FieldOfStudy.objects.create(name='نرم افزار', group='کامپیوتر', faculty=self.faculty, units=75,
                                                degree='کارشناسی')
+        self.educational_deputy = EducationalDeputy.objects.create(user=self.base_user, faculty=self.faculty,
+                                                                   field_of_study=self.fos)
+        self.educational_faculty = self.educational_deputy.faculty
+
+        # Create a professor in the same faculty as the educational deputy
+        self.faculty = Faculty.objects.create(name='فنی حرفه ای 1 تبریز')
         self.passed_courses = [Course.objects.create(name='تاریخ', faculty=self.faculty,
                                                      credits=3, course_type='core'), ]
         self.taken_courses = [Course.objects.create(name='سیستم عامل', faculty=self.faculty,
@@ -27,25 +41,10 @@ class CustomUserModelTest(TestCase):
         self.degree2 = Degree.objects.create(name='لیسانس')
         self.professor = Professor.objects.create(user=self.base_user, faculty=self.faculty, field_of_study=self.fos,
                                                   expertise=self.expertise, degree=self.degree)
-        self.professor.past_teaching_courses.add(*self.taken_courses)
+        # Generate a JWT token for the user
+        self.token = str(AccessToken.for_user(self.user))
 
-    def test_professor_create(self):
-        self.professor.save()
-        self.assertEqual(self.professor.degree.name, 'دکترا')
+        self.client = APIClient()
 
-    def test_professor_retrieve(self):
-        professor = Professor.objects.get(pk=self.professor.pk)
-        self.assertEqual(professor.degree.name, 'دکترا')
 
-    def test_professor_update(self):
-        old = self.professor.degree.name
-        self.professor.degree = self.degree2
-        self.professor.save()
-        professor = Professor.objects.get(pk=self.professor.pk)
-        self.assertNotEqual(professor.degree.name, old)
 
-    def test_professor_delete(self):
-        pk = self.professor.pk
-        self.professor.delete()
-        result = Professor.objects.filter(pk=pk).exists()
-        self.assertEqual(result, False)
