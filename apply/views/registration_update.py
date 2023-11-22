@@ -13,3 +13,4 @@ class RegistrationUpdateViewSet(viewsets.ModelViewSet):
     queryset = RegistrationUpdate.objects.all()
     serializer_class = RegistrationUpdateSerializer
     permission_classes = [IsAuthenticated, IsITAdmin, ]
+    http_method_names = ['get', 'post']

@@ -4,6 +4,7 @@ from accounts.models.educational_deputy import EducationalDeputy
 from accounts.models.student import Student
 from accounts.models.professor import Professor
 
+
 class EducationalDeputyOrStudentOrProfessorPermission(BasePermission):
     def has_permission(self, request, view):
         if request.user.is_authenticated:
@@ -11,6 +12,6 @@ class EducationalDeputyOrStudentOrProfessorPermission(BasePermission):
                 return True
             elif request.method == 'PUT' and (
                     Student.objects.filter(user=request.user).exists() or Professor.objects.filter(
-                    user=request.user).exists()):
+                user=request.user).exists()):
                 return True
         return False
