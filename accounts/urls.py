@@ -1,6 +1,5 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
-
 from .views import *
 from rest_framework_simplejwt import views as jwt_views
 from .views.educational_deputy import EducationalDeputyViewSet
@@ -15,12 +14,7 @@ router.register(r'students', StudentViewSet, basename='student')
 router.register(r'professors', ProfessorViewSet, basename='professor')
 router.register(r'admin/students-itadmin', StudentViewSetITAdmin, basename='student-itadmin')
 router.register(r'admin/professors-itadmin', ProfessorViewSetITAdmin, basename='professor-itadmin')
-
-
-
-router = DefaultRouter 
 router.register(r'admin/educationaldeputies', EducationalDeputyViewSet, basename='educationaldeputy')
-
 
 urlpatterns = [
     path('login/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),

@@ -1,6 +1,5 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
-
 from accounts.permissions import IsITAdmin
 from college.serializers.faculty import FacultySerializer
 from college.models import Faculty
