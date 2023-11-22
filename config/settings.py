@@ -9,11 +9,22 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+import os
+import pathlib
 from datetime import timedelta
 from pathlib import Path
-import os
+import dotenv
 
-# from drf_spectacular.openapi import AutoSchema
+env = dotenv.dotenv_values('.env')
+
+if env.get('DEBUG').strip() == '1':
+    env.update(dotenv.dotenv_values('.dev.env'))
+
+env.update(os.environ)
+
+
+def getenv(key: str, default=None) -> str:
+    return env.get(key, default).strip()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,14 +34,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-vzb@hch-oxho^dww91=tkj_p1s8pi-bb8@!*c3z0$#(5_x$&pv'
+SECRET_KEY = getenv("SECRET_KEY", default='django-insecure-vzb@hch-oxho^dww91=tkj_p1s8pi-bb8@!*c3z0$#(5_x$&pv')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(int(getenv("DEBUG", default=1)))
 
-ALLOWED_HOSTS = [
-    '127.0.0.1', 'localhost'
-]
+ALLOWED_HOSTS = eval(getenv("DJANGO_ALLOWED_HOSTS", "['127.0.0.1', 'localhost']"))
 
 # Application definition
 
@@ -43,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
     'django_filters',
     'rest_framework_simplejwt',
     'rest_framework',
@@ -51,7 +61,7 @@ INSTALLED_APPS = [
     'accounts',
     'college',
     'course',
-    'apply'
+    'apply',
 ]
 
 MIDDLEWARE = [
@@ -89,9 +99,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": getenv("SQL_ENGINE"),
+        "NAME": getenv("SQL_DATABASE"),
+        "USER": getenv("SQL_USER"),
+        "PASSWORD": getenv("SQL_PASSWORD"),
+        "HOST": getenv("SQL_HOST"),
+        "PORT": getenv("SQL_PORT"),
     }
 }
 
@@ -127,8 +141,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "mediafiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -149,14 +166,14 @@ PASSWORD_HASHERS = (
 
 AUTH_USER_MODEL = 'accounts.User'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+EMAIL_BACKEND = getenv("EMAIL_BACKEND")
+EMAIL_PORT = getenv("EMAIL_PORT")
+EMAIL_USE_TLS = getenv("EMAIL_USE_TLS")
 EMAIL_USE_SSL = False
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = "pychicss@gmail.com"
+EMAIL_HOST = getenv("EMAIL_HOST")
+EMAIL_HOST_USER = getenv("EMAIL_HOST_USER")
 EMAIL_SENDER = EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = "sawgojyooxtqvfnn"
+EMAIL_HOST_PASSWORD = getenv("EMAIL_HOST_PASSWORD")
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
@@ -193,39 +210,55 @@ SIMPLE_JWT = {
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
 
-# settings.py
+CELERY_BROKER_URL = getenv("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = getenv("CELERY_RESULT_BACKEND")
 
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'handlers': {
-#         'file': {
-#             'level': 'INFO',
-#             'class': 'logging.FileHandler',
-#             'filename': BASE_DIR / 'logs' / 'http_requests.log',
-#             'formatter': 'detailed_http_request_format',
-#         },
-#     },
-#     'formatters': {
-#         'detailed_http_request_format': {
-#             'format': '{asctime} - {levelname} - {message}',
-#             'style': '{',
-#         },
-#     },
-#     'loggers': {
-#         'django': {
-#             'handlers': ['file'],
-#             'level': 'INFO',
-#             'propagate': True,
-#         },
-#         'django.request': {
-#             'handlers': ['file'],
-#             'level': 'INFO',
-#             'propagate': False,
-#         },
-#     },
-# }
+DEFAULT_FILE_STORAGE = getenv("DEFAULT_FILE_STORAGE")
 
+MINIO_ACCESS_KEY = getenv("MINIO_ROOT_USER")
+MINIO_SECRET_KEY = getenv("MINIO_ROOT_PASSWORD")
+MINIO_BUCKET_NAME = getenv("MINIO_BUCKET_NAME")
+MINIO_ENDPOINT = getenv("MINIO_ENDPOINT")
 
-# CELERY_BROKER_URL = "redis://localhost:6379/0"
-# CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
+AWS_ACCESS_KEY_ID = MINIO_ACCESS_KEY
+AWS_SECRET_ACCESS_KEY = MINIO_SECRET_KEY
+AWS_STORAGE_BUCKET_NAME = MINIO_BUCKET_NAME
+AWS_S3_ENDPOINT_URL = MINIO_ENDPOINT
+AWS_DEFAULT_ACL = None
+AWS_QUERYSTRING_AUTH = True
+AWS_S3_FILE_OVERWRITE = False
+
+logs_dir = pathlib.Path('logs')
+logs_dir.mkdir(parents=True, exist_ok=True)
+(logs_dir / 'http_requests.log').touch(exist_ok=True)
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'logs' / 'http_requests.log',
+            'formatter': 'detailed_http_request_format',
+        },
+    },
+    'formatters': {
+        'detailed_http_request_format': {
+            'format': '{asctime} - {levelname} - {message}',
+            'style': '{',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}

@@ -3,7 +3,6 @@ from accounts.models import Student, User, Professor, Expertise, Degree
 from course.models.course import Course
 from apply.models import CourseDrop
 from college.models import FieldOfStudy, Faculty
-from django.core.files.uploadedfile import SimpleUploadedFile
 
 
 class CourseDropModelTest(TestCase):

@@ -1,6 +1,7 @@
 /venv/
 /.idea/
 **/migrations/*_initial.py
+**/migrations/0*_*.py
 
 *.log
 *.pot
@@ -12,3 +13,5 @@ local_settings.py
 db.sqlite3
 /staticfiles/
 /uploads/
+/mediafiles/
+/logs/

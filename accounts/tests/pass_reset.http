@@ -2,7 +2,34 @@ POST http://127.0.0.1:8000/accounts/change-password-request/
 Content-Type: application/json
 
 {
-  "email": "sahand.u99@gmail.com"
+  "email": "hbpubgm@gmail.com"
+}
+
+###
+
+POST http://127.0.0.1:8000/accounts/change-password-action/MQ/by36ea-fddbbc5ee20309b7866b39558b713c8b/
+Content-Type: application/json
+
+{
+  "new_password": 5298
+}
+
+###
+
+POST http://192.168.2.11/accounts/change-password-request/
+Content-Type: application/json
+
+{
+  "email": "hbpubgm@gmail.com"
+}
+
+###
+
+POST http://192.168.2.11/accounts/change-password-action/MQ/by2mqn-2e3eebed912b631657456c08d1b1121f/
+Content-Type: application/json
+
+{
+  "new_password": 5298
 }
 
 ###

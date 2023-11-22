@@ -5,3 +5,13 @@ Content-Type: application/json
   "username": "admin",
   "password": "admin"
 }
+
+###
+
+POST http://192.168.2.11/accounts/login/token/
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin"
+}

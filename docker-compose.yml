@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+
+  nginx:
+    restart: always
+    build: ./nginx
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/mediafiles
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+
+  db:
+    image: postgres:15
+    restart: unless-stopped
+    volumes:
+      - postgres_data_prod:/var/lib/postgresql/data/
+    env_file:
+      - .db.env
+    expose:
+      - 5432
+
+  redis:
+    image: redis:7.0.5-alpine
+    restart: unless-stopped
+    expose:
+      - 6379
+
+  s3:
+    image: minio/minio
+    restart: unless-stopped
+    command: server --console-address :9090 --address :9000 /data
+    expose:
+      - 9000
+      - 9090
+    env_file:
+      - .minio.env
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    volumes:
+      - s3_data:/data
+
+  s3_create_buckets:
+    image: minio/mc
+    depends_on:
+      - s3
+    entrypoint: >
+      /bin/sh -c "
+      apk add nc &&
+      while ! nc -z minio 9000; do echo 'Wait minio to startup...' && sleep 0.1; done; sleep 5 &&
+      /usr/bin/mc config host add myminio http://s3:9000 minioadmin minioadmin;
+      /usr/bin/mc mb myminio/django-files;
+      /usr/bin/mc policy download myminio/django-files;
+      exit 0;
+      "      
+
+  web:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: /app/entrypoint-web.sh
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/mediafiles
+    expose:
+      - 8000
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+
+  celery:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: /app/entrypoint-celery.sh
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/mediafiles
+    expose:
+      - 8000
+    env_file:
+      - .env
+    depends_on:
+      - web
+      - db
+      - redis
+
+volumes:
+  postgres_data_prod:
+  static_volume:
+  media_volume:
+  s3_data:
