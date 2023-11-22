@@ -52,7 +52,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'storages',
+    'django_filters',
+    'rest_framework_simplejwt',
     'rest_framework',
+    'drf_spectacular',
     'accounts',
     'college',
     'course',
@@ -171,11 +174,17 @@ EMAIL_SENDER = EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = getenv("EMAIL_HOST_PASSWORD")
 
 REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Course Selection',
+    'VERSION': '1.0.0',
 }
 
 PASSWORD_RESET_TIMEOUT = 5 * 60
@@ -194,6 +203,7 @@ SIMPLE_JWT = {
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
 
+
 CELERY_BROKER_URL = getenv("CELERY_BROKER_URL")
 CELERY_RESULT_BACKEND = getenv("CELERY_RESULT_BACKEND")
 
@@ -211,3 +221,34 @@ AWS_S3_ENDPOINT_URL = MINIO_ENDPOINT
 AWS_DEFAULT_ACL = None
 AWS_QUERYSTRING_AUTH = True
 AWS_S3_FILE_OVERWRITE = False
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'logs' / 'http_requests.log',
+            'formatter': 'detailed_http_request_format',
+        },
+    },
+    'formatters': {
+        'detailed_http_request_format': {
+            'format': '{asctime} - {levelname} - {message}',
+            'style': '{',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}

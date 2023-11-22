@@ -1,20 +1,24 @@
 from django.db import models
 from django_jalali.db import models as jmodels
+from django.utils.translation import gettext_lazy as _
+from shared.models import BaseModel
 
 
-class Term(models.Model):
-    name = models.CharField(max_length=256)
-    students = models.ManyToManyField(to='accounts.Student', related_name='term_student', blank=True)
-    professors = models.ManyToManyField(to='accounts.Professor', related_name='term_professor', blank=True)
-    selection_start_time = jmodels.jDateTimeField()
-    selection_end_time = jmodels.jDateTimeField()
-    classes_start_time = jmodels.jDateTimeField()
-    classes_end_time = jmodels.jDateTimeField()
-    update_start_time = jmodels.jDateTimeField()
-    update_end_time = jmodels.jDateTimeField()
-    emergency_cancellation_end_time = jmodels.jDateTimeField()
-    exams_start_time = jmodels.jDateField()
-    term_end_time = jmodels.jDateField()
+class Term(BaseModel):
+    name = models.CharField(max_length=256, verbose_name=_('نام ترم'))
+    students = models.ManyToManyField(to='accounts.Student', related_name='term_student', blank=True,
+                                      verbose_name=_('دانشجو ها'))
+    professors = models.ManyToManyField(to='accounts.Professor', related_name='term_professor', blank=True,
+                                        verbose_name=_('اساتید'))
+    selection_start_time = jmodels.jDateTimeField(verbose_name=_('زمان شروع انتخاب واحد'))
+    selection_end_time = jmodels.jDateTimeField(verbose_name=_('زمان پایان انتخاب واحد'))
+    classes_start_time = jmodels.jDateTimeField(verbose_name=_('زمان شروع کلاس ها'))
+    classes_end_time = jmodels.jDateTimeField(verbose_name=_('زمان پایان کلاس ها'))
+    update_start_time = jmodels.jDateTimeField(verbose_name=_('زمان شروع ترمیم'))
+    update_end_time = jmodels.jDateTimeField(verbose_name=_('زمان پایان ترمیم'))
+    emergency_cancellation_end_time = jmodels.jDateTimeField(verbose_name=_('زمان پایان حذف اضطراری'))
+    exams_start_time = jmodels.jDateField(verbose_name=_('زمان شروع امتحانات'))
+    term_end_time = jmodels.jDateField(verbose_name=_('زمان پایان ترم'))
 
     def __str__(self):
         return self.name

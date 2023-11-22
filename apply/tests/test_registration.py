@@ -5,12 +5,14 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 
 from accounts.models import Degree, Professor
 from accounts.models.helper.expertise import Expertise
-from accounts.models.user import User
-from accounts.models.student import Student, FacultyUser
+from django.contrib.auth import get_user_model
+from accounts.models.student import Student
 from college.models.faculty import Faculty
 from college.models.fieldofstudy import FieldOfStudy
 from apply.models.registration import Registration
 from course.models.course import Course
+
+User = get_user_model()
 
 
 class RegistrationModelTestCase(TestCase):
@@ -28,21 +30,13 @@ class RegistrationModelTestCase(TestCase):
         self.taken_courses = [Course.objects.create(name='سیستم عامل', faculty=self.faculty,
                                                     credits=3, course_type='specialized'), ]
 
-        avatar = SimpleUploadedFile(name='default.jpg',
-                                    content=open(r"shared/files/avatar.jpg",
-                                                 'rb').read(),
-                                    content_type='image/jpeg')
-        self.faculty_user = FacultyUser.objects.create(base_user=self.user, user_no=1521, avatar=avatar,
-                                                       phone_number='+987654321', national_code='1547825478',
-                                                       gender='M',
-                                                       birth_date=timezone.datetime(1375, 5, 8))
         self.expertise = Expertise.objects.create(name='نرم افزار')
         self.degree = Degree.objects.create(name='دکترا')
-        self.professor = Professor.objects.create(user=self.faculty_user, faculty=self.faculty,
+        self.professor = Professor.objects.create(user=self.user, faculty=self.faculty,
                                                   field_of_study=self.fos,
                                                   expertise=self.expertise, degree=self.degree)
         self.professor.past_teaching_courses.add(*self.taken_courses)
-        self.student = Student.objects.create(user=self.faculty_user, entry_year=timezone.datetime(1375, 10, 10), entry_term=1,
+        self.student = Student.objects.create(user=self.user, entry_year=timezone.datetime(1375, 10, 10), entry_term=1,
                                               gpa=18.0,
                                               faculty=self.faculty, field_of_study=self.fos,
                                               supervisor=self.professor,
@@ -59,7 +53,7 @@ class RegistrationModelTestCase(TestCase):
 
     def test_create_registration(self):
         # Check if registration created successfully
-        self.assertEqual(self.registration.student.user.base_user.username, 'testuser')
+        self.assertEqual(self.registration.student.user.username, 'testuser')
 
         courses = list(self.registration.courses.all())
         courses_list = [course.name for course in courses]
@@ -71,7 +65,7 @@ class RegistrationModelTestCase(TestCase):
         # Check if registration retrieved successfully
         retrieved_registration = Registration.objects.get(pk=self.registration.pk)
 
-        self.assertEqual(retrieved_registration.student.user.base_user.username, 'testuser')
+        self.assertEqual(retrieved_registration.student.user.username, 'testuser')
 
         retrieved_courses = list(retrieved_registration.courses.all())
         retrieved_courses_list = [course.name for course in retrieved_courses]

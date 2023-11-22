@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
@@ -8,13 +9,18 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import smart_bytes
 from django.utils.http import urlsafe_base64_encode
 import shared.utils as utils
+from django.contrib.auth import get_user_model
 from accounts.serializers import ChangePasswordRequestSerializer
 
 
+User = get_user_model()
+
+
+@extend_schema(tags=["Change password request"])
 class ChangePasswordRequestView(generics.GenericAPIView):
     queryset = User.objects.all()
     serializer_class = ChangePasswordRequestSerializer
-
+    
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -32,3 +38,5 @@ class ChangePasswordRequestView(generics.GenericAPIView):
                                                                 kwargs={'uidb64': user_id_b64, 'token': token})
             utils.send_password_reset_email(reset_url, email)
         return Response({'successfully': 'check your email to reset your password'}, status=status.HTTP_200_OK)
+
+

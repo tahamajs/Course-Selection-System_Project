@@ -1,4 +1,6 @@
+from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets, status
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
@@ -8,9 +10,11 @@ from accounts.serializers import ProfessorSerializer, ProfessorSerializerAllFiel
 from accounts.permissions import EducationalDeputyOrStudentOrProfessorPermission
 
 
+@extend_schema(tags=["professor"])
 class ProfessorViewSet(viewsets.ModelViewSet):
-    permission_classes = [EducationalDeputyOrStudentOrProfessorPermission]
+    permission_classes = [EducationalDeputyOrStudentOrProfessorPermission, IsAuthenticated]
     serializer_class = ProfessorSerializer
+    http_method_names = ['get', 'put']
 
     def get_serializer_class(self):
         if self.action == 'update':
@@ -34,7 +38,7 @@ class ProfessorViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         if EducationalDeputy.objects.filter(user=self.request.user).exists():
             educational_faculty = EducationalDeputy.objects.get(user=self.request.user).faculty
-            return Professor.objects.filter(faculty=educational_faculty)
+            return Professor.objects.filter(faculty=educational_faculty).order_by('pk')
         return Professor.objects.filter(user=self.request.user)
 
     def update(self, request, *args, **kwargs):
