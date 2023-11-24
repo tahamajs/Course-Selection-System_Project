@@ -9,7 +9,6 @@
 **/__pycache__/
 local_settings.py
 
-.env
 db.sqlite3
 /staticfiles/
 /uploads/
