@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models.course import Course
 from .models.student_course import StudentCourse
 from .models.term_course import TermCourse
+from django_jalali import admin as jadmin
 
 
 @admin.register(Course)

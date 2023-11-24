@@ -24,7 +24,7 @@ class Professor(BaseModel):
                                                    verbose_name=_('دروس تدریسی گذشته'))
 
     def __str__(self):
-        return f'{self.user.name}'
+        return self.user.username
 
     class Meta:
         ordering = ('pk',)

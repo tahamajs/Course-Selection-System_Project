@@ -3,10 +3,8 @@ from rest_framework.routers import DefaultRouter
 from .views import *
 from rest_framework_simplejwt import views as jwt_views
 from .views.educational_deputy import EducationalDeputyViewSet
-from .views.view_professor import ProfessorViewSetITAdmin
-from .views.view_student import StudentViewSetITAdmin
-from .views.professor import ProfessorViewSet
-from .views.student import StudentViewSet
+from .views.view_professor import ProfessorViewSetITAdmin, ProfessorViewSet
+from .views.view_student import StudentViewSetITAdmin, StudentViewSet
 
 app_name = 'accounts'
 router = DefaultRouter()

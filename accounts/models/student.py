@@ -12,11 +12,11 @@ class Student(BaseModel):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name=_('یوزر'))
     entry_year = jmodels.jDateField(verbose_name=_('سال ورودی'))
     entry_term = models.IntegerField(choices=((1, 'نیمه اول'), (2, 'نیمه دوم')), verbose_name=_('ترم ورودی'))
-    gpa = models.DecimalField(max_digits=5, decimal_places=3, verbose_name=_('معدل'))  # معدل => grade point average
+    gpa = models.DecimalField(max_digits=5, decimal_places=3, verbose_name=_('معدل'), null=True, blank=True)
     faculty = models.ForeignKey(to='college.Faculty', on_delete=models.CASCADE, related_name='student_faculty',
-                                   verbose_name=_('دانشکده'))
+                                verbose_name=_('دانشکده'))
     field_of_study = models.ForeignKey(to='college.FieldOfStudy', on_delete=models.CASCADE,
-                                          related_name='student_field_of_study', verbose_name=_('رشته تحصیلی'))
+                                       related_name='student_field_of_study', verbose_name=_('رشته تحصیلی'))
     courses_passed = models.ManyToManyField(to='course.Course',
                                             related_name='student_courses_passed', blank=True,
                                             verbose_name=_('دروس گذرانده'))
