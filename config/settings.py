@@ -40,6 +40,7 @@ SECRET_KEY = getenv("SECRET_KEY", default='django-insecure-vzb@hch-oxho^dww91=tk
 DEBUG = bool(int(getenv("DEBUG", default=1)))
 
 ALLOWED_HOSTS = eval(getenv("DJANGO_ALLOWED_HOSTS", "['127.0.0.1', 'localhost']"))
+CSRF_TRUSTED_ORIGINS = ['https://pychicss.revengine3r.ir','http://127.0.0.1']
 
 # Application definition
 

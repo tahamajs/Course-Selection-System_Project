@@ -3,13 +3,13 @@ version: '3.8'
 services:
 
   nginx:
-    restart: always
+    restart: unless-stopped
     build: ./nginx
     volumes:
       - static_volume:/app/staticfiles
       - media_volume:/app/mediafiles
     ports:
-      - "80:80"
+      - "8088:80"
     depends_on:
       - web
 
