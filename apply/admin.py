@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django_jalali import admin as jadmin
 from apply.models import Registration, RegistrationUpdate, CourseDrop, TermDrop, ReviewGrade, \
     EnrollmentVerification
 
