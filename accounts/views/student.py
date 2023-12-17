@@ -18,12 +18,9 @@ class StudentViewSet(viewsets.ModelViewSet):
     http_method_names = ['get', 'put']
 
     def get_serializer_class(self):
-        if self.action == 'update':
-            return self.serializer_class
-        elif self.action == 'retrieve' or self.action == 'list':
+        if self.action in ['retrieve', 'list']:
             return StudentSerializerAllFields
-        else:
-            return self.serializer_class
+        return self.serializer_class
 
     def retrieve(self, request, pk=None):
         educational_faculty = EducationalDeputy.objects.get(user=self.request.user).faculty

@@ -1,8 +1,7 @@
-import pytz
 from django.test import TestCase
 
 from accounts.models import Student, Professor, User, Degree
-from accounts.models.helper.expertise import Expertise
+from shared.models.expertise import Expertise
 from course.models import StudentCourse, Course, TermCourse
 from college.models import Term, Faculty, FieldOfStudy
 from jdatetime import time

@@ -9,7 +9,7 @@ User = get_user_model()
 
 
 class Student(BaseModel):
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name=_('یوزر'))
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name=_('کاربر'))
     entry_year = jmodels.jDateField(verbose_name=_('سال ورودی'))
     entry_term = models.IntegerField(choices=((1, 'نیمه اول'), (2, 'نیمه دوم')), verbose_name=_('ترم ورودی'))
     gpa = models.DecimalField(max_digits=5, decimal_places=3, verbose_name=_('معدل'), null=True, blank=True)
@@ -24,10 +24,11 @@ class Student(BaseModel):
                                            related_name='student_courses_taken', verbose_name=_('دروس در حال گذراندن'))
     supervisor = models.ForeignKey(to=Professor, on_delete=models.CASCADE, related_name='student_supervisor',
                                    verbose_name=_('استاد راهنما'))
-    military_service_status = models.CharField(max_length=3,
+    military_service_status = models.CharField(max_length=6,
                                                choices=(
-                                                   ('SBJ', 'مشمول'), ('MEE', 'معافیت تحصیلی'), ('MES', 'پایان خدمت')),
-                                               verbose_name=_('وضعیت نظام وظیفه'))
+                                                   ('مشمول', 'مشمول'), ('تحصیلی', 'معافیت تحصیلی'),
+                                                   ('پایان', 'پایان خدمت'), ('بینیاز', 'نیازی نیست')),
+                                               verbose_name=_('وضعیت نظام وظیفه'), default='مشمول')
     academic_years = models.IntegerField(verbose_name=_('سنوات'))
 
     def __str__(self):

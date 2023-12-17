@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.utils import timezone
 from accounts.models import Degree, Professor
-from accounts.models.helper.expertise import Expertise
+from shared.models.expertise import Expertise
 from django.contrib.auth import get_user_model
 from accounts.models.student import Student
 from college.models.faculty import Faculty

@@ -1,14 +1,10 @@
 from shared.admin import *
 from .models import *
 from course.models import TermCourse
-from accounts.models import Student, Professor
-from django_jalali import admin as jadmin
-
 
 
 class TermInline(admin.TabularInline):
     model = TermCourse
-
 
 
 class TermAdmin(admin.ModelAdmin):

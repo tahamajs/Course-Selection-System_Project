@@ -1,11 +1,10 @@
-from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from accounts.models import Professor, User
 from college.models import Faculty
 from college.models import FieldOfStudy
-from accounts.models.helper.expertise import Expertise
-from accounts.models.helper.degree import Degree
-from course.models.course import Course
+from shared.models import Expertise
+from shared.models import Degree
+from course.models import Course
 
 
 class ProfessorSerializer(serializers.ModelSerializer):

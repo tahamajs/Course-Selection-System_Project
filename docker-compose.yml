@@ -9,7 +9,7 @@ services:
       - static_volume:/app/staticfiles
       - media_volume:/app/mediafiles
     ports:
-      - "8088:80"
+      - "80:80"
     depends_on:
       - web
 

@@ -7,11 +7,11 @@ Content-Type: application/json
 
 ###
 
-POST http://127.0.0.1:8000/accounts/change-password-action/MQ/by36ea-fddbbc5ee20309b7866b39558b713c8b/
+POST http://127.0.0.1:8000/accounts/change-password-action/MQ/byh5zw-823f2b8627a1b94157e8e7d1687f374a/
 Content-Type: application/json
 
 {
-  "new_password": 5298
+  "new_password": "saeed"
 }
 
 ###

@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'college',
     'course',
     'apply',
+    'shared'
 ]
 
 MIDDLEWARE = [

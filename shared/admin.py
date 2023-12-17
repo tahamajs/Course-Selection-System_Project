@@ -1,3 +1,5 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django_jalali import admin as jadmin
+from .models import *
+
+admin.site.register(Expertise)
+admin.site.register(Degree)
