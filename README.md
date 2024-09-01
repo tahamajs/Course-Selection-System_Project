@@ -91,12 +91,9 @@ The system is developed using the Django web framework with Django Rest Framewor
 * **File Management** : The system supports file storage using MinIO, allowing the secure handling of documents and media associated with students and courses.
 * **Internationalization and Localization** : The system includes support for multiple languages, with translations managed through Django’s translation framework. This ensures that the system can be used in different linguistic and cultural contexts.
 
-### Conclusion
-
-The project is a robust, scalable solution for managing university course selection and related academic processes. It leverages modern web technologies and follows best practices in software development to provide a secure, efficient, and user-friendly experience for students, faculty, and administrators.
 
 
-1. ## Installation Guide
+ ## Installation Guide
 
    To set up the project locally, follow these steps:
 
