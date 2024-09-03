@@ -92,68 +92,6 @@ The system is developed using the Django web framework with Django Rest Framewor
 * **Internationalization and Localization** : The system includes support for multiple languages, with translations managed through Django’s translation framework. This ensures that the system can be used in different linguistic and cultural contexts.
 
 
-
- ## Installation Guide
-
-   To set up the project locally, follow these steps:
-
-   ### 1. Clone the Repository
-
-   First, you need to clone the project repository to your local machine. Use the following commands:
-
-
-   <pre><div class="dark bg-gray-950 contain-inline-size rounded-md border-[0.5px] border-token-border-medium"><div class="flex items-center relative text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md"><span>bash</span><div class="flex items-center"><span class="" data-state="closed"><button class="flex gap-1 items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" class="icon-sm"><path fill="currentColor" fill-rule="evenodd" d="M7 5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-2v2a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3h2zm2 2h5a3 3 0 0 1 3 3v5h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-9a1 1 0 0 0-1 1zM5 9a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1z" clip-rule="evenodd"></path></svg>Copy code</button></span></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-bash">git clone <repository_url>
-   cd <repository_directory>
-   </code></div></div></pre>
-
-   Replace** **`<repository_url>` with the actual URL of the repository and** **`<repository_directory>` with the desired directory name.
-
-   ### 2. Set Up Environment Variables
-
-   Next, you need to configure the environment variables that the Django project will use. These variables are essential for the project to connect to the database, manage API keys, and handle other sensitive information.
-
-   * Create a** **`.env` file in the project root directory. This file should be based on the provided** **`.env.example` file.
-   * Ensure that you set up the following additional environment files:
-     * `.db.env`: Contains environment variables specific to the database configuration.
-     * `.dev.env`: Contains development-specific environment variables.
-     * `minio.env`: Contains configuration for MinIO, which is used for file storage.
-
-   ### 3. Build and Run the Application Using Docker
-
-   Once the environment variables are set, you can build and run the application using Docker. Docker simplifies the setup by ensuring that all dependencies and services are correctly configured and running in isolated containers.
-
-   To build and start the application, run the following command:
-
-   <pre><div class="dark bg-gray-950 contain-inline-size rounded-md border-[0.5px] border-token-border-medium"><div class="flex items-center relative text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md"><span>bash</span><div class="flex items-center"><span class="" data-state="closed"><button class="flex gap-1 items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" class="icon-sm"><path fill="currentColor" fill-rule="evenodd" d="M7 5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-2v2a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3h2zm2 2h5a3 3 0 0 1 3 3v5h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-9a1 1 0 0 0-1 1zM5 9a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1z" clip-rule="evenodd"></path></svg>Copy code</button></span></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-bash">docker-compose up --build
-   </code></div></div></pre>
-
-   This command uses Docker Compose to build the Docker images and start the containers as defined in the** **`docker-compose.yml` file.
-
-   ### 4. Apply Migrations
-
-   Django uses migrations to apply changes to the database schema. After starting the application, you need to apply these migrations:
-
-   <pre><div class="dark bg-gray-950 contain-inline-size rounded-md border-[0.5px] border-token-border-medium"><div class="flex items-center relative text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md"><span>bash</span><div class="flex items-center"><span class="" data-state="closed"><button class="flex gap-1 items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" class="icon-sm"><path fill="currentColor" fill-rule="evenodd" d="M7 5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-2v2a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3h2zm2 2h5a3 3 0 0 1 3 3v5h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-9a1 1 0 0 0-1 1zM5 9a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1z" clip-rule="evenodd"></path></svg>Copy code</button></span></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-bash">docker-compose exec web python manage.py migrate
-   </code></div></div></pre>
-
-   This command runs the Django migration scripts, which will create the necessary database tables and apply any schema changes.
-
-   ### 5. Create a Superuser for Accessing the Admin Panel
-
-   To access the Django admin interface, you'll need to create a superuser account. This account will have full access to the admin panel:
-
-   <pre><div class="dark bg-gray-950 contain-inline-size rounded-md border-[0.5px] border-token-border-medium"><div class="flex items-center relative text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md"><span>bash</span><div class="flex items-center"><span class="" data-state="closed"><button class="flex gap-1 items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" class="icon-sm"><path fill="currentColor" fill-rule="evenodd" d="M7 5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-2v2a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3h2zm2 2h5a3 3 0 0 1 3 3v5h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-9a1 1 0 0 0-1 1zM5 9a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1z" clip-rule="evenodd"></path></svg>Copy code</button></span></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-bash">docker-compose exec web python manage.py createsuperuser
-   </code></div></div></pre>
-
-   Follow the prompts to set a username, email, and password for the superuser.
-
-   ### 6. Access the Application
-
-   Finally, you can access the running application through your web browser:
-
-   * The application should be available at** **`http://localhost:8000`.
-   * The Django admin panel can be accessed at** **`http://localhost:8000/admin`.
-
 ## API Documentation
 
 API endpoints are available for different user roles (Admin, Faculty, Students). The documentation is auto-generated and accessible via Swagger at** **`http://localhost:8000/swagger/`.
@@ -171,10 +109,6 @@ API endpoints are available for different user roles (Admin, Faculty, Students).
 * Use the provided** **`docker-compose.yml` for production deployments.
 * Configure CI/CD pipelines using GitHub Actions for automated testing and deployment.
 
-## Contributing
-
-* Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-* Follow the branching and commit message conventions as defined in the project guidelines.
 
 ## License
 
