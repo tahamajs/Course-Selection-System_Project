@@ -52,28 +52,28 @@ The system is developed using the Django web framework with Django Rest Framewor
 
 * **Accounts Module** : Manages user authentication and profile management, including the creation of user accounts, handling login/logout operations, and ensuring secure access through token-based authentication. It supports different user roles such as students, professors, and administrators.
 
-1. **Course Management** :
+2. **Course Management** :
 
 * **Course Module** : Handles the creation, updating, and deletion of courses. It manages course details like prerequisites, co-requisites, and credit information. The module also supports the scheduling of classes and exams, and the assignment of instructors to specific courses.
 
-1. **Student Enrollment and Registration** :
+3. **Student Enrollment and Registration** :
 
 * **Apply Module** : Facilitates student course registration, including the selection and dropping of courses. It supports emergency drop requests and course substitutions. The module ensures that students can manage their course loads effectively, adhering to academic regulations.
 
-1. **Academic Records** :
+4. **Academic Records** :
 
 * **Grades and Transcripts** : Allows students to view their grades and academic history. Professors can enter and update student grades, which are then reflected in the student’s transcript. The system also supports grade appeals, allowing students to request a review of their grades, which professors can respond to.
 
-1. **Administrative Functions** :
+5. **Administrative Functions** :
 
 * **College and Department Management** : Manages the structure and data related to colleges, faculties, and departments within the university. It includes functionalities for handling academic terms, course offerings, and scheduling.
 * **Faculty Management** : Admins can manage faculty profiles, including their departmental affiliations, teaching assignments, and academic credentials.
 
-1. **API and System Architecture** :
+6. **API and System Architecture** :
 
 * The system’s architecture is designed to be modular, with each functionality accessible through RESTful APIs. This design allows for easy integration with other systems and scalability. Pagination is implemented in API responses to efficiently handle large datasets.
 
-1. **Documentation and Configuration** :
+7. **Documentation and Configuration** :
 
 * **Config Module** : Contains all necessary configurations for running the system in different environments (development, testing, production). This includes environment variables and settings files.
 * **Nginx Configuration** : Manages the reverse proxy settings to ensure secure and efficient routing of requests to the appropriate backend services.
