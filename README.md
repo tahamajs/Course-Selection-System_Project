@@ -2,125 +2,293 @@
 
 ## Overview
 
-This project is a Course Selection System designed for university students. It allows students to register for courses, manage their academic information, and communicate with university staff. The system is built using Django, Django Rest Framework, and PostgreSQL as the database. Docker is used for containerization to ensure easy deployment and scalability.
+The **Course Selection System** is a comprehensive web application designed for university students to manage their academic activities efficiently. Built using **Django**, **Django REST Framework**, and **PostgreSQL**, the system provides functionalities for course enrollment, academic tracking, faculty management, and administrative operations. The application is containerized using **Docker** to ensure easy deployment and scalability.
+
+---
+
+## Table of Contents
+
+- [Features](#features)
+- [Technology Stack](#technology-stack)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Documentation](#api-documentation)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
+- [Contact](#contact)
+
+---
 
 ## Features
 
-* User Authentication: Secure login and logout functionality with token-based authentication.
-* Course Management: Students can view available courses, enroll, drop, and manage their course load.
-* Faculty Management: Admins can manage faculty information and assign them to specific courses.
-* Student Information: Detailed student profiles with academic history, course enrollment status, and more.
-* Term Management: Admins can manage academic terms, including course offerings and schedules.
-* Emergency Course Drop: Students can apply for emergency course drops with proper justification.
-* Grade Appeal: A system for students to appeal their grades and for professors to review and respond to these appeals.
-* Document Management: Storage and retrieval of important academic documents using MinIO.
-* Role-Based Access Control: Different levels of access for students, faculty, and admins.
+### User Authentication
+
+- Secure login and logout functionality with token-based authentication.
+- Role-based access control for **Students**, **Faculty**, and **Administrators**.
+- Password hashing and secure session management.
+
+### Course Management
+
+- **View Available Courses**: Students can browse courses offered in the current term.
+- **Enroll and Drop Courses**: Seamless enrollment and dropping of courses within allowed periods.
+- **Course Load Management**: Validation to prevent overloading beyond credit limits.
+
+### Faculty Management
+
+- **Faculty Profiles**: Administrators can create and manage faculty profiles.
+- **Course Assignment**: Assign faculty members to specific courses.
+- **Communication**: Faculty can communicate with enrolled students.
+
+### Student Information
+
+- **Student Profiles**: Detailed profiles including academic history and personal information.
+- **Academic Tracking**: View enrolled courses, grades, and GPA calculation.
+- **Document Management**: Upload and access important academic documents.
+
+### Term Management
+
+- **Academic Terms**: Administrators can create and manage terms.
+- **Course Offerings**: Define courses available each term with schedules and capacities.
+- **Scheduling**: Manage class times, exam schedules, and room assignments.
+
+### Emergency Course Drop
+
+- **Application for Emergency Drop**: Students can apply with justifications.
+- **Approval Workflow**: Requests are reviewed and approved by faculty and administrators.
+
+### Grade Appeal
+
+- **Appeal Submission**: Students can submit grade appeals with supporting documents.
+- **Review Process**: Faculty can review, comment, and make decisions on appeals.
+- **Notification System**: Automated notifications for status updates.
+
+### Document Management
+
+- **MinIO Integration**: Secure storage and retrieval of academic documents.
+- **File Uploads**: Supports various file types with size restrictions.
+- **Access Control**: Permissions based on user roles and ownership.
+
+### Role-Based Access Control
+
+- **Students**: Course enrollment, view grades, manage profiles.
+- **Faculty**: Manage courses, enter grades, respond to appeals.
+- **Administrators**: Full access to manage users, courses, terms, and system settings.
+
+---
+
+## Technology Stack
+
+- **Backend Framework**: [Django](https://www.djangoproject.com/) and [Django REST Framework](https://www.django-rest-framework.org/)
+- **Database**: [PostgreSQL](https://www.postgresql.org/)
+- **Containerization**: [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
+- **Web Server**: [Nginx](https://www.nginx.com/) as a reverse proxy
+- **Storage**: [MinIO](https://min.io/) for object storage
+- **Authentication**: Token-based authentication using Django's built-in mechanisms
+- **Version Control**: [Git](https://git-scm.com/)
+
+---
 
 ## Project Structure
 
-* /accounts/: Handles user accounts and authentication
-* /apply/: Manages the course application process
-* /college/: Manages college-specific information
-* /config/: Configuration files and environment settings
-* /course/: Core functionality for course management
-* /description/: Contains project descriptions and documentation
-* /nginx/: Configuration for Nginx reverse proxy
-* /shared/: Shared resources and utilities
-* .env: Main environment variables
-* .dockerignore: Files and directories to ignore in Docker builds
-* .gitignore: Files and directories to ignore in Git
-* Dockerfile: Dockerfile for building the application
-* docker-compose.yml: Docker Compose configuration
-* manage.py: Django management script
-* README.md: Project documentation (you're reading it!)
+```
+├── accounts/             # Handles user accounts and authentication
+├── apply/                # Manages the course application process
+├── college/              # Manages college-specific information
+├── config/               # Configuration files and environment settings
+├── course/               # Core functionality for course management
+├── description/          # Project descriptions and documentation
+├── nginx/                # Configuration for Nginx reverse proxy
+├── shared/               # Shared resources and utilities
+├── Dockerfile            # Dockerfile for building the application
+├── docker-compose.yml    # Docker Compose configuration
+├── manage.py             # Django management script
+├── requirements.txt      # Python dependencies
+├── .env                  # Environment variables
+├── .gitignore            # Git ignore rules
+├── LICENSE.md            # License information
+└── README.md             # Project documentation (you're reading it!)
+```
 
+---
 
+## Installation
 
-## Project Overview
+### Prerequisites
 
-### Purpose and Scope
+- **Docker** and **Docker Compose** installed on your machine.
+- **Git** for version control.
 
-The project is a comprehensive university course selection system designed to facilitate the process of course registration, management, and academic tracking for students. The system is built to support various academic activities such as course enrollment, managing student grades, handling emergency course drops, and allowing students to appeal their grades. Additionally, it supports administrative functions like managing faculty, departments, and academic terms.
+### Steps
 
-### Technology Stack
+1. **Clone the Repository**
 
-The system is developed using the Django web framework with Django Rest Framework (DRF) to build RESTful APIs. PostgreSQL is used as the primary database to store and manage all academic records, including student information, course details, and faculty data. Docker is employed for containerization, enabling consistent deployment across different environments. The system also utilizes Nginx as a reverse proxy for secure and efficient handling of HTTP requests.
+   ```bash
+   git clone https://github.com/yourusername/course-selection-system.git
+   cd course-selection-system
+   ```
 
-### Key Features
+2. **Create Environment Variables**
 
-1. **User Management** :
+   - Copy the sample environment file and modify it according to your setup.
 
-* **Accounts Module** : Manages user authentication and profile management, including the creation of user accounts, handling login/logout operations, and ensuring secure access through token-based authentication. It supports different user roles such as students, professors, and administrators.
+     ```bash
+     cp .env.example .env
+     ```
 
-2. **Course Management** :
+   - Update the `.env` file with your configurations.
 
-* **Course Module** : Handles the creation, updating, and deletion of courses. It manages course details like prerequisites, co-requisites, and credit information. The module also supports the scheduling of classes and exams, and the assignment of instructors to specific courses.
+3. **Build and Run the Containers**
 
-3. **Student Enrollment and Registration** :
+   ```bash
+   docker-compose up -d --build
+   ```
 
-* **Apply Module** : Facilitates student course registration, including the selection and dropping of courses. It supports emergency drop requests and course substitutions. The module ensures that students can manage their course loads effectively, adhering to academic regulations.
+4. **Apply Migrations**
 
-4. **Academic Records** :
+   ```bash
+   docker-compose exec web python manage.py migrate
+   ```
 
-* **Grades and Transcripts** : Allows students to view their grades and academic history. Professors can enter and update student grades, which are then reflected in the student’s transcript. The system also supports grade appeals, allowing students to request a review of their grades, which professors can respond to.
+5. **Create Superuser (Admin Account)**
 
-5. **Administrative Functions** :
+   ```bash
+   docker-compose exec web python manage.py createsuperuser
+   ```
 
-* **College and Department Management** : Manages the structure and data related to colleges, faculties, and departments within the university. It includes functionalities for handling academic terms, course offerings, and scheduling.
-* **Faculty Management** : Admins can manage faculty profiles, including their departmental affiliations, teaching assignments, and academic credentials.
+6. **Collect Static Files**
 
-6. **API and System Architecture** :
+   ```bash
+   docker-compose exec web python manage.py collectstatic --no-input
+   ```
 
-* The system’s architecture is designed to be modular, with each functionality accessible through RESTful APIs. This design allows for easy integration with other systems and scalability. Pagination is implemented in API responses to efficiently handle large datasets.
+7. **Access the Application**
 
-7. **Documentation and Configuration** :
+   - The application should now be running at `http://localhost:8000/`.
+   - Access the admin panel at `http://localhost:8000/admin/`.
 
-* **Config Module** : Contains all necessary configurations for running the system in different environments (development, testing, production). This includes environment variables and settings files.
-* **Nginx Configuration** : Manages the reverse proxy settings to ensure secure and efficient routing of requests to the appropriate backend services.
-* **Shared Utilities** : Provides common functions and middleware that are used across various modules, ensuring code reusability and consistency.
+---
 
-### Project Workflow
+## Usage
 
-* **Development and Version Control** : The project is managed using Git, with a structured workflow for branching, committing, and merging code changes. Pull requests are reviewed before being merged into the main branch, ensuring code quality.
-* **Deployment** : The system is containerized using Docker, with Docker Compose managing multi-container setups for the web server, database, and other services. This ensures that the application can be deployed consistently across different environments.
-* **Continuous Integration and Testing** : The project includes a pipeline for continuous integration (CI) using GitHub Actions or another CI tool. This pipeline automatically runs tests, checks code formatting, and builds Docker images for deployment.
+### For Students
 
-### Additional Features
+- **Register and Login**: Create an account or log in using your credentials.
+- **Browse Courses**: View available courses for the current term.
+- **Enroll in Courses**: Add desired courses to your schedule.
+- **Manage Enrollments**: Drop courses or apply for emergency drops if needed.
+- **View Grades**: Check your grades and academic progress.
+- **Submit Grade Appeals**: If necessary, submit appeals for grade reviews.
 
-* **Logging and Error Management** : The system includes comprehensive logging and error management, following standards like RFC 7231. Logs are maintained at different levels (info, warning, error) to facilitate troubleshooting and system monitoring.
-* **File Management** : The system supports file storage using MinIO, allowing the secure handling of documents and media associated with students and courses.
-* **Internationalization and Localization** : The system includes support for multiple languages, with translations managed through Django’s translation framework. This ensures that the system can be used in different linguistic and cultural contexts.
+### For Faculty
 
+- **Login**: Access your faculty account.
+- **Manage Courses**: View and edit course information.
+- **Enter Grades**: Submit grades for enrolled students.
+- **Respond to Appeals**: Review and respond to grade appeals.
+
+### For Administrators
+
+- **Login**: Access the admin dashboard.
+- **Manage Users**: Create, update, or delete student and faculty accounts.
+- **Configure Terms**: Set up academic terms and course offerings.
+- **Oversee Operations**: Monitor system activities and handle administrative tasks.
+
+---
 
 ## API Documentation
 
-API endpoints are available for different user roles (Admin, Faculty, Students). The documentation is auto-generated and accessible via Swagger at** **`http://localhost:8000/swagger/`.
+- **Swagger UI**: Access the interactive API documentation at `http://localhost:8000/swagger/`.
+- **Endpoints**: Detailed information about available endpoints for different user roles.
+- **Authentication**: Use token-based authentication for secure API access.
+
+---
 
 ## Testing
 
-* Unit tests are implemented for all major components.
-* To run tests, execute:
-  <pre><div class="dark bg-gray-950 contain-inline-size rounded-md border-[0.5px] border-token-border-medium"><div class="flex items-center relative text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md"><span>bash</span><div class="flex items-center"><span class="" data-state="closed"><button class="flex gap-1 items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" class="icon-sm"><path fill="currentColor" fill-rule="evenodd" d="M7 5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-2v2a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3h2zm2 2h5a3 3 0 0 1 3 3v5h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-9a1 1 0 0 0-1 1zM5 9a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1z" clip-rule="evenodd"></path></svg>Copy code</button></span></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-bash">docker-compose exec web python manage.py test
-  </code></div></div></pre>
+- **Unit Tests**: Comprehensive tests are implemented for all major components.
+
+### Running Tests
+
+```bash
+docker-compose exec web python manage.py test
+```
+
+- **Test Coverage**: Generate coverage reports to ensure code quality.
+
+---
 
 ## Deployment
 
-* The application is containerized using Docker.
-* Use the provided** **`docker-compose.yml` for production deployments.
-* Configure CI/CD pipelines using GitHub Actions for automated testing and deployment.
+### Production Deployment
 
+- **Docker Compose**: Use the provided `docker-compose.yml` file configured for production.
+- **Environment Variables**: Ensure all production variables are set in the `.env` file.
+- **Reverse Proxy**: Nginx is configured to handle HTTPS and serve static files.
+
+### Continuous Integration/Continuous Deployment (CI/CD)
+
+- **CI Pipelines**: Set up pipelines using tools like GitHub Actions, GitLab CI/CD, or Jenkins.
+- **Automated Testing**: Tests are automatically run during the CI process.
+- **Automated Deployment**: Successful builds can be deployed to production environments.
+
+---
 
 ## License
 
-This project is licensed under the MIT License - see the** **`LICENSE.md` file for details.
+This project is licensed under the **MIT License**. See the [LICENSE.md](LICENSE.md) file for details.
+
+---
 
 ## Acknowledgements
 
-* Django Rest Framework
-* PostgreSQL
-* Docker
-* MinIO for storage management
+- **Django**: High-level Python Web framework.
+- **Django REST Framework**: Powerful toolkit for building Web APIs.
+- **PostgreSQL**: Robust relational database system.
+- **Docker**: Platform for developing, shipping, and running applications in containers.
+- **MinIO**: High-performance, S3 compatible object storage.
+- **Nginx**: High-performance HTTP server and reverse proxy.
+
+---
 
 ## Contact
 
-For further details, please contact the project maintainers.
+For further details or inquiries:
+
+- **Project Maintainer**: [taha majlesi](mailto:tahamaj4@gmail.com)
+- **GitHub Repository**: [Course Selection System](https://github.com/tahamajs/Course-Selection-System_Project)
+
+Feel free to open an issue or submit a pull request if you have suggestions or improvements.
+
+---
+
+## Additional Information
+
+### Logging and Error Management
+
+- **Logging**: The system implements comprehensive logging at various levels (DEBUG, INFO, WARNING, ERROR, CRITICAL).
+- **Error Handling**: Custom error pages and messages for better user experience.
+
+### Security Measures
+
+- **Input Validation**: All user inputs are validated to prevent SQL injection and XSS attacks.
+- **Secure Passwords**: Passwords are hashed using strong algorithms.
+- **HTTPS Support**: Configuration supports SSL/TLS for secure communication.
+
+### Internationalization and Localization
+
+- **Language Support**: The application is built with internationalization in mind, supporting multiple languages.
+- **Translation**: Easily add translations for different languages using Django's built-in i18n framework.
+
+### Pagination and Filtering
+
+- **Efficient Data Handling**: API responses are paginated to handle large datasets efficiently.
+- **Filtering and Searching**: Endpoints support filtering and searching for resources like courses and users.
+
+### Documentation
+
+- **Code Documentation**: Docstrings and comments are provided throughout the codebase.
+- **Developer Guide**: Instructions for developers to contribute to the project are available in the `CONTRIBUTING.md` file.
+
